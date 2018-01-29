@@ -43,13 +43,12 @@ else
 
 <body>
 <?php include('includes/header.php');?>
-    <!-- LOGO HEADER END-->
+
 <?php if($_SESSION['login']!="")
 {
  include('includes/menubar.php');
 }
  ?>
-    <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
