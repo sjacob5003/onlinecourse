@@ -49,14 +49,14 @@ exit();
     <div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">Login To Enter </h4>
+                <div class="col-md-6 col-md-offset-3">
+                    <center><h4 class="page-head-line">Login To Enter </h4></center>
                 </div>
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
             <form name="admin" method="post">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-offset-3">
                      <label>Enter Reg no : </label>
                         <input type="text" name="regno" class="form-control"  />
                         <label>Enter Password :  </label>
