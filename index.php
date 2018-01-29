@@ -53,7 +53,7 @@ exit();
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">Please Login To Enter </h4>
+                    <h4 class="page-head-line">Login To Enter </h4>
 
                 </div>
 
@@ -72,7 +72,7 @@ exit();
                 </form>
                 <div class="col-md-6">
                     <div class="alert alert-info">
-                        This is a free bootstrap admin template with basic pages you need to craft your project. 
+                        This is a free bootstrap admin template with basic pages you need to craft your project.
                         Use this template for free to use for personal and commercial use.
                         <br />
                          <strong> Some of its features are given below :</strong>
@@ -90,7 +90,7 @@ exit();
                                 Clean and light code used.
                             </li>
                         </ul>
-                       
+
                     </div>
                                     </div>
 
