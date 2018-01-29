@@ -1,9 +1,4 @@
 <?php
-$mysql_hostname = "localhost";
-$mysql_user = "root";
-$mysql_password = "";
-$mysql_database = "onlinecourse";
-$bd = mysql_connect($mysql_hostname, $mysql_user, $mysql_password) or die("Could not connect database");
-mysql_select_db($mysql_database, $bd) or die("Could not select database");
-
+header("Access-Control-Allow-Origin: *");
+ $con = mysqli_connect("localhost","root","","onlinecourse") or die ("could not connect database");
 ?>

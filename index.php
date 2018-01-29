@@ -2,21 +2,21 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
-  if(isset($_POST['submit']))
-  {
+if(isset($_POST['submit']))
+{
     $regno=$_POST['regno'];
     $password=md5($_POST['password']);
-    $query=mysql_query("SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
-    $num=mysql_fetch_array($query);
-      if($num>0)
-        {
-          $extra="change-password.php";//
-          $_SESSION['login']=$_POST['regno'];
-          $_SESSION['id']=$num['studentRegno'];
-          $_SESSION['sname']=$num['studentName'];
-          $uip=$_SERVER['REMOTE_ADDR'];
-          $status=1;
-$log=mysql_query("insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
+$query=mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
+$num=mysqli_fetch_array($query);
+if($num>0)
+{
+$extra="change-password.php";//
+$_SESSION['login']=$_POST['regno'];
+$_SESSION['id']=$num['studentRegno'];
+$_SESSION['sname']=$num['studentName'];
+$uip=$_SERVER['REMOTE_ADDR'];
+$status=1;
+$log=mysqli_query($con, "insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 header("location:http://$host$uri/$extra");

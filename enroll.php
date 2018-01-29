@@ -1,10 +1,8 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['login'])==0 or strlen($_SESSION['pcode'])==0)
-    {   
-header('location:index.php');
-}
+if(strlen($_SESSION['login'])==0)
+  header('location:index.php');
 else{
 
 if(isset($_POST['submit']))
