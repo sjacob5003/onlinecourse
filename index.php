@@ -70,29 +70,6 @@ exit();
                         <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
                 </div>
                 </form>
-                <div class="col-md-6">
-                    <div class="alert alert-info">
-                        Sup
-                        <br />
-                         <strong> Some of its features are given below :</strong>
-                        <ul>
-                            <li>
-                                Responsive Design Framework Used
-                            </li>
-                            <li>
-                                Easy to use and customize
-                            </li>
-                            <li>
-                                Font awesome icons included
-                            </li>
-                            <li>
-                                Clean and light code used.
-                            </li>
-                        </ul>
-
-                    </div>
-                                    </div>
-
             </div>
         </div>
     </div>
