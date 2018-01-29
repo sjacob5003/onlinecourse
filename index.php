@@ -2,20 +2,20 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
-if(isset($_POST['submit']))
-{
+  if(isset($_POST['submit']))
+  {
     $regno=$_POST['regno'];
     $password=md5($_POST['password']);
-$query=mysql_query("SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
-$num=mysql_fetch_array($query);
-if($num>0)
-{
-$extra="change-password.php";//
-$_SESSION['login']=$_POST['regno'];
-$_SESSION['id']=$num['studentRegno'];
-$_SESSION['sname']=$num['studentName'];
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=1;
+    $query=mysql_query("SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
+    $num=mysql_fetch_array($query);
+      if($num>0)
+        {
+          $extra="change-password.php";//
+          $_SESSION['login']=$_POST['regno'];
+          $_SESSION['id']=$num['studentRegno'];
+          $_SESSION['sname']=$num['studentName'];
+          $uip=$_SERVER['REMOTE_ADDR'];
+          $status=1;
 $log=mysql_query("insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
@@ -39,9 +39,6 @@ exit();
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
     <title>Student Login</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -52,16 +49,14 @@ exit();
     <div class="content-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">Login To Enter </h4>
-
+                <div class="col-md-6 col-md-offset-3">
+                    <center><h4 class="page-head-line">Login To Enter </h4></center>
                 </div>
-
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
             <form name="admin" method="post">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-md-offset-3">
                      <label>Enter Reg no : </label>
                         <input type="text" name="regno" class="form-control"  />
                         <label>Enter Password :  </label>
@@ -70,29 +65,6 @@ exit();
                         <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
                 </div>
                 </form>
-                <div class="col-md-6">
-                    <div class="alert alert-info">
-                        Sup
-                        <br />
-                         <strong> Some of its features are given below :</strong>
-                        <ul>
-                            <li>
-                                Responsive Design Framework Used
-                            </li>
-                            <li>
-                                Easy to use and customize
-                            </li>
-                            <li>
-                                Font awesome icons included
-                            </li>
-                            <li>
-                                Clean and light code used.
-                            </li>
-                        </ul>
-
-                    </div>
-                                    </div>
-
             </div>
         </div>
     </div>
