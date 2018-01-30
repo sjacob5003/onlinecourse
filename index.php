@@ -4,13 +4,14 @@ error_reporting(0);
 include("includes/config.php");
 if(isset($_POST['submit']))
 {
-    $regno=filter_var($_POST['regno'], FILTER_VALIDATE_INT);
+    $regno=$_POST['regno'];
+    $regno=filter_var($regno, FILTER_SANITIZE_NUMBER_INT);
     $password=md5($_POST['password']);
     $query=mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='$regno' AND password='$password'");
     $num=mysqli_fetch_array($query);
     if($num>0)
     {
-        $_SESSION['login']=$_POST['regno'];
+        $_SESSION['login']=$regno;
         $_SESSION['id']=$num['studentRegno'];
         $_SESSION['sname']=$num['studentName'];
         $uip=$_SERVER['REMOTE_ADDR'];
@@ -22,7 +23,7 @@ if(isset($_POST['submit']))
     }
     else
     {
-        $_SESSION['errmsg']="Invalid Reg no or Password";        
+        $_SESSION['errmsg']="Invalid Reg no or Password";    
         $host  = $_SERVER['HTTP_HOST'];
         $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         header("Location:http://$host$uri/index.php");
