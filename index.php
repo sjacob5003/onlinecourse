@@ -4,33 +4,30 @@ error_reporting(0);
 include("includes/config.php");
 if(isset($_POST['submit']))
 {
-    $regno=$_POST['regno'];
+    $regno=filter_var($_POST['regno'], FILTER_VALIDATE_INT);
     $password=md5($_POST['password']);
-$query=mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
-$num=mysqli_fetch_array($query);
-if($num>0)
-{
-$extra="change-password.php";//
-$_SESSION['login']=$_POST['regno'];
-$_SESSION['id']=$num['studentRegno'];
-$_SESSION['sname']=$num['studentName'];
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=1;
-$log=mysqli_query($con, "insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-else
-{
-$_SESSION['errmsg']="Invalid Reg no or Password";
-$extra="index.php";
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
+    $query=mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='$regno' AND password='$password'");
+    $num=mysqli_fetch_array($query);
+    if($num>0)
+    {
+        $_SESSION['login']=$_POST['regno'];
+        $_SESSION['id']=$num['studentRegno'];
+        $_SESSION['sname']=$num['studentName'];
+        $uip=$_SERVER['REMOTE_ADDR'];
+        mysqli_query($con, "INSERT INTO userlog(studentRegno,userip,status) VALUES('$regno','$uip',1)");
+        $host=$_SERVER['HTTP_HOST'];
+        $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+        header("Location:http://$host$uri/my-profile.php");
+        exit();
+    }
+    else
+    {
+        $_SESSION['errmsg']="Invalid Reg no or Password";        
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+        header("Location:http://$host$uri/index.php");
+        exit();
+    }
 }
 ?>
 
