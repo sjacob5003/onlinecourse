@@ -10,7 +10,7 @@ if(isset($_POST['submit']))
     $email=filter_var($email, FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        $_SESSION['errmsg']="Invalid Email";        
+        $_SESSION['errmsg']="Invalid Email";
         header("Location:http://$host$uri/index.php");
         exit();
     }
@@ -24,7 +24,7 @@ if(isset($_POST['submit']))
             $_SESSION['email']=$email;
             $_SESSION['id']=$num['UserId'];
             $_SESSION['sname']=$num['UserName'];
-            $_SESSION['utype']=$num['UserType'];            
+            $_SESSION['utype']=$num['UserType'];
             $uip=$_SERVER['REMOTE_ADDR'];
             mysqli_query($con, "INSERT INTO userlog(UserId,IP) VALUES('".$_SESSION['id']."','$uip')");
             if($_SESSION['utype']==1)
@@ -39,7 +39,7 @@ if(isset($_POST['submit']))
             header("Location:http://$host$uri/index.php");
             exit();
         }
-    }    
+    }
 }
 ?>
 
@@ -72,6 +72,9 @@ if(isset($_POST['submit']))
                         <input type="password" name="password" class="form-control"  />
                         <hr />
                         <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
+
+                        <p style="text-align:center;color:red;font-size:130%">New here? <a href="signup.php"> <u>Register now</u> </a></p>
+
                 </div>
                 </form>
             </div>
