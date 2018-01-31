@@ -1,28 +1,30 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['login'])==0)
-    {   
-header('location:index.php');
-}
-else{
-
-if(isset($_POST['submit']))
-{
-$studentname=$_POST['studentname'];
-$photo=$_FILES["photo"]["name"];
-$cgpa=$_POST['cgpa'];
-  move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
-$ret=mysql_query("update students set studentName='$studentname',studentPhoto='$photo',cgpa='$cgpa'  where StudentRegno='".$_SESSION['login']."'");
-if($ret)
-{
-$_SESSION['msg']="Student Record updated Successfully !!";
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+if(strlen($_SESSION['email'])==0)
+{   
+  header("Location:http://$host$uri/index.php");
 }
 else
 {
-  $_SESSION['msg']="Error : Student Record not update";
-}
-}
+  if(isset($_POST['submit']))
+  {
+    $studentname=$_POST['studentname'];
+    // $photo=$_FILES["photo"]["name"];
+    $cgpa=$_POST['cgpa'];
+    // move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
+    $ret=mysqli_query($con,"update userstable set UserName='$studentname',cgpa='$cgpa'  where UserEmail='".$_SESSION['email']."'");
+    if($ret)
+    {
+      $_SESSION['msg']="Student Record updated Successfully !!";
+    }
+    else
+    {
+      $_SESSION['msg']="Error : Student Record not update";
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -39,19 +41,16 @@ else
 </head>
 
 <body>
-<?php include('includes/header.php');?>
-    <!-- LOGO HEADER END-->
-<?php if($_SESSION['login']!="")
-{
- include('includes/menubar.php');
-}
- ?>
+<?php include('includes/header.php');
+if($_SESSION['email']!="")
+  include('includes/menubar.php');
+?>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Student Registration  </h1>
+                        <h1 class="page-head-line">Student Details  </h1>
                     </div>
                 </div>
                 <div class="row" >
@@ -62,54 +61,51 @@ else
                           Student Registration
                         </div>
 <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-<?php $sql=mysql_query("select * from students where StudentRegno='".$_SESSION['login']."'");
+<?php $sql=mysqli_query($con, "SELECT * FROM userstable WHERE UserId='".$_SESSION['id']."'");
 $cnt=1;
-while($row=mysql_fetch_array($sql))
-{ ?>
+while($row=mysqli_fetch_array($sql))
+{
+?>
 
-                        <div class="panel-body">
-                       <form name="dept" method="post" enctype="multipart/form-data">
-   <div class="form-group">
-    <label for="studentname">Student Name  </label>
-    <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['studentName']);?>"  />
-  </div>
+  <div class="panel-body">
+  <form name="dept" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="studentregno">Student ID   </label>
+      <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo htmlentities($row['UserId']);?>"  placeholder="Student Reg no" readonly />    
+    </div>
 
- <div class="form-group">
-    <label for="studentregno">Student Reg No   </label>
-    <input type="text" class="form-control" id="studentregno" name="studentregno" value="<?php echo htmlentities($row['StudentRegno']);?>"  placeholder="Student Reg no" readonly />
+    <div class="form-group">
+      <label for="studentname">Student Name  </label>
+      <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['UserName']);?>"  />
+    </div>
+
+    <div class="form-group">
+      <label for="Pincode">Pincode  </label>
+      <input type="text" class="form-control" id="Pincode" name="Pincode" value="<?php echo htmlentities($row['UserPinCode']);?>" required />
+    </div>   
+
+    <div class="form-group">
+      <label for="CGPA">CGPA  </label>
+      <input type="text" class="form-control" id="cgpa" name="cgpa"  value="<?php echo htmlentities($row['cgpa']);?>" readonly required />
+    </div>  
+
+    <!-- <div class="form-group">
+      <label for="Pincode">Student Photo  </label>
+     <?php if($row['studentPhoto']==""){ ?>
+     <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
+     <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
+     <?php } ?>
+    </div>
     
-  </div>
+    <div class="form-group">
+      <label for="Pincode">Upload New Photo  </label>
+      <input type="file" class="form-control" id="photo" name="photo"  value="<?php echo htmlentities($row['studentPhoto']);?>" />
+    </div> -->
 
+<?php } ?>
 
-
-<div class="form-group">
-    <label for="Pincode">Pincode  </label>
-    <input type="text" class="form-control" id="Pincode" name="Pincode" readonly value="<?php echo htmlentities($row['pincode']);?>" required />
-  </div>   
-
-<div class="form-group">
-    <label for="CGPA">CGPA  </label>
-    <input type="text" class="form-control" id="cgpa" name="cgpa"  value="<?php echo htmlentities($row['cgpa']);?>" required />
-  </div>  
-
-
-<div class="form-group">
-    <label for="Pincode">Student Photo  </label>
-   <?php if($row['studentPhoto']==""){ ?>
-   <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
-   <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
-   <?php } ?>
-  </div>
-<div class="form-group">
-    <label for="Pincode">Upload New Photo  </label>
-    <input type="file" class="form-control" id="photo" name="photo"  value="<?php echo htmlentities($row['studentPhoto']);?>" />
-  </div>
-
-
-  <?php } ?>
-
- <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
-</form>
+   <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
+  </form>
                             </div>
                             </div>
                     </div>
@@ -117,17 +113,11 @@ while($row=mysql_fetch_array($sql))
                 </div>
 
             </div>
-
-
-
-
-
         </div>
     </div>
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
-
 
 </body>
 </html>

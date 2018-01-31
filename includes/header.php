@@ -2,7 +2,7 @@
 include("includes/config.php");
 error_reporting(0);
 ?>
-<?php if($_SESSION['login']!="")
+<?php if($_SESSION['email']!="")
 {?>
 <header>
         <div class="container">
@@ -10,13 +10,11 @@ error_reporting(0);
                 <div class="col-md-12">
                     <strong>Welcome: </strong><?php echo htmlentities($_SESSION['sname']);?>
                     &nbsp;&nbsp;
-                    
 
-
-                    <strong>Last Login:<?php 
-        $ret=mysql_query("SELECT  * from userlog where studentRegno='".$_SESSION['login']."' order by id desc limit 1,1");
-                    $row=mysql_fetch_array($ret);
-                    echo $row['userip']; ?> at <?php echo $row['loginTime'];?></strong>
+                    <strong>Last Login: <?php 
+        $ret=mysqli_query($con,"SELECT  * from userlog where UserId='".$_SESSION['id']."' order by id desc limit 1,1");
+                    $row=mysqli_fetch_array($ret);
+                    echo $row['loginTime'];?></strong>
                 </div>
 
             </div>

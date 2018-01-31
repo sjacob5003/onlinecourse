@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
         $num=mysqli_fetch_array($query);
         if($num>0)
         {
-            $_SESSION['login']=$email;
+            $_SESSION['email']=$email;
             $_SESSION['id']=$num['UserId'];
             $_SESSION['sname']=$num['UserName'];
             $_SESSION['utype']=$num['UserType'];            
