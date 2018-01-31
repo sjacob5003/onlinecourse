@@ -2,35 +2,44 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
-if(isset($_POST['submit']))
-{
-    $regno=$_POST['regno'];
-    $password=md5($_POST['password']);
-$query=mysqli_query($con, "SELECT * FROM students WHERE StudentRegno='$regno' and password='$password'");
-$num=mysqli_fetch_array($query);
-if($num>0)
-{
-$extra="change-password.php";//
-$_SESSION['login']=$_POST['regno'];
-$_SESSION['id']=$num['studentRegno'];
-$_SESSION['sname']=$num['studentName'];
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=1;
-$log=mysqli_query($con, "insert into userlog(studentRegno,userip,status) values('".$_SESSION['login']."','$uip','$status')");
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-else
-{
-$_SESSION['errmsg']="Invalid Reg no or Password";
-$extra="index.php";
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
+if(isset($_POST['submit']))
+{
+    $email=$_POST['email'];
+    $email=filter_var($email, FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+    {
+        $_SESSION['errmsg']="Invalid Email";        
+        header("Location:http://$host$uri/index.php");
+        exit();
+    }
+    else
+    {
+        $password=$_POST['password'];
+        $query=mysqli_query($con, "SELECT * FROM userstable WHERE UserEmail='$email' AND UserPassword='$password'");
+        $num=mysqli_fetch_array($query);
+        if($num>0)
+        {
+            $_SESSION['login']=$email;
+            $_SESSION['id']=$num['UserId'];
+            $_SESSION['sname']=$num['UserName'];
+            $_SESSION['utype']=$num['UserType'];            
+            $uip=$_SERVER['REMOTE_ADDR'];
+            mysqli_query($con, "INSERT INTO userlog(UserId,IP) VALUES('".$_SESSION['id']."','$uip')");
+            if($_SESSION['utype']==1)
+                header("Location:http://$host$uri/my-profile.php");
+            else if($_SESSION['utype']==2)
+                header("Location:http://$host$uri/admin/index.php");
+            exit();
+        }
+        else
+        {
+            $_SESSION['errmsg']="Invalid Email/Password Combination";
+            header("Location:http://$host$uri/index.php");
+            exit();
+        }
+    }    
 }
 ?>
 
@@ -57,8 +66,8 @@ exit();
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                     <label>Enter Reg no : </label>
-                        <input type="text" name="regno" class="form-control"  />
+                     <label>Enter Email : </label>
+                        <input type="email" name="email" class="form-control"  />
                         <label>Enter Password :  </label>
                         <input type="password" name="password" class="form-control"  />
                         <hr />
