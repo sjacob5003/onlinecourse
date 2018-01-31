@@ -12,7 +12,7 @@ error_reporting(0);
                     &nbsp;&nbsp;
 
                     <strong>Last Login: <?php 
-        $ret=mysqli_query($con,"SELECT  * from userlog where UserId='".$_SESSION['id']."' order by id desc limit 1,1");
+        $ret=mysqli_query($con,"SELECT  * from userlog where UserId='".$_SESSION['id']."' order by UserId desc limit 1,1");
                     $row=mysqli_fetch_array($ret);
                     echo $row['loginTime'];?></strong>
                 </div>
