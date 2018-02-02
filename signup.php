@@ -22,50 +22,50 @@
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                     <label>Full Name * </label>
-                        <input type="text" name="sname" class="form-control" required  />
+                     <label>FULL NAME * </label>
+                        <input type="text" name="sname" class="form-control" placeholder="ENTER YOUR NAME" required  />
 
-                        <label>Email Id *  </label>
-                        <input type="email" name="semail" class="form-control" required />
+                        <label>EMAIL ID *  </label>
+                        <input type="email" name="semail" class="form-control" placeholder="ENTER YOUR EMAIL ID" required />
 
-                        <label>Mobile Number * </label>
-                        <input type="tel" name="smobile" class="form-control" maxlength="10" required />
+                        <label>MOBILE NUMBER * </label>
+                        <input type="tel" name="smobile" class="form-control" maxlength="10" placeholder="ENTER YOUR MOBILE NO" required />
 
-                        <label>Address (Street 1) * </label>
-                        <input type="text" name="sstreet1" class="form-control" required />
+                        <label>ADDRESS 1 * </label>
+                        <input type="text" name="sstreet1" class="form-control" placeholder="ENTER YOUR STREET ADDRESS 1" required />
 
-                        <label>Address (Street 2)  </label>
-                        <input type="text" name="sstreet2" class="form-control"  />
+                        <label>ADDRESS 2 </label>
+                        <input type="text" name="sstreet2" class="form-control" placeholder="ENTER YOUR STREET ADDRESS 2" />
 
                        <div id="selection" class="form-group">
-                           <label>State</label>
+                           <label>STATE</label>
                            <select class="form-control" id="listBox" onchange='selct_district(this.value)'></select>
 
-                           <label>City</label>
+                           <label>CITY</label>
                            <select class="form-control" id='secondlist'></select>
                        </div>
 
-                        <label>Pincode * </label>
-                        <input type="text" name="spincode" class="form-control" required />
+                        <label>PINCODE * </label>
+                        <input type="text" name="spincode" class="form-control" maxlength="6" placeholder="ENTER YOUR PINCODE" required />
 
-                        <label>Date of Birth * </label>
+                        <label>DATE OF BIRTH * </label>
                         <input type="date" name="sbirth" class="form-control" required />
 
-                        <label>Gender * </label><br>
+                        <label>GENDER * </label><br>
                         <input type="radio" name="sgender" value="male" checked /> Male &nbsp; &nbsp;
                         <input type="radio" name="sgender" value="female" /> Female <br>
 
-                        <label>Password * </label>
-                        <input type="password" name="spass" class="form-control" pattern=".{8,12}" required title="8 to 12 characters" />
+                        <label>PASSWORD * </label>
+                        <input type="password" name="spass" class="form-control" pattern=".{8,12}" placeholder="ENTER PASSWORD" required title="8 to 12 characters" />
 
-                        <label>Confirm Password * </label>
-                        <input type="password" name="sconfirmpass" class="form-control" pattern=".{8,12}" required title="8 to 12 characters" />
-                        
+                        <label>CONFIRM PASSSWORD * </label>
+                        <input type="password" name="sconfirmpass" class="form-control" pattern=".{8,12}" placeholder="CONFIRM PASSWORD" required title="8 to 12 characters" />
+
                         <hr />
                         <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Register </button>&nbsp;
                         <button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove-sign"></span> &nbsp;Reset </button>&nbsp;
 
-                        <p style="text-align:center;color:red;font-size:130%">Already registered? <a href="index.php"> <u>Log back in</u> </a></p>
+                        <p style="text-align:center;color:red;font-size:130%">Already registered? <a href="index.php"> <u>Log in here</u> </a></p>
 
                 </div>
                 </form>
