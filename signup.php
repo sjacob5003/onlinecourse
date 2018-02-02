@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
     $city=$_POST['city'];
     $state=$_POST['state'];
     $pincode=$_POST['pincode'];
-    $dob=date('y-m-D',strtotime($_POST['dob']));
+    $dob=date('y-m-d',strtotime($_POST['dob']));
     $gender=$_POST['gender'];
     $pass=$_POST['password'];
     $pass1=$_POST['confirmpassword'];
@@ -106,7 +106,7 @@ if(isset($_POST['submit']))
                    </div>
 
                     <label for="pincode">Pincode * </label>
-                    <input type="text" name="pincode" class="form-control" required />
+                    <input type="text" name="pincode" class="form-control" maxlength="6" required />
 
                     <label for="dob">Date of Birth * </label>
                     <input type="date" name="dob" class="form-control" required />
