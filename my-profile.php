@@ -30,7 +30,7 @@ else
                                                   UserStreet1='$studentstreet1',
                                                   UserStreet2='$studentstreet2',
                                                   UserCity='$studentcity',
-                                                  UserState='$studentstate'  WHERE UserId='".$_SESSION['id']."'");
+                                                  UserState='$studentstate' WHERE UserId='".$_SESSION['id']."'");
     if($ret)
       $_SESSION['msg']="Student Record updated Successfully!";
     else
