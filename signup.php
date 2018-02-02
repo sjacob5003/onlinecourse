@@ -132,7 +132,7 @@ if(isset($_POST['submit']))
             </div>
         </div>
     </div>
-    <!-- CONTENT-WRAPPER SECTION END-->
+
     <?php include('includes/footer.php');?>
     <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
