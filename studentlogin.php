@@ -11,13 +11,13 @@ if(isset($_POST['submit']))
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         $_SESSION['errmsg']="Invalid Email";
-        header("Location:http://$host$uri/index.php");
+        header("Location:http://$host$uri/studentlogin.php");
         exit();
     }
     else
     {
         $password=$_POST['password'];
-        $query=mysqli_query($con, "SELECT * FROM userstable WHERE UserEmail='$email' AND UserPassword='$password'");
+        $query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentPassword='$password'");
         $num=mysqli_fetch_array($query);
         if($num>0)
         {
@@ -25,20 +25,14 @@ if(isset($_POST['submit']))
             $_SESSION['id']=$num['UserId'];
             $_SESSION['sname']=$num['UserName'];
             $_SESSION['utype']=$num['UserType'];
-            $uip=$_SERVER['REMOTE_ADDR'];
-            mysqli_query($con, "INSERT INTO userlog(UserId,IP) VALUES('".$_SESSION['id']."','$uip')");
-            if($_SESSION['utype']==1)
-                header("Location:http://$host$uri/my-profile.php");
-            else if($_SESSION['utype']==2)
-                header("Location:http://$host$uri/admin/index.php");
-            else if($_SESSION['utype']==3)
-                header("Location:http://$host$uri/change-password.php");
+            $uip=$_SERVER['REMOTE_ADDR'];            
+            header("Location:http://$host$uri/change-password.php");
             exit();
         }
         else
         {
             $_SESSION['errmsg']="Invalid Email/Password Combination";
-            header("Location:http://$host$uri/index.php");
+            header("Location:http://$host$uri/studentlogin.php");
             exit();
         }
     }
@@ -76,7 +70,6 @@ if(isset($_POST['submit']))
                         <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
 
                         <p style="text-align:center;color:red;font-size:130%">New here? <a href="signup.php"> <u>Register now</u> </a></p>
-
                 </div>
                 </form>
             </div>
