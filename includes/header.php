@@ -1,44 +1,48 @@
 <?php
 include("includes/config.php");
 error_reporting(0);
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 ?>
-<?php if($_SESSION['email']!="")
-{?>
 <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['sname']);?>
-                    &nbsp;&nbsp;
-
-                    <strong>Last Login: <?php 
-        $ret=mysqli_query($con,"SELECT  * from userlog where UserId='".$_SESSION['id']."' order by UserId desc limit 1,1");
-                    $row=mysqli_fetch_array($ret);
-                    echo $row['loginTime'];?></strong>
-                </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php
+                if($_SESSION['email']!="")
+                {
+                ?>
+                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['sname']);?>&nbsp;&nbsp;
+                <?php
+                }
+                else
+                {
+                    ?>
+                 <a href="studentsignup.php">Signup</a> | <a href="studentlogin.php">Login</a>
+                <?php } ?>
             </div>
         </div>
-    </header>
-    <?php } ?>
-    <!-- HEADER END-->
-    <div class="navbar navbar-inverse set-radius-zero">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#" style="color:#fff; font-size:24px;4px; line-height:24px; ">
+    </div>
+</header>
 
-                   Online Course Registration
-                </a>
+<!-- HEADER END-->
+<div class="navbar navbar-inverse set-radius-zero">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="color:#fff; font-size:24px;4px; line-height:24px; ">
 
-            </div>
+               Online Course Registration
+            </a>
 
-            <div class="left-div">
-                <i class="fa fa-user-plus login-icon" ></i>
         </div>
-            </div>
+
+        <div class="left-div">
+            <i class="fa fa-user-plus login-icon" ></i>
         </div>
+    </div>
+</div>
