@@ -12,7 +12,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 if($_SESSION['email']!="")
                 {
                 ?>
-                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['sname']);?>&nbsp;&nbsp;
+                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['username']);?>&nbsp;&nbsp;
                 <?php
                 }
                 else

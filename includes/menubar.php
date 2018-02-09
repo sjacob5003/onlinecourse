@@ -55,6 +55,9 @@ if($_SESSION['email']!="")
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="logout.php">Logout</a></li>
             </ul>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </div>
