@@ -48,30 +48,17 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysql_query("select courseenrolls.course as cid, course.courseName as courname,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate ,semester.semester as sem from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level  join semester on semester.id=courseenrolls.semester  where courseenrolls.studentRegno='".$_SESSION['login']."'");
-    $cnt=1;
-    while($row=mysql_fetch_array($sql))
+    $sql=mysqli_query($con, "SELECT CourseCode, CourseName, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
+    while($row=mysqli_fetch_array($sql))
     {
     ?>
-
-
-                                            <tr>
-                                                <td><?php echo $cnt;?></td>
-                                                <td><?php echo htmlentities($row['courname']);?></td>
-                                                <td><?php echo htmlentities($row['session']);?></td>
-                                                <td><?php echo htmlentities($row['dept']);?></td>
-                                                <td><?php echo htmlentities($row['level']);?></td>
-                                                <td><?php echo htmlentities($row['sem']);?></td>
-                                                 <td><?php echo htmlentities($row['edate']);?></td>
-                                                <td>
-                                                <a href="print.php?id=<?php echo $row['cid']?>" target="_blank">
-    <button class="btn btn-primary"><i class="fa fa-print "></i> Print</button> </a>
-
-
-                                                </td>
-                                            </tr>
+        <tr>
+            <td><?php echo htmlentities($row['CourseCode']);?></td>
+            <td><?php echo htmlentities($row['CourseName']);?></td>
+            <td><?php echo htmlentities($row['FacultyName']);?></td>
+            <td><?php echo htmlentities($row['CourseLevel']);?></td>
+        </tr>
     <?php
-    $cnt++;
     } ?>
 
 
