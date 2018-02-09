@@ -32,7 +32,7 @@ if(isset($_POST['submit']))
     }
     else
     {
-        $result=mysqli_query($con, "SELECT * FROM userstable WHERE UserEmail='$email'");
+        $result=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email'");
         if ($result->num_rows > 0)
         {
             $_SESSION['errmsg']="This email ID is already in use";
@@ -40,11 +40,10 @@ if(isset($_POST['submit']))
             exit();
         }
         else
-        {
-                
-            if(mysqli_query($con, "INSERT INTO userstable (UserName,UserEmail,UserPassword,UserPhone,UserStreet1,UserStreet2,UserCity, UserState, UserPinCode, Gender, UserDOB,UserType) VALUES ('$name','$email','$pass','$phone','$street1','$street2','$city','$state','$pincode','$gender','$dob',1)"))
+        {                
+            if(mysqli_query($con, "INSERT INTO studenttable (StudentName,StudentEmail,StudentPassword,StudentPhone,StudentStreet1,StudentStreet2,StudentCity, StudentState, StudentPinCode, StudentGender, StudentDOB) VALUES ('$name','$email','$pass','$phone','$street1','$street2','$city','$state','$pincode','$gender','$dob')"))
             {
-                header("Location:http://$host$uri/index.php");
+                header("Location:http://$host$uri/change-password.php");
                 exit();
             }
             else
@@ -132,7 +131,6 @@ if(isset($_POST['submit']))
             </div>
         </div>
     </div>
-
     <?php include('includes/footer.php');?>
     <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
@@ -143,6 +141,5 @@ if(isset($_POST['submit']))
     <!-- state dropdown scripts -->
     <script src="assets/js/state.js"></script>
     <script src="assets/js/statejquery.js"></script>
-
 </body>
 </html>

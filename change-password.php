@@ -2,31 +2,27 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['id'])==0)
-    {   
-header('location:index.php');
-}
-else{
-date_default_timezone_set('Asia/Kolkata');// change according timezone
-$currentTime = date( 'd-m-Y h:i:s A', time () );
-
-
-if(isset($_POST['submit']))
-{
-$sql=mysql_query("SELECT password FROM  students where password='".md5($_POST['cpass'])."' && studentRegno='".$_SESSION['login']."'");
-$num=mysql_fetch_array($sql);
-if($num>0)
-{
- $con=mysql_query("update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where studentRegno='".$_SESSION['login']."'");
-$_SESSION['msg']="Password Changed Successfully !!";
+if(strlen($_SESSION['email'])==0)
+{   
+  header('location:index.php');
 }
 else
 {
-$_SESSION['msg']="Current Password not match !!";
-}
-}
+  date_default_timezone_set('Asia/Kolkata');// change according timezone
+  $currentTime = date( 'd-m-Y h:i:s A', time () );
+  if(isset($_POST['submit']))
+  {
+    $sql=mysql_query("SELECT password FROM  students where password='".md5($_POST['cpass'])."' && studentRegno='".$_SESSION['login']."'");
+    $num=mysql_fetch_array($sql);
+    if($num>0)
+    {
+      $con=mysql_query("update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where studentRegno='".$_SESSION['login']."'");
+      $_SESSION['msg']="Password Changed Successfully !!";
+    }
+    else
+      $_SESSION['msg']="Current Password not match !!";
+  }
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -72,7 +68,7 @@ return true;
 <body>
 <?php include('includes/header.php');?>
     <!-- LOGO HEADER END-->
-<?php if($_SESSION['login']!="")
+<?php if($_SESSION['email']!="")
 {
  include('includes/menubar.php');
 }
@@ -113,8 +109,6 @@ return true;
   <button type="submit" name="submit" class="btn btn-default">Submit</button>
                            <hr />
    
-
-
 
 </form>
                             </div>
