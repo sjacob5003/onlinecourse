@@ -18,7 +18,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 else
                 {
                     ?>
-                 <a href="studentsignup.php">Signup</a> | <a href="studentlogin.php">Login</a>
+                 <a href="studentsignup.php"><font color="ffffff" size="4px">Signup</font></a> | <a href="studentlogin.php"><font color="ffffff" size="4px">Login</font></a>
                 <?php } ?>
             </div>
         </div>
