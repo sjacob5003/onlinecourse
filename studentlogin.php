@@ -22,9 +22,9 @@ if(isset($_POST['submit']))
         if($num>0)
         {
             $_SESSION['email']=$email;
-            $_SESSION['id']=$num['UserId'];
-            $_SESSION['sname']=$num['UserName'];
-            $_SESSION['utype']=$num['UserType'];
+            $_SESSION['studentid']=$num['StudentId'];
+            $_SESSION['studentname']=$num['StudentName'];
+            $_SESSION['usertype']="Student";
             $uip=$_SERVER['REMOTE_ADDR'];            
             header("Location:http://$host$uri/change-password.php");
             exit();
