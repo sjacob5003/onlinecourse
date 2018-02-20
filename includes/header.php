@@ -22,9 +22,9 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Signup
        <span class="caret"></span></button>
        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Student Signup</a></li>
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Faculty Signup</a></li>
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">University Signup</a></li>
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="studentsignup.php">Student Signup</a></li>
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="facultysignup.php">Faculty Signup</a></li>
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="universitysignup.php">University Signup</a></li>
                     </ul></div>
 
                 <?php } ?>
@@ -32,10 +32,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Login
          <span class="caret"></span></button>
          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Student Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Faulty Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">University Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Admin Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="studentlogin.php">Student Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="facultylogin.php">Faulty Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="universitylogin.php">University Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="admin/adminlogin.php">Admin Login</a></li>
          </ul>
 </div>
        </div>
