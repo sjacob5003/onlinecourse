@@ -6,8 +6,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 ?>
 <header>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+
                 <?php
                 if($_SESSION['email']!="")
                 {
@@ -18,11 +17,28 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 else
                 {
                     ?>
-                 <a href="studentsignup.php"><font color="ffffff" size="4px">Signup</font></a> | <a href="studentlogin.php"><font color="ffffff" size="4px">Login</font></a>
+
+                    <div class="dropdown" style="float:right">
+       <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Signup
+       <span class="caret"></span></button>
+       <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Student Signup</a></li>
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Faculty Signup</a></li>
+         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">University Signup</a></li>
+                    </ul></div>
+
                 <?php } ?>
-            </div>
-        </div>
-    </div>
+                <div class="dropdown" style="float:right">
+         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Login
+         <span class="caret"></span></button>
+         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Student Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Faulty Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">University Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Admin Login</a></li>
+         </ul>
+</div>
+       </div>
 </header>
 
 <!-- HEADER END-->
