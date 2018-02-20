@@ -21,7 +21,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     <div class="dropdown" style="float:right">
        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Signup
        <span class="caret"></span></button>
-       <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+       <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
          <li role="presentation"><a role="menuitem" tabindex="-1" href="studentsignup.php">Student Signup</a></li>
          <li role="presentation"><a role="menuitem" tabindex="-1" href="facultysignup.php">Faculty Signup</a></li>
          <li role="presentation"><a role="menuitem" tabindex="-1" href="universitysignup.php">University Signup</a></li>
@@ -31,9 +31,9 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 <div class="dropdown" style="float:right">
          <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Login
          <span class="caret"></span></button>
-         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
            <li role="presentation"><a role="menuitem" tabindex="-1" href="studentlogin.php">Student Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="facultylogin.php">Faulty Login</a></li>
+           <li role="presentation"><a role="menuitem" tabindex="-1" href="facultylogin.php">Faculty Login</a></li>
            <li role="presentation"><a role="menuitem" tabindex="-1" href="universitylogin.php">University Login</a></li>
            <li role="presentation"><a role="menuitem" tabindex="-1" href="admin/adminlogin.php">Admin Login</a></li>
          </ul>
@@ -50,7 +50,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" style="color:#fff; font-size:24px;4px; line-height:24px; ">
+            <a class="navbar-brand" href="index.php" style="color:#fff; font-size:24px;4px; line-height:24px; ">
 
                Online Course Registration
             </a>

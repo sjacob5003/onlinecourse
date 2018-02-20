@@ -3020,9 +3020,9 @@ fieldset[disabled] .btn {
   opacity: .65;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: #FFF;
+  background-color: #f0677c;
+  border-color: #f0677c;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3030,9 +3030,9 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+  color: #FFF;
+  background-color: #f0677c;
+  border-color: #f0677c;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3453,16 +3453,16 @@ tbody.collapse.in {
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  color: #262626;
+  color: #FFF;
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: #f0677c;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
   color: #fff;
   text-decoration: none;
-  background-color: #337ab7;
+  background-color: #337a;
   outline: 0;
 }
 .dropdown-menu > .disabled > a,
