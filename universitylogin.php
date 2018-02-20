@@ -25,7 +25,7 @@ if(isset($_POST['submit']))
             $_SESSION['userid']=$num['UniversityId'];
             $_SESSION['username']=$num['UniversityName'];
             $_SESSION['usertype']="University";
-            $uip=$_SERVER['REMOTE_ADDR'];            
+            $uip=$_SERVER['REMOTE_ADDR'];
             header("Location:http://$host$uri/index.php");
             exit();
         }

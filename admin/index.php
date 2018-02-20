@@ -1,35 +1,9 @@
 <?php
 session_start();
-error_reporting(0);
-include("includes/config.php");
-if(isset($_POST['submit']))
-{
-    $username=$_POST['username'];
-    $password=md5($_POST['password']);
-$query=mysql_query("SELECT * FROM admin WHERE username='$username' and password='$password'");
-$num=mysql_fetch_array($query);
-if($num>0)
-{
-$extra="change-password.php";//
-$_SESSION['alogin']=$_POST['username'];
-$_SESSION['id']=$num['id'];
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-else
-{
-$_SESSION['errmsg']="Invalid username or password";
-$extra="index.php";
+require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-}
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,45 +11,72 @@ exit();
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
-    <title>Admin Login</title>
+    <title>Admin - Home</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
+
 <body>
-    <?php include('includes/header.php');?>
+<?php 
+    include('../includes/header.php');
+    include('../includes/menubar.php');
+?>
+    <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <center><h4 class="page-head-line">Please Login To Enter </h4></center>
+              <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-head-line">Universities</h1>
+                    </div>
+                    <div class="row" >
 
-                </div>
+                    <div class="col-md-12">
+                        <!--    Bordered Table  -->
+                        <div class="panel panel-default">
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive table-bordered">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>University Name </th>
+                                                <th>University Email </th>
+                                                <th>Contact Person </th>
+                                                <th>Phone Number </th>
+                                                <th>Verify </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+    <?php
+    $sql=mysqli_query($con, "SELECT UniversityName, UniversityEmail, UniversityContactPerson, UniversityPhone FROM universitytable where UniversityIsActive=0");
+    while($row=mysqli_fetch_array($sql))
+    {
+    ?>
+        <tr>
+            <td><?php echo htmlentities($row['UniversityName']);?></td>
+            <td><?php echo htmlentities($row['UniversityEmail']);?></td>
+            <td><?php echo htmlentities($row['UniversityContactPerson']);?></td>
+            <td><?php echo htmlentities($row['UniversityPhone']);?></td>
+            <td>A</td>
+        </tr>
+    <?php
+    } ?>
 
-            </div>
-             <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
-            <form name="admin" method="post">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                     <label>Enter Username : </label>
-                        <input type="text" name="username" class="form-control" required />
-                        <label>Enter Password :  </label>
-                        <input type="password" name="password" class="form-control" required />
-                        <hr />
-                        <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                         <!--  End  Bordered Table  -->
+                    </div>
                 </div>
-             </form>
-            </div>
+                </div>
         </div>
     </div>
-    <!-- CONTENT-WRAPPER SECTION END-->
-    <?php include('includes/footer.php');?>
-    <!-- FOOTER SECTION END-->
-    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY SCRIPTS -->
+  <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
-    <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
