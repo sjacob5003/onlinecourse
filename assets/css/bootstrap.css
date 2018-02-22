@@ -2983,7 +2983,7 @@ select[multiple].form-group-lg .form-control {
       -ms-user-select: none;
           user-select: none;
   background-image: none;
-  border: 1px solid transparent;
+  border: 1px dotted;
   border-radius: 4px;
 }
 .btn:focus,
@@ -3021,8 +3021,8 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #FFF;
-  background-color: #f0677c;
-  border-color: #f0677c;
+  background-color: #1d76b6;
+  border-color: #1d76b6;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3031,8 +3031,8 @@ fieldset[disabled] .btn {
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
   color: #FFF;
-  background-color: #f0677c;
-  border-color: #f0677c;
+  background-color: #004986;
+  border-color: #1d76b6;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3156,8 +3156,8 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #004986;
+  border-color: #004986;
   width:100%;
 }
 .btn-info:hover,
@@ -3167,8 +3167,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
   color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+  background-color: #1d76b6;
+  border-color: #1d76b6;
 }
 .btn-info:active,
 .btn-info.active,
@@ -3455,7 +3455,7 @@ tbody.collapse.in {
 .dropdown-menu > li > a:focus {
   color: #FFF;
   text-decoration: none;
-  background-color: #f0677c;
+  background-color: #1d76b6;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,

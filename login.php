@@ -25,7 +25,7 @@ if(isset($_POST['submit']))
             $_SESSION['userid']=$num['StudentId'];
             $_SESSION['username']=$num['StudentName'];
             $_SESSION['usertype']="Student";
-            $uip=$_SERVER['REMOTE_ADDR'];            
+            $uip=$_SERVER['REMOTE_ADDR'];
             header("Location:http://$host$uri/change-password.php");
             exit();
         }
@@ -46,6 +46,7 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Student Login</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
@@ -55,21 +56,41 @@ if(isset($_POST['submit']))
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <center><h4 class="page-head-line">Login To Enter </h4></center>
+                    <center><h4 class="page-head-line"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Login To Enter </h4></center>
                 </div>
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                     <label>Enter Email : </label>
-                        <input type="email" name="email" class="form-control"  />
-                        <label>Enter Password :  </label>
-                        <input type="password" name="password" class="form-control"  />
-                        <hr />
-                        <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Log Me In </button>&nbsp;
+                          <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                          </div>
 
-                        <p style="text-align:center;color:red;font-size:130%">New here? <a href="signup.php"> <u>Register now</u> </a></p>
+<br>
+
+                          <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                          </div>
+
+<br>
+
+                          <div class="input-group">
+                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                               <select class="selectpicker" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Login Type">
+                                         <option value="admin">Admin</option>
+                                         <option value="student">Student</option>
+                                         <option value="faculty">Faculty</option>
+                                         <option value="university">University</option>
+                              </select>
+                           </div>
+
+                     <br>
+                     <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Log In </button>&nbsp;
+
+                        <p style="text-align:center;color:grey;font-size:130%">New here? <a href="signup.php"> <u>Register now</u> </a></p>
                 </div>
                 </form>
             </div>
@@ -83,5 +104,6 @@ if(isset($_POST['submit']))
     <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
 </body>
 </html>
