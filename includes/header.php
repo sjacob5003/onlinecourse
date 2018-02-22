@@ -7,37 +7,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 <header>
     <div class="container">
 
-                <?php
-                if($_SESSION['email']!="")
-                {
-                ?>
-                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['username']);?>&nbsp;&nbsp;
-                <?php
-                }
-                else
-                {
-                    ?>
-
-                    <div class="dropdown" style="float:right">
-       <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Signup
-       <span class="caret"></span></button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="studentsignup.php">Student Signup</a></li>
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="facultysignup.php">Faculty Signup</a></li>
-         <li role="presentation"><a role="menuitem" tabindex="-1" href="universitysignup.php">University Signup</a></li>
-                    </ul></div>
-
-                <?php } ?>
-                <div class="dropdown" style="float:right">
-         <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Login
-         <span class="caret"></span></button>
-         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="studentlogin.php">Student Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="facultylogin.php">Faculty Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="universitylogin.php">University Login</a></li>
-           <li role="presentation"><a role="menuitem" tabindex="-1" href="admin/adminlogin.php">Admin Login</a></li>
-         </ul>
-</div>
+              <a href="login.php"><button class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> &nbsp;LOGIN</button></a>
+              <a href="signup.php"><button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> &nbsp;SIGNUP</button></a>
        </div>
 </header>
 
@@ -45,14 +16,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 <div class="navbar navbar-inverse set-radius-zero">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php" style="color:#fff; font-size:24px;4px; line-height:24px; ">
 
-               Online Course Registration
+            <a class="navbar-brand" href="index.php" style="color:#fff; font-size:24px;4px; line-height:30px; ">
+
+               Course Registration
             </a>
 
         </div>
