@@ -64,12 +64,14 @@ if(isset($_POST['submit']))
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
 
+				<p style="text-align:center;color:red;font-size:17px">Please enter the verification code below</p>
+				
 		        <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <input id="email" type="text" class="form-control" name="email" placeholder="Please enter your code here">
                           </div>
 
-
+<br>
                     <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>&nbsp;
 					<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
