@@ -1,6 +1,12 @@
 <?php
 session_start();
 include('includes/config.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(isset($_POST['submit']))
@@ -10,6 +16,7 @@ if(isset($_POST['submit']))
     $phone=$_POST['phone'];
     $pass=$_POST['password'];
     $pass1=$_POST['confirmpassword'];
+    $usertype=$_POST['usertype'];
     $email=filter_var($email, FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))    
     {
@@ -23,7 +30,7 @@ if(isset($_POST['submit']))
         header("Location:http://$host$uri/signup.php");
         exit();
     }
-    else
+    elseif($usertype=="Student")
     {
         $result=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email'");
         if ($result->num_rows > 0)
@@ -38,8 +45,75 @@ if(isset($_POST['submit']))
             $token=str_shuffle($token);
             $token=substr($token, 0, 10);
             if(mysqli_query($con, "INSERT INTO studenttable (StudentName,StudentEmail,StudentPassword,StudentPhone, StudentTokenString) VALUES ('$name','$email','$pass','$phone','$token')"))
+            {                
+                try 
+                {
+                    $mail = new PHPMailer(true);
+                    $mail->SMTPDebug = 0; //SMTP Debug
+                    $mail->isSMTP();
+                    $mail->Host = "smtp.gmail.com";
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'donotreplytothis02@gmail.com';
+                    $mail->Password = 'dummyaccount1';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = '587';
+                    /**
+                     * SMTPOptions work-around by @author : Synchro
+                     * This setting should removed on server and 
+                     * mailing should be working on the server
+                     */
+                    $mail->SMTPOptions = array(
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                            'allow_self_signed' => true
+                        )
+                    );
+                    
+                    //Recipients
+                    $mail->setFrom('no-reply@confirmation.com', 'Do Not Reply');
+                    $mail->addAddress($email,'CourseManagement@NUV');     // Add a recipient
+                    $mail->addReplyTo('no-reply@confirmation.com');
+
+                     //Content
+                     $mail->isHTML(true);                                  // Set email format to HTML
+                     $mail->Subject = 'Email Verification';
+                     $mail->Body    = 'Please click on the link below to verify email<BR><BR>
+                                        <a href="http://'.$host.''.$uri.'/emailverify.php?email='.$email.'&token='.$token.'">Click Here</a>';
+                    if($mail->send())
+                        echo "Check email for activation";
+                    else
+                        echo "Not s ent";
+                }
+                catch (Exception $e)
+                {
+                    echo $e->getMessage();
+                }
+                // header("Location:http://$host$uri/emailverify.php");
+                // exit();
+            }
+            else
             {
-                header("Location:http://$host$uri/change-password.php");
+                $_SESSION['errmsg']="Unable to register";
+                header("Location:http://$host$uri/signup.php");
+                exit();
+            }
+        }
+    }
+    elseif($usertype=="Faculty")
+    {
+        $result=mysqli_query($con, "SELECT * FROM facultytable WHERE FacultyEmail='$email'");
+        if ($result->num_rows > 0)
+        {
+            $_SESSION['errmsg']="This email ID is already in use";
+            header("Location:http://$host$uri/signup.php");
+            exit();
+        }
+        else
+        {
+            if(mysqli_query($con, "INSERT INTO facultytable (FacultyName,FacultyEmail,FacultyPassword,FacultyPhone) VALUES ('$name','$email','$pass','$phone')"))
+            {
+                header("Location:http://$host$uri/index.php");
                 exit();
             }
             else
@@ -50,6 +124,33 @@ if(isset($_POST['submit']))
             }
         }
     }
+    elseif($usertype=="University")
+    {
+        $result=mysqli_query($con, "SELECT * FROM universitytable WHERE UniversityEmail='$email'");
+        if ($result->num_rows > 0)
+        {
+            $_SESSION['errmsg']="This email ID is already in use";
+            header("Location:http://$host$uri/signup.php");
+            exit();
+        }
+        else
+        {       
+            $token="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            $token=str_shuffle($token);
+            $token=substr($token, 0, 10);
+            if(mysqli_query($con, "INSERT INTO universitytable (UniversityName,UniversityEmail,UniversityPassword,UniversityPhone) VALUES ('$name','$email','$pass','$phone')"))
+            {
+                header("Location:http://$host$uri/index.php");
+                exit();
+            }
+            else
+            {
+                $_SESSION['errmsg']="Unable to register";
+                header("Location:http://$host$uri/signup.php");
+                exit();
+            }
+        }
+    }    
 }
 ?>
 <!DOCTYPE html>

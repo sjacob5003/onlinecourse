@@ -4,38 +4,19 @@ error_reporting(0);
 include("includes/config.php");
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(isset($_POST['submit']))
+$email=$_GET['email'];
+$token=$_GET['token'];
+$query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentTokenString='$token'");
+$num=mysqli_fetch_array($query);
+if($num>0)
+{    
+    mysqli_query($con,"UPDATE studenttable SET StudentIsActive=1, StudentTokenString='' WHERE StudentEmail='$email'");
+}
+else
 {
-    $email=$_POST['email'];
-    $email=filter_var($email, FILTER_SANITIZE_EMAIL);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
-        $_SESSION['errmsg']="Invalid Email";
-        header("Location:http://$host$uri/studentlogin.php");
-        exit();
-    }
-    else
-    {
-        $password=$_POST['password'];
-        $query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentPassword='$password'");
-        $num=mysqli_fetch_array($query);
-        if($num>0)
-        {
-            $_SESSION['email']=$email;
-            $_SESSION['userid']=$num['StudentId'];
-            $_SESSION['username']=$num['StudentName'];
-            $_SESSION['usertype']="Student";
-            $uip=$_SERVER['REMOTE_ADDR'];
-            header("Location:http://$host$uri/change-password.php");
-            exit();
-        }
-        else
-        {
-            $_SESSION['errmsg']="Invalid Email/Password Combination";
-            header("Location:http://$host$uri/studentlogin.php");
-            exit();
-        }
-    }
+    $_SESSION['errmsg']="Error in verification";
+    header("Location:http://$host$uri/emailverify.php");
+    exit();
 }
 ?>
 
@@ -64,16 +45,7 @@ if(isset($_POST['submit']))
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
 
-				<p style="text-align:center;color:red;font-size:17px">Please enter the verification code below</p>
-				
-		        <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="Please enter your code here">
-                          </div>
-
-<br>
-                    <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>&nbsp;
-					<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
+				<p style="text-align:center;color:red;font-size:17px">Your email has been successfully verified</p>
 
                 </div>
                 </form>
