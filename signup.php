@@ -69,7 +69,7 @@ if(isset($_POST['submit']))
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <center><h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Email Verification </h4></center>
+                    <center><h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Registration Form </h4></center>
                 </div>
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
@@ -77,7 +77,6 @@ if(isset($_POST['submit']))
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
 
-<<<<<<< HEAD
         	   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                     <input id="name" type="text" class="form-control" name="name" placeholder="Full Name" required>
@@ -119,13 +118,7 @@ if(isset($_POST['submit']))
                                          <option value="University">University</option>
                               </select>
                            </div>
-=======
-		        <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="Please enter your code here">
-                          </div>
-
->>>>>>> 530922d770d3d7d2c4fb7aea260ae66ef58f518d
+                           <br>
 
                     <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>&nbsp;
 					<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
