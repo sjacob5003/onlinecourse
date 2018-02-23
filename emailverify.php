@@ -25,7 +25,7 @@ else
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Student Login</title>
+    <title>Email Verification</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />

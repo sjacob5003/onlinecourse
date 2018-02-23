@@ -6,6 +6,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(isset($_POST['submit']))
 {
+    $usertype=$_POST['usertype'];
     $email=$_POST['email'];
     $email=filter_var($email, FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -17,23 +18,85 @@ if(isset($_POST['submit']))
     else
     {
         $password=$_POST['password'];
-        $query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentPassword='$password'");
-        $num=mysqli_fetch_array($query);
-        if($num>0)
+        if($usertype=="Student")
         {
-            $_SESSION['email']=$email;
-            $_SESSION['userid']=$num['StudentId'];
-            $_SESSION['username']=$num['StudentName'];
-            $_SESSION['usertype']="Student";
-            $uip=$_SERVER['REMOTE_ADDR'];
-            header("Location:http://$host$uri/change-password.php");
-            exit();
+            $query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentPassword='$password'");
+            $num=mysqli_fetch_array($query);
+            if($num>0)
+            {
+                $_SESSION['email']=$email;
+                $_SESSION['userid']=$num['StudentId'];
+                $_SESSION['username']=$num['StudentName'];
+                $_SESSION['usertype']="Student";
+                header("Location:http://$host$uri/index.php");
+                exit();
+            }
+            else
+            {
+                $_SESSION['errmsg']="Invalid Email/Password Combination";
+                header("Location:http://$host$uri/login.php");
+                exit();
+            }    
         }
-        else
+        elseif($usertype=="Faculty")
         {
-            $_SESSION['errmsg']="Invalid Email/Password Combination";
-            header("Location:http://$host$uri/studentlogin.php");
-            exit();
+            $query=mysqli_query($con, "SELECT * FROM facultytable WHERE FacultyEmail='$email' AND FacultyPassword='$password'");
+            $num=mysqli_fetch_array($query);
+            if($num>0)
+            {
+                $_SESSION['email']=$email;
+                $_SESSION['userid']=$num['FacultyId'];
+                $_SESSION['username']=$num['FacultyName'];
+                $_SESSION['usertype']="Faculty";
+                header("Location:http://$host$uri/index.php");
+                exit();
+            }
+            else
+            {
+                $_SESSION['errmsg']="Invalid Email/Password Combination";
+                header("Location:http://$host$uri/login.php");
+                exit();
+            }   
+        }
+        elseif($usertype=="Admin")
+        {
+            $query=mysqli_query($con, "SELECT * FROM admintable WHERE AdminEmail='$email' AND AdminPassword='$password'");
+            $num=mysqli_fetch_array($query);
+            if($num>0)
+            {
+                $_SESSION['email']=$email;
+                $_SESSION['userid']=$num['AdminId'];
+                $_SESSION['username']=$num['AdminName'];
+                $_SESSION['usertype']="Admin";
+                header("Location:http://$host$uri/index.php");
+                exit();
+            }
+            else
+            {
+                $_SESSION['errmsg']="Invalid Email/Password Combination";
+                header("Location:http://$host$uri/login.php");
+                exit();
+            }   
+        }
+        elseif($usertype=="University")
+        {
+            $query=mysqli_query($con, "SELECT * FROM universitytable WHERE UniversityEmail='$email' AND UniversityPassword='$password'");
+            $num=mysqli_fetch_array($query);
+            if($num>0)
+            {
+                $_SESSION['email']=$email;
+                $_SESSION['userid']=$num['UniversityId'];
+                $_SESSION['username']=$num['UniversityName'];
+                $_SESSION['usertype']="University";
+                header("Location:http://$host$uri/index.php");
+                exit();
+            }
+            else
+            {
+                $_SESSION['errmsg']="Invalid Email/Password Combination";
+                header("Location:http://$host$uri/login.php");
+                exit();
+            }
         }
     }
 }
@@ -44,7 +107,7 @@ if(isset($_POST['submit']))
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Student Login</title>
+    <title>Login</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
@@ -79,11 +142,11 @@ if(isset($_POST['submit']))
 
                           <div class="input-group">
                          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                               <select class="selectpicker" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Login Type">
-                                         <option value="admin">Admin</option>
-                                         <option value="student">Student</option>
-                                         <option value="faculty">Faculty</option>
-                                         <option value="university">University</option>
+                               <select class="selectpicker" name="usertype" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Login Type" required>
+                                         <option value="Student">Student</option>
+                                         <option value="Faculty">Faculty</option>
+                                         <option value="University">University</option>
+                                         <option value="Admin">Admin</option>
                               </select>
                            </div>
 

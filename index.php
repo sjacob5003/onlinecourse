@@ -56,7 +56,12 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             <td><?php echo htmlentities($row['CourseCode']);?></td>
             <td><?php echo htmlentities($row['CourseName']);?></td>
             <td><?php echo htmlentities($row['FacultyName']);?></td>
-            <td><?php echo htmlentities($row['CourseLevel']);?></td>
+            <td><?php if($row['CourseLevel']==1)
+                echo htmlentities("Beginner");
+                elseif($row['CourseLevel']==2)
+                    echo htmlentities("Intermediate");
+                elseif($row['CourseLevel']==3)
+                    echo htmlentities("Expert");?></td>
         </tr>
     <?php
     } ?>
