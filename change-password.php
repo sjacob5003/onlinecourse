@@ -1,26 +1,30 @@
-
 <?php
 session_start();
-include('includes/config.php');
+require_once('includes/config.php');
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email'])==0)
 {   
-  header('location:index.php');
+  header('Location:http://$host$uri/index.php');
 }
 else
 {
   date_default_timezone_set('Asia/Kolkata');// change according timezone
-  $currentTime = date( 'd-m-Y h:i:s A', time () );
+  $currentTime = date( 'Y-m-d h:i:s', time () );
   if(isset($_POST['submit']))
   {
-    $sql=mysql_query("SELECT password FROM  students where password='".md5($_POST['cpass'])."' && studentRegno='".$_SESSION['login']."'");
-    $num=mysql_fetch_array($sql);
-    if($num>0)
+    if($_SESSION['usertype']=="Student")
     {
-      $con=mysql_query("update students set password='".md5($_POST['newpass'])."', updationDate='$currentTime' where studentRegno='".$_SESSION['login']."'");
-      $_SESSION['msg']="Password Changed Successfully !!";
-    }
-    else
-      $_SESSION['msg']="Current Password not match !!";
+      $sql=mysqli_query($con, "SELECT StudentPassword FROM studenttable WHERE StudentPassword='".$_POST['cpass']."' && studentEmail='".$_SESSION['email']."'");
+      $num=mysqli_fetch_array($sql);
+      if($num>0)
+      {
+        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate='$currentTime' where StudentEmail='".$_SESSION['email']."'");
+        $_SESSION['msg']="Password Changed Successfully !!";
+      }
+      else
+        $_SESSION['msg']="Current Password not match !!";
+    }    
   }
 ?>
 <!DOCTYPE html>
@@ -30,7 +34,7 @@ else
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin | Student Password</title>
+    <title>Change Password</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -38,31 +42,31 @@ else
 <script type="text/javascript">
 function valid()
 {
-if(document.chngpwd.cpass.value=="")
-{
-alert("Current Password Filed is Empty !!");
-document.chngpwd.cpass.focus();
-return false;
-}
-else if(document.chngpwd.newpass.value=="")
-{
-alert("New Password Filed is Empty !!");
-document.chngpwd.newpass.focus();
-return false;
-}
-else if(document.chngpwd.cnfpass.value=="")
-{
-alert("Confirm Password Filed is Empty !!");
-document.chngpwd.cnfpass.focus();
-return false;
-}
-else if(document.chngpwd.newpass.value!= document.chngpwd.cnfpass.value)
-{
-alert("Password and Confirm Password Field do not match  !!");
-document.chngpwd.cnfpass.focus();
-return false;
-}
-return true;
+  if(document.chngpwd.cpass.value=="")
+  {
+    alert("Current Password Filed is Empty !!");
+    document.chngpwd.cpass.focus();
+    return false;
+  }
+  else if(document.chngpwd.newpass.value=="")
+  {
+    alert("New Password Filed is Empty !!");
+    document.chngpwd.newpass.focus();
+    return false;
+  }
+  else if(document.chngpwd.cnfpass.value=="")
+  {
+    alert("Confirm Password Filed is Empty !!");
+    document.chngpwd.cnfpass.focus();
+    return false;
+  }
+  else if(document.chngpwd.newpass.value!= document.chngpwd.cnfpass.value)
+  {
+    alert("Password and Confirm Password Field do not match  !!");
+    document.chngpwd.cnfpass.focus();
+    return false;
+  }
+  return true;
 }
 </script>
 <body>
