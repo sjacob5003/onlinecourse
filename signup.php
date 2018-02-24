@@ -11,7 +11,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(isset($_POST['submit']))
 {
-    $name=$_POST['name'];
+    $name=ucwords(strtolower($_POST['name']));
     $email=$_POST['email'];
     $phone=$_POST['phone'];
     $pass=$_POST['password'];

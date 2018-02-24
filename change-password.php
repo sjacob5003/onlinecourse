@@ -15,16 +15,52 @@ else
   {
     if($_SESSION['usertype']=="Student")
     {
-      $sql=mysqli_query($con, "SELECT StudentPassword FROM studenttable WHERE StudentPassword='".$_POST['cpass']."' && studentEmail='".$_SESSION['email']."'");
+      $sql=mysqli_query($con, "SELECT StudentPassword FROM studenttable WHERE StudentPassword='".$_POST['cpass']."' && StudentEmail='".$_SESSION['email']."'");
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate='$currentTime' where StudentEmail='".$_SESSION['email']."'");
-        $_SESSION['msg']="Password Changed Successfully !!";
+        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate='$currentTime' WHERE StudentEmail='".$_SESSION['email']."'");
+        $_SESSION['msg']="Password Changed Successfully";
       }
       else
-        $_SESSION['msg']="Current Password not match !!";
-    }    
+        $_SESSION['msg']="Password is Incorrect";
+    }
+    elseif($_SESSION['usertype']=="Faculty")
+    {
+      $sql=mysqli_query($con, "SELECT FacultyPassword FROM facultytable WHERE FacultyPassword='".$_POST['cpass']."' && FacultyEmail='".$_SESSION['email']."'");
+      $num=mysqli_fetch_array($sql);
+      if($num>0)
+      {
+        $con=mysqli_query($con, "UPDATE facultytable SET FacultyPassword='".$_POST['newpass']."', FacultyUpdationDate='$currentTime' WHERE FacultyEmail='".$_SESSION['email']."'");
+        $_SESSION['msg']="Password Changed Successfully";
+      }
+      else
+        $_SESSION['msg']="Password is Incorrect";
+    }
+    elseif($_SESSION['usertype']=="University")
+    {
+      $sql=mysqli_query($con, "SELECT UniversityPassword FROM universitytable WHERE UniversityPassword='".$_POST['cpass']."' && UniversityEmail='".$_SESSION['email']."'");
+      $num=mysqli_fetch_array($sql);
+      if($num>0)
+      {
+        $con=mysqli_query($con, "UPDATE universitytable SET UniversityPassword='".$_POST['newpass']."', UniversityUpdationDate='$currentTime' WHERE UniversityEmail='".$_SESSION['email']."'");
+        $_SESSION['msg']="Password Changed Successfully";
+      }
+      else
+        $_SESSION['msg']="Password is Incorrect";
+    }
+    elseif($_SESSION['usertype']=="Admin")
+    {
+      $sql=mysqli_query($con, "SELECT AdminPassword FROM admintable WHERE AdminPassword='".$_POST['cpass']."' && AdminEmail='".$_SESSION['email']."'");
+      $num=mysqli_fetch_array($sql);
+      if($num>0)
+      {
+        $con=mysqli_query($con, "UPDATE admintable SET AdminPassword='".$_POST['newpass']."', AdminUpdationDate='$currentTime' WHERE AdminEmail='".$_SESSION['email']."'");
+        $_SESSION['msg']="Password Changed Successfully";
+      }
+      else
+        $_SESSION['msg']="Password is Incorrect";
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -44,25 +80,25 @@ function valid()
 {
   if(document.chngpwd.cpass.value=="")
   {
-    alert("Current Password Filed is Empty !!");
+    alert("Current Password Field is Empty");
     document.chngpwd.cpass.focus();
     return false;
   }
   else if(document.chngpwd.newpass.value=="")
   {
-    alert("New Password Filed is Empty !!");
+    alert("New Password Field is Empty !!");
     document.chngpwd.newpass.focus();
     return false;
   }
   else if(document.chngpwd.cnfpass.value=="")
   {
-    alert("Confirm Password Filed is Empty !!");
+    alert("Confirm Password Field is Empty !!");
     document.chngpwd.cnfpass.focus();
     return false;
   }
   else if(document.chngpwd.newpass.value!= document.chngpwd.cnfpass.value)
   {
-    alert("Password and Confirm Password Field do not match  !!");
+    alert("Password and Confirm Password Fields do not match  !!");
     document.chngpwd.cnfpass.focus();
     return false;
   }
@@ -97,24 +133,22 @@ function valid()
 
                         <div class="panel-body">
                        <form name="chngpwd" method="post" onSubmit="return valid();">
-   <div class="form-group">
-    <label for="exampleInputPassword1">Current Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" name="cpass" placeholder="Password" />
-  </div>
-   <div class="form-group">
-    <label for="exampleInputPassword1">New Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword2" name="newpass" placeholder="Password" />
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Confirm Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword3" name="cnfpass" placeholder="Password" />
-  </div>
- 
-  <button type="submit" name="submit" class="btn btn-default">Submit</button>
-                           <hr />
-   
-
-</form>
+                         <div class="form-group">
+                          <label for="exampleInputPassword1">Current Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" name="cpass" placeholder="Password" />
+                        </div>
+                         <div class="form-group">
+                          <label for="exampleInputPassword1">New Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword2" name="newpass" placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Confirm Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword3" name="cnfpass" placeholder="Password" />
+                        </div>
+                       
+                        <button type="submit" name="submit" class="btn btn-default">Submit</button>
+                         <hr />                         
+                        </form>
                             </div>
                             </div>
                     </div>
