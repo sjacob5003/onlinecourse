@@ -1,7 +1,6 @@
-﻿
-/*=============================================================
+﻿/*=============================================================
     Authour URL: www.designbootstrap.com
-    
+
     http://www.designbootstrap.com/
 
     License: MIT
@@ -11,7 +10,7 @@
     100% Free To use For Personal And Commercial Use.
 
     IN EXCHANGE JUST TELL PEOPLE ABOUT THIS WEBSITE
-   
+
 ========================================================  */
 
 
@@ -39,12 +38,12 @@ body {
 }
 
 .page-head-line {
-    font-weight: 900;
+    font-weight: 600;
     padding-bottom: 20px;
-    border-bottom: 2px solid #F0677C;
+    border-bottom: 2px solid #1d76b6;
     text-transform: uppercase;
-    color: #F0677C;
-    font-size: 20px;
+    color: #1d76b6;
+    font-size:19px;
     margin-bottom: 40px;
 }
 
@@ -63,14 +62,14 @@ body {
 .login-icon {
     height: 60px;
 width: 60px;
-padding: 13px;
+padding: 14px;
 border-radius: 50%;
 font-size: 30px;
 margin-bottom: 20px;
 color: #fff;
 text-align: center;
 cursor:pointer;
-background-color:#F0677C;
+background-color:#1d76b6;
 -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
@@ -78,7 +77,7 @@ background-color:#F0677C;
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #F0677C;
+    background-color: #1d76b6;
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -95,8 +94,8 @@ header {
 }
 
 .navbar-brand {
-    width: 250px;
-    padding-top: 30px;
+    width: 260px;
+    padding-top: 60px;
 }
 
 /* USER SETTINGS DIV */
@@ -181,7 +180,7 @@ header {
 }
 
 .navbar-inverse {
-    background-color: #C36464;
+    background-color: #004986;
     border-color: transparent;
 }
 
@@ -200,7 +199,7 @@ footer {
     padding: 10px;
     color: #fff;
     font-size: 12px;
-    background-color: #C36464;
+    background-color: #1d76b6;
 }
 
     footer a, footer a:hover {
@@ -209,7 +208,7 @@ footer {
     }
 
 /*==============================================
-    DASHBOARD  STYLES    
+    DASHBOARD  STYLES
  =============================================*/
 
 /* DASHBOARD ICONS */

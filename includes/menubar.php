@@ -1,5 +1,4 @@
 <?php
-include("includes/config.php");
 error_reporting(0);
 if($_SESSION['email']!="")
 {

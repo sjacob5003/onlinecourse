@@ -1,5 +1,4 @@
 <?php
-include("includes/config.php");
 error_reporting(0);
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
@@ -7,20 +6,20 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 <header>
     <div class="container">
       <?php
-                if($_SESSION['email']!="")
-                {
-                ?>
-                    <strong>Welcome: </strong><?php echo htmlentities($_SESSION['username']);?>&nbsp;&nbsp;
-                <?php
-                }
-                else
-                {
-                    ?>
-                  <a href="login.php"><button class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> &nbsp;LOGIN</button></a>
-                  <a href="signup.php"><button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> &nbsp;SIGNUP</button></a>
-                <?php } ?>
-              
-       </div>
+        if($_SESSION['email']!="")
+        {
+        ?>
+            <strong>Welcome: </strong><?php echo htmlentities($_SESSION['username']);?>&nbsp;&nbsp;
+        <?php
+        }
+        else
+        {
+            ?>
+          <a href="login.php"><button class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> &nbsp;LOGIN</button></a>
+          <a href="signup.php"><button class="btn btn-default"><span class="glyphicon glyphicon-user"></span> &nbsp;SIGNUP</button></a>
+        <?php } ?>
+          
+   </div>
 </header>
 
 <!-- HEADER END-->

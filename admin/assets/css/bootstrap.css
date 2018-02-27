@@ -2530,7 +2530,7 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 35px;
+  height: 44px;
   padding: 10px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -2967,6 +2967,7 @@ select[multiple].form-group-lg .form-control {
 .btn {
   display: inline-block;
   padding: 8px 12px;
+  margin-left: auto;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;
@@ -2982,7 +2983,7 @@ select[multiple].form-group-lg .form-control {
       -ms-user-select: none;
           user-select: none;
   background-image: none;
-  border: 1px solid transparent;
+  border: 1px dotted;
   border-radius: 4px;
 }
 .btn:focus,
@@ -3019,9 +3020,9 @@ fieldset[disabled] .btn {
   opacity: .65;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: #FFF;
+  background-color: #1d76b6;
+  border-color: #1d76b6;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -3029,9 +3030,9 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+  color: #FFF;
+  background-color: #004986;
+  border-color: #1d76b6;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3155,8 +3156,8 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #004986;
+  border-color: #004986;
   width:100%;
 }
 .btn-info:hover,
@@ -3166,8 +3167,8 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open > .dropdown-toggle.btn-info {
   color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
+  background-color: #1d76b6;
+  border-color: #1d76b6;
 }
 .btn-info:active,
 .btn-info.active,
@@ -3452,16 +3453,16 @@ tbody.collapse.in {
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  color: #262626;
+  color: #FFF;
   text-decoration: none;
-  background-color: #f5f5f5;
+  background-color: #1d76b6;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
   color: #fff;
   text-decoration: none;
-  background-color: #337ab7;
+  background-color: #337a;
   outline: 0;
 }
 .dropdown-menu > .disabled > a,
