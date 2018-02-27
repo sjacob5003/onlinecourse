@@ -49,7 +49,7 @@ if($_SESSION['email']!="")
           {            
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
-              <li><a href="pincode-verification.php">Validate  University </a></li>
+              <li><a href="<?php $host ?>/onlinecourse/admin/index.php">Validate University </a></li>
               <li><a href="enroll-history.php">View Enrolment</a></li>
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="logout.php">Logout</a></li>

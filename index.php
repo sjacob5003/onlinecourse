@@ -43,7 +43,11 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Faculty Name </th>
-                                                 <th>Course Level</th>
+                                                <th>Course Level</th>
+                                                <?php
+                                                if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
+                                                    echo "<th>Enrol</th>";
+                                                ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,6 +66,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
+            <?php
+            if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
+                echo "<td> EnrolButton</td>";
+            ?>
         </tr>
     <?php
     } ?>
