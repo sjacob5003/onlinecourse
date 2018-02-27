@@ -7,14 +7,32 @@ if($_SESSION['userid']!=NULL&&$_SESSION['usertype']=='Faculty')
 {
     if(isset($_POST['add']))
     {
-        
-        $name=$_POST['coursename'];
-        $code=$_POST['coursecode'];    
-        $scope=$_POST['coursescope'];        
-        $noofseats=$_POST['courseseats'];        
-        $location=$_POST['courselocation'];
-        $level=$_POST['courselevel'];
+        if(isset($_POST['coursename']))
+            $name=$_POST['coursename'];
+        else
+            echo "No Course Name";
+        if(isset($_POST['coursecode']))            
+            $code=$_POST['coursecode'];
+        else
+            echo "No CourseCode";
+        if(isset($_POST['coursescope']))            
+            $scope=$_POST['coursescope'];
+        else
+            echo "No CourseScope";
+        if(isset($_POST['courseseats']))            
+            $noofseats=$_POST['courseseats'];
+        else
+            echo "No Seats";
+        if(isset($_POST['courselocation']))            
+            $location=$_POST['courselocation'];
+        else
+            echo "No Location";
+        if(isset($_POST['courselevel']))            
+            $level=$_POST['courselevel'];
+        else
+            echo "No CourseLEVEL";
         $facultyid=$_SESSION['userid'];
+        echo $facultyid;
         if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location')"))
         {
             $_SESSION['errmsg']="Course Successfully Added";
