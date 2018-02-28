@@ -36,13 +36,13 @@ if($_SESSION['userid']!=NULL&&$_SESSION['usertype']=='Faculty')
         if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location')"))
         {
             $_SESSION['errmsg']="Course Successfully Added";
-            header("Location:http://$host$uri/course.php");
+            header("Location:http://$host$uri/addcourse.php");
             exit();
         }
         else
         {
             $_SESSION['errmsg']="Course Could Not Be Added";
-            header("Location:http://$host$uri/course.php");
+            header("Location:http://$host$uri/addcourse.php");
             exit();
         }   
     }
