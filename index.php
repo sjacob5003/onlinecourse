@@ -52,7 +52,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseCode, CourseName, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
+    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -68,8 +68,12 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     echo htmlentities("Expert");?></td>
             <?php
             if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
-                echo "<td> EnrolButton</td>";
-            ?>
+                {
+          ?>
+          <td> <a href="courseenrol.php?courseid=<?php echo $row['CourseId']?>">
+                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Enrol</button> </a>
+                      </td>
+            <?php } ?>
         </tr>
     <?php
     } ?>
