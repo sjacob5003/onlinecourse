@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('includes/config.php');
+require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
@@ -59,8 +59,8 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <?php include('includes/header.php');
-    include('includes/menubar.php');?>
+    <?php include('../includes/header.php');
+    include('../includes/menubar.php');?>
     <div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -126,7 +126,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         </div>
     </div>
     <!-- CONTENT-WRAPPER SECTION END-->
-    <?php include('includes/footer.php');?>
+    <?php include('../includes/footer.php');?>
     <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY SCRIPTS -->
