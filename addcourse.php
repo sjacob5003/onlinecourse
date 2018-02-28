@@ -3,7 +3,7 @@ session_start();
 require_once('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if($_SESSION['userid']!=NULL&&$_SESSION['usertype']=='Faculty')
+if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 {
     if(isset($_POST['add']))
     {
@@ -79,8 +79,8 @@ if($_SESSION['userid']!=NULL&&$_SESSION['usertype']=='Faculty')
                 </div>
                 <br>
               <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-                        <input id="coursecode" type="text" class="form-control" name="coursecode" maxlength="5" placeholder="Course Code" required>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+                <input id="coursecode" type="text" class="form-control" name="coursecode" maxlength="5" placeholder="Course Code" required>
               </div>
 
 <br>
