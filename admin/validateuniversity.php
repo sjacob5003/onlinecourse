@@ -11,7 +11,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin - Home</title>
+    <title>Admin - Verify University</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
