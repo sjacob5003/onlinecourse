@@ -141,7 +141,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 else
 {
     $_SESSION['errmsg']="Please Login";
-    header("Location:http://$host$uri/login.php");
+    header("Location:http://$host/onlinecourse/login.php");
     exit();
 }
 ?>
