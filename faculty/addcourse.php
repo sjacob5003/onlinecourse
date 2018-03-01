@@ -11,23 +11,23 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
             $name=$_POST['coursename'];
         else
             echo "No Course Name";
-        if(isset($_POST['coursecode']))            
+        if(isset($_POST['coursecode']))
             $code=$_POST['coursecode'];
         else
             echo "No CourseCode";
-        if(isset($_POST['coursescope']))            
+        if(isset($_POST['coursescope']))
             $scope=$_POST['coursescope'];
         else
             echo "No CourseScope";
-        if(isset($_POST['courseseats']))            
+        if(isset($_POST['courseseats']))
             $noofseats=$_POST['courseseats'];
         else
             echo "No Seats";
-        if(isset($_POST['courselocation']))            
+        if(isset($_POST['courselocation']))
             $location=$_POST['courselocation'];
         else
             echo "No Location";
-        if(isset($_POST['courselevel']))            
+        if(isset($_POST['courselevel']))
             $level=$_POST['courselevel'];
         else
             echo "No CourseLEVEL";
@@ -44,7 +44,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
             $_SESSION['errmsg']="Course Could Not Be Added";
             header("Location:http://$host$uri/addcourse.php");
             exit();
-        }   
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -87,7 +87,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 
 		      <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
-                <input id="courseseats" type="text" class="form-control" name="courseseats" maxlength=10 placeholder="Course Seats" required>
+                <input id="courseseats" type="number" min="0" max="50" class="form-control" name="courseseats" maxlength=10 placeholder="Course Seats" required>
               </div>
 
 <br>
