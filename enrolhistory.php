@@ -1,14 +1,10 @@
 <?php
 session_start();
-include('includes/config.php');
-if(strlen($_SESSION['login'])==0)
-    {   
-header('location:index.php');
-}
-else{
-
-
-
+require_once('includes/config.php');
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
+{   
 ?>
 
 <!DOCTYPE html>
@@ -118,4 +114,10 @@ $cnt++;
     <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php }
+else
+{
+    header("Location:http://$host$uri/login.php");
+    exit();
+}
+?>
