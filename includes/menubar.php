@@ -17,7 +17,7 @@ if($_SESSION['email']!="")
               <li><a href="enroll-history.php">Enroll History  </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
-              <li><a href="logout.php">Logout</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
           }
@@ -29,7 +29,7 @@ if($_SESSION['email']!="")
               <li><a href="enroll-history.php">View Enrolment</a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
-              <li><a href="logout.php">Logout</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
           }
@@ -41,7 +41,7 @@ if($_SESSION['email']!="")
               <li><a href="enroll-history.php">Validate Course</a></li>
               <li><a href="my-profile.php">Update Details</a></li>
               <li><a href="change-password.php">Change Password</a></li>
-              <li><a href="logout.php">Logout</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
           }
