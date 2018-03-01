@@ -3,7 +3,7 @@ session_start();
 include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-$sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, CourseScope, CourseNoOfSeats, CourseLocation, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId WHERE CourseId=".$_GET['courseid']);
+$sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseScope, CourseNoOfSeats-count(StudentId) AS RemainingSeats, CourseLocation, FacultyName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE coursetable.CourseId=".$_GET['courseid']);
 while($row=mysqli_fetch_array($sql))
 {
 ?>
@@ -65,11 +65,11 @@ while($row=mysqli_fetch_array($sql))
                               </p>
                               <p>
                                         <b>Remaining Seats:</b>
-                                        <?php echo $row['CourseNoOfSeats']; ?>
+                                        <?php echo $row['RemainingSeats']; ?>
                               </p>
                               <p>
                                         <b>Start Date - End Date:</b>
-                                        21/10/2018 - 20/12/2018
+                                        <?php echo $row['CourseStartDate']." - ".$row['CourseEndDate']; ?>
                               </p>
                               <p>
                                         <b>Faculty Name:</b>
