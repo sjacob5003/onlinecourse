@@ -32,8 +32,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         else
             echo "No CourseLEVEL";
         $facultyid=$_SESSION['userid'];
-        echo $facultyid;
-        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location')"))
+        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation, CourseDurationId) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location',1)"))
         {
             $_SESSION['errmsg']="Course Successfully Added";
             header("Location:http://$host$uri/addcourse.php");
@@ -57,6 +56,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
     <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
 </head>
 <body>
     <?php include('../includes/header.php');
@@ -94,8 +94,9 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 
               <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                    <textarea class="form-control" name="coursescope" rows="11" id="scope" placeholder="Course Scope..." required></textarea>
+                    <textarea name="coursescope" id="editor"></textarea> 
               </div>
+
 
 <br>
 
@@ -134,6 +135,9 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
+    <script> 
+        CKEDITOR.replace('coursescope');
+    </script>
 </body>
 </html>
 <?php

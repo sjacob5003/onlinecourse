@@ -47,7 +47,7 @@ while($row=mysqli_fetch_array($sql))
                               <p>
                                         <b>Scope:</b>
                                         <br>
-                                        <?php echo htmlentities($row['CourseScope']); ?>
+                                        <?php echo $row['CourseScope']; ?>
                               </p>
                               <p>
                                         <b>Level:</b>
