@@ -46,101 +46,131 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         }
     }
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Add Course</title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-</head>
-<body>
-    <?php include('../includes/header.php');
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>Add Course</title>
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
+        <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
+        <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet" />
+        <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+    </head>
+    <body>
+        <?php include('../includes/header.php');
     include('../includes/menubar.php');?>
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <center><h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Add course </h4></center>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <center>
+                            <h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Add course </h4>
+                        </center>
+                    </div>
                 </div>
-            </div>
-             <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
-            <form name="addcourse" method="post">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+                <span style="color:red;"><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
+                <form name="addcourse" method="post">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
 
-        	   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    <input id="coursename" type="text" class="form-control" name="coursename" placeholder="Course Name" required>
-                </div>
-                <br>
-              <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-                <input id="coursecode" type="text" class="form-control" name="coursecode" maxlength="5" placeholder="Course Code" required>
-              </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input id="coursename" type="text" class="form-control" name="coursename" placeholder="Course Name" required>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+                                <input id="coursecode" type="text" class="form-control" name="coursecode" maxlength="5" placeholder="Course Code" required>
+                            </div>
 
-<br>
+                            <br>
 
-		      <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
-                <input id="courseseats" type="number" min="0" max="50" class="form-control" name="courseseats" maxlength=10 placeholder="Course Seats" required>
-              </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                <input id="courseseats" type="number" min="0" max="50" class="form-control" name="courseseats" maxlength=10 placeholder="Course Seats" required>
+                            </div>
 
-<br>
+                            <br>
 
-              <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                    <textarea name="coursescope" id="editor"></textarea> 
-              </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Scope</span>
+                                <textarea name="coursescope" id="editor"></textarea>
+                            </div>
 
 
-<br>
+                            <br>
+                            <div class="input-group">
+                                     <span class="input-group-addon">Start Date</span>
+                                     <input id="start" type="date" class="form-control" required>
+                            </div>
 
-              <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                    <input id="courselocation" type="text" class="form-control" name="courselocation" placeholder="Course Location" required>
-              </div>
+                            <br>
 
-<br>
+                            <div class="input-group">
+                                <span class="input-group-addon">End Date &nbsp;</span>
+                                <input id="end" type="date" class="form-control" required>
+                            </div>
 
-              <div class="input-group">
-             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                   <select class="selectpicker" name="courselevel" data-style="btn" data-width="100%" data-border="1px" title="Choose Course Level" required>
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                <input id="courselocation" type="text" class="form-control" name="courselocation" placeholder="Course Location" required>
+                            </div>
+
+                            <br>
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <select class="selectpicker" name="courselevel" data-style="btn" data-width="100%" data-border="1px" title="Choose Course Level" required>
                              <option value=1>Beginner</option>
                              <option value=2>Intermediate</option>
                              <option value=3>Expert</option>
                   </select>
-               </div>
+                            </div>
 
-                           <br>
+                            <br>
 
-                    <button type="submit" name="add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>&nbsp;
-		            <button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
+                            <button type="submit" name="add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>&nbsp;
+                            <button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
-                </div>
+                        </div>
                 </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- CONTENT-WRAPPER SECTION END-->
-    <?php include('../includes/footer.php');?>
-    <!-- FOOTER SECTION END-->
-    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.11.1.js"></script>
-    <!-- BOOTSTRAP SCRIPTS  -->
-    <script src="assets/js/bootstrap.js"></script>
-    <script src="assets/js/bootstrap-select.min.js"></script>
-    <script> 
-        CKEDITOR.replace('coursescope');
-    </script>
-</body>
-</html>
-<?php
+        <!-- CONTENT-WRAPPER SECTION END-->
+        <?php include('../includes/footer.php');?>
+        <!-- FOOTER SECTION END-->
+        <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+        <!-- CORE JQUERY SCRIPTS -->
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <!-- BOOTSTRAP SCRIPTS  -->
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/bootstrap-select.min.js"></script>
+        <script>
+            CKEDITOR.replace('coursescope');
+        </script>
+        <script>
+        var start = document.getElementById('start');
+var end = document.getElementById('end');
+
+start.addEventListener('change', function() {
+    if (start.value)
+        end.min = start.value;
+}, false);
+end.addEventLiseter('change', function() {
+    if (end.value)
+        start.max = end.value;
+}, false);
+</script>
+    </body>
+
+    </html>
+    <?php
 }
 else
 {
