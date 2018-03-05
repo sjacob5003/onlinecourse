@@ -81,7 +81,6 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 
                               <button class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
 
-
                             </div>
 
                          <!--  End  Bordered Table  -->

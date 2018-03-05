@@ -21,19 +21,15 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 </head>
 
 <body>
-<?php include('includes/header.php');?>
-    <!-- LOGO HEADER END-->
-<?php if($_SESSION['login']!="")
-{
- include('includes/menubar.php');
-}
- ?>
+<?php include('includes/header.php');
+  include('includes/menubar.php');
+?>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Enroll History  </h1>
+                        <h1 class="page-head-line">Enrol History  </h1>
                     </div>
                 </div>
                 <div class="row" >
