@@ -31,19 +31,34 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
             $level=$_POST['courselevel'];
         else
             echo "No CourseLEVEL";
+        if(isset($_POST['start']))
+            $start = date('Y-m-d', strtotime($_POST['start']));
+        else
+            echo "No StartDate";
+        if(isset($_POST['end']))
+            $end = date('Y-m-d', strtotime($_POST['end']));
+        else
+            echo "No EndDate";
         $facultyid=$_SESSION['userid'];
-        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation, CourseDurationId) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location',1)"))
+        $durationid=0;
+        $query=mysqli_query($con, "SELECT DurationId FROM coursedurationtable WHERE CourseStartDate='$start' AND CourseEndDate = '$end'");
+        $num=mysqli_fetch_array($query);
+        if($num>0)
+            $durationid=$num['DurationId'];
+        else
+        {
+            mysqli_query($con, "INSERT IGNORE INTO coursedurationtable (CourseStartDate, CourseEndDate) VALUES ('$start','$end')");
+            $durationid=mysqli_insert_id($con);
+        }
+        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation, CourseDurationId) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location','$durationid')"))
         {
             $_SESSION['errmsg']="Course Successfully Added";
             header("Location:http://$host$uri/addcourse.php");
             exit();
         }
-        else
-        {
-            $_SESSION['errmsg']="Course Could Not Be Added";
-            header("Location:http://$host$uri/addcourse.php");
-            exit();
-        }
+        $_SESSION['errmsg']="Course Could Not Be Added";
+        header("Location:http://$host$uri/addcourse.php");
+        exit();
     }
 ?>
     <!DOCTYPE html>
@@ -103,15 +118,15 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 
                             <br>
                             <div class="input-group">
-                                     <span class="input-group-addon">Start Date</span>
-                                     <input id="start" type="date" class="form-control" required>
+                                <span class="input-group-addon">Start Date</span>
+                                <input id="start" name="start" type="date" class="form-control" required>
                             </div>
 
                             <br>
 
                             <div class="input-group">
                                 <span class="input-group-addon">End Date &nbsp;</span>
-                                <input id="end" type="date" class="form-control" required>
+                                <input id="end" name="end" type="date" class="form-control" required>
                             </div>
 
                             <br>
@@ -126,10 +141,10 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <select class="selectpicker" name="courselevel" data-style="btn" data-width="100%" data-border="1px" title="Choose Course Level" required>
-                             <option value=1>Beginner</option>
-                             <option value=2>Intermediate</option>
-                             <option value=3>Expert</option>
-                  </select>
+                                    <option value=1>Beginner</option>
+                                    <option value=2>Intermediate</option>
+                                    <option value=3>Expert</option>
+                                </select>
                             </div>
 
                             <br>
