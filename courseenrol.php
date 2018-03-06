@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('includes/config.php');
+require_once('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
@@ -79,8 +79,9 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                               </p>
                               <br>
 
-                              <button class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
+                              <button id="enrolbtn" name="enrolbtn" onclick="enrolStudent" class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
 
+                              <p id="message"></p>
                             </div>
 
                          <!--  End  Bordered Table  -->
@@ -89,6 +90,26 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                 </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function enrolStudent() {
+    var course_id=<?php echo $_GET['courseid'];?>
+    var student_id=<?php echo $_SESSION['userid'];?>
+ 
+// AJAX code to send data to php file.
+        $.ajax({
+            type: "POST",
+            url: "enrol-student.php",
+            data: {course_id:course_id,student_id:student_id},
+            dataType: "JSON",
+            success: function(data) {
+              alert("Success");
+            },
+            error: function(error) {
+            alert(error);
+            }
+        }); 
+}
+</script>
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
