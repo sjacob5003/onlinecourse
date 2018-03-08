@@ -105,12 +105,13 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
             // data: {course_id:course_id,student_id:student_id},
             // dataType: "JSON",
             success: function(html) {
-              alert(html);
+              alert(html);              
             },
             error: function(html) {
-            alert(html);
-            }
-        }); 
+              alert(html);
+            }            
+        });
+        window.location.href="enrolhistory.php";
 }
 </script>
   <?php include('includes/footer.php');?>

@@ -1,6 +1,5 @@
 <?php
 require_once('includes/config.php');
-$con = mysqli_connect("localhost","root","","coursemanagement") or die ("could not connect database");
 $studentid=$_POST['studentid'];
 $courseid=$_POST['courseid'];
 $query=mysqli_query($con, "SELECT * FROM courseenrolmenttable WHERE CourseId='$courseid' AND studentid='$studentid'");
