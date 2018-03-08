@@ -79,7 +79,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                               </p>
                               <br>
 
-                              <button id="enrolbtn" name="enrolbtn" onclick="enrolStudent" class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
+                              <button id="enrolbtn" name="enrolbtn" onclick="enrolStudent()" class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
 
                               <p id="message"></p>
                             </div>
@@ -91,21 +91,24 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
         </div>
     </div>
     <script type="text/javascript">
-        function enrolStudent() {
-    var course_id=<?php echo $_GET['courseid'];?>
-    var student_id=<?php echo $_SESSION['userid'];?>
+      function enrolStudent() {
+    var course_id=parseInt(<?php echo $_GET['courseid'];?>);
+    var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
+    var dataString='courseid='+course_id+"&studentid="+student_id;
  
 // AJAX code to send data to php file.
         $.ajax({
             type: "POST",
             url: "enrol-student.php",
-            data: {course_id:course_id,student_id:student_id},
-            dataType: "JSON",
-            success: function(data) {
-              alert("Success");
+            data: dataString,
+            cache: false,
+            // data: {course_id:course_id,student_id:student_id},
+            // dataType: "JSON",
+            success: function(html) {
+              alert(html);
             },
-            error: function(error) {
-            alert(error);
+            error: function(html) {
+            alert(html);
             }
         }); 
 }

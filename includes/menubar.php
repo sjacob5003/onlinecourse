@@ -14,7 +14,7 @@ if($_SESSION['email']!="")
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="pincode-verification.php">Enroll for Course </a></li>
-              <li><a href="enroll-history.php">Enroll History  </a></li>
+              <li><a href="<?php $host ?>/onlinecourse/enrolhistory.php">Enroll History  </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
