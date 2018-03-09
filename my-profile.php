@@ -32,9 +32,9 @@ else
                                                   UserCity='$studentcity',
                                                   UserState='$studentstate' WHERE UserId='".$_SESSION['id']."'");
     if($ret)
-      $_SESSION['msg']="Student Record updated Successfully!";
+      $_SESSION['msg']="Profile Updated Successfully!";
     else
-      $_SESSION['msg']="Error : Student Record could not be updated";
+      $_SESSION['msg']="Error : Your Profile could not be updated";
     header("Location:http://$host$uri/my-profile.php");
     exit();
   }
@@ -71,7 +71,7 @@ if($_SESSION['email']!="")
                     <div class="col-md-6">
                       <div class="panel panel-default">
                           <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-                          <?php $sql=mysqli_query($con, "SELECT * FROM userstable WHERE UserId='".$_SESSION['id']."'");
+                          <?php $sql=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentId='".$_SESSION['userid']."'");
                           $cnt=1;
                           while($row=mysqli_fetch_array($sql))
                           {
@@ -80,57 +80,52 @@ if($_SESSION['email']!="")
                             <form name="dept" method="post" enctype="multipart/form-data">
                               <div class="form-group">
                                 <label for="studentid">Student ID   </label>
-                                <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo htmlentities($row['UserId']);?>"  placeholder="Student Reg no" readonly />    
+                                <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo htmlentities($row['StudentId']);?>"  placeholder="Student Reg no" readonly />    
                               </div>
 
                               <div class="form-group">
                                 <label for="studentname">Name  </label>
-                                <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['UserName']);?>"  />
+                                <input type="text" class="form-control" id="studentname" name="studentname" value="<?php echo htmlentities($row['StudentName']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentemail">Email  </label>
-                                <input type="text" class="form-control" id="studentemail" name="studentemail" value="<?php echo htmlentities($row['UserEmail']);?>"  />
+                                <input type="text" class="form-control" id="studentemail" name="studentemail" value="<?php echo htmlentities($row['StudentEmail']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentphone">Phone number  </label>
-                                <input type="text" class="form-control" id="studentphone" name="studentphone" value="<?php echo htmlentities($row['UserPhone']);?>"  />
+                                <input type="text" class="form-control" id="studentphone" name="studentphone" value="<?php echo htmlentities($row['StudentPhone']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentdob">Date of Birth (YYYY-MM-DD) </label>
-                                <input type="text" class="form-control" id="studentdob" name="studentdob" value="<?php echo htmlentities($row['UserDOB']);?>"  />
+                                <input type="text" class="form-control" id="studentdob" name="studentdob" value="<?php echo htmlentities($row['StudentDOB']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentstreet1">Address Street 1  </label>
-                                <input type="text" class="form-control" id="studentstreet1" name="studentstreet1" value="<?php echo htmlentities($row['UserStreet1']);?>"  />
+                                <input type="text" class="form-control" id="studentstreet1" name="studentstreet1" value="<?php echo htmlentities($row['StudentStreet1']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentstreet2">Address Street 2  </label>
-                                <input type="text" class="form-control" id="studentstreet2" name="studentstreet2" value="<?php echo htmlentities($row['UserStreet2']);?>"  />
+                                <input type="text" class="form-control" id="studentstreet2" name="studentstreet2" value="<?php echo htmlentities($row['StudentStreet2']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentcity">City  </label>
-                                <input type="text" class="form-control" id="studentcity" name="studentcity" value="<?php echo htmlentities($row['UserCity']);?>"  />
+                                <input type="text" class="form-control" id="studentcity" name="studentcity" value="<?php echo htmlentities($row['StudentCity']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentstate">State  </label>
-                                <input type="text" class="form-control" id="studentstate" name="studentstate" value="<?php echo htmlentities($row['UserState']);?>"  />
+                                <input type="text" class="form-control" id="studentstate" name="studentstate" value="<?php echo htmlentities($row['StudentState']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentpincode">Pincode  </label>
-                                <input type="text" class="form-control" id="studentpincode" name="studentpincode" value="<?php echo htmlentities($row['UserPinCode']);?>" required />
-                              </div>
-
-                              <div class="form-group">
-                                <label for="CGPA">marks  </label>
-                                <input type="text" class="form-control" id="cgpa" name="cgpa"  value="<?php echo htmlentities($row['cgpa']);?>" readonly required />
+                                <input type="text" class="form-control" id="studentpincode" name="studentpincode" value="<?php echo htmlentities($row['StudentPinCode']);?>" required />
                               </div>
 
                               <!-- <div class="form-group">
