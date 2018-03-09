@@ -1,10 +1,9 @@
 <?php
 session_start();
-require_once('includes/config.php');
+require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 ?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,22 +11,22 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Home</title>
+    <title>View Enrolment</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
-<?php include('includes/header.php');
-  include('includes/menubar.php');
+<?php include('../includes/header.php');
+    include('../includes/menubar.php');
 ?>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Available Courses</h1>
+                        <h1 class="page-head-line">Courses You Conduct</h1>
                     </div>
                     <div class="row" >
 
@@ -41,25 +40,23 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         <thead>
                                             <tr>
                                                 <th>Course Code </th>
-                                                <th>Course Name </th>
-                                                <th>Faculty Name </th>
+                                                <th>Course Name </th>                                                
                                                 <th>Course Level</th>
                                                 <?php
-                                                if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
-                                                    echo "<th>Enrol</th>";
+                                                if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
+                                                    echo "<th>View Students</th>";
                                                 ?>
                                             </tr>
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
+    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, CourseLevel FROM coursetable WHERE CourseFacultyId=".$_SESSION['userid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
         <tr>
             <td><?php echo htmlentities($row['CourseCode']);?></td>
             <td><?php echo htmlentities($row['CourseName']);?></td>
-            <td><?php echo htmlentities($row['FacultyName']);?></td>
             <td><?php if($row['CourseLevel']==1)
                 echo htmlentities("Beginner");
                 elseif($row['CourseLevel']==2)
@@ -67,11 +64,11 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
             <?php
-            if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
+            if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                 {
           ?>
           <td> <a href="courseenrol.php?courseid=<?php echo $row['CourseId']?>">
-                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Enrol</button> </a>
+                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;View Students</button> </a>
                       </td>
             <?php } ?>
         </tr>

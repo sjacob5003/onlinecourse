@@ -26,7 +26,7 @@ if($_SESSION['email']!="")
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/faculty/addcourse.php">Add Course </a></li>
-              <li><a href="enroll-history.php">View Enrolment</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/faculty/viewenrolment.php">View Enrolment</a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
