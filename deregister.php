@@ -50,7 +50,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseCode, CourseName, CourseLevel, CourseStartDate, Marks FROM coursetable JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE CourseStartDate>CURDATE() AND StudentId=".$_SESSION['userid']);
+    $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseLevel, CourseStartDate, Marks FROM coursetable JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE CourseStartDate>CURDATE() AND StudentId=".$_SESSION['userid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -64,8 +64,8 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>            
-          <td> <a href="courseenrol.php?courseid=<?php echo $row['CourseId']?>">
-                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
+          <td>
+                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['CourseId']; ?>)" class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
                       </td>            
         </tr>
     <?php
@@ -86,6 +86,30 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      function dereg(id) {
+    var course_id=parseInt(id);
+    var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
+    var dataString='courseid='+course_id+"&studentid="+student_id;
+ 
+// AJAX code to send data to php file.
+        $.ajax({
+            type: "POST",
+            url: "dereg-student.php",
+            data: dataString,
+            cache: false,
+            // data: {course_id:course_id,student_id:student_id},
+            // dataType: "JSON",
+            success: function(html) {
+              alert(html);              
+            },
+            error: function(html) {
+              alert(html);
+            }            
+        });
+        // window.location.href="enrolhistory.php";
+    }
+    </script>
 </body>
 </html>
 <?php
