@@ -12,9 +12,9 @@ if($_SESSION['email']!="")
           if($_SESSION['usertype']=="Student")
           {
           ?>
-            <ul id="menu-top" class="nav navbar-nav navbar-right">
-              <li><a href="pincode-verification.php">Enroll for Course </a></li>
+            <ul id="menu-top" class="nav navbar-nav navbar-right">              
               <li><a href="<?php $host ?>/onlinecourse/enrolhistory.php">Enroll History  </a></li>
+              <li><a href="<?php $host ?>/onlinecourse/deregister.php">Deregister </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
@@ -28,7 +28,7 @@ if($_SESSION['email']!="")
               <li><a href="<?php $host ?>/onlinecourse/faculty/addcourse.php">Add Course </a></li>
               <li><a href="<?php $host ?>/onlinecourse/faculty/viewenrolment.php">View Enrolment</a></li>
               <li><a href="my-profile.php">My Profile</a></li>
-              <li><a href="change-password.php">Change Password</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php

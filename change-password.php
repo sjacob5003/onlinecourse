@@ -84,21 +84,27 @@ function valid()
     document.chngpwd.cpass.focus();
     return false;
   }
+  else if(document.chngpwd.newpass.value==document.chngpwd.cpass.value)
+  {
+    alert("Password Fields are The Same!");
+    document.chngpwd.newpass.focus();
+    return false;
+  }
   else if(document.chngpwd.newpass.value=="")
   {
-    alert("New Password Field is Empty !!");
+    alert("New Password Field is Empty!");
     document.chngpwd.newpass.focus();
     return false;
   }
   else if(document.chngpwd.cnfpass.value=="")
   {
-    alert("Confirm Password Field is Empty !!");
+    alert("Confirm Password Field is Empty!");
     document.chngpwd.cnfpass.focus();
     return false;
   }
   else if(document.chngpwd.newpass.value!= document.chngpwd.cnfpass.value)
   {
-    alert("Password and Confirm Password Fields do not match  !!");
+    alert("Password and Confirm Password Fields do not match!");
     document.chngpwd.cnfpass.focus();
     return false;
   }
@@ -118,7 +124,7 @@ function valid()
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Student Change Password </h1>
+                        <h1 class="page-head-line">Change Password </h1>
                     </div>
                 </div>
                 <div class="row" >

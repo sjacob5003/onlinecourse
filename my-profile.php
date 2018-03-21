@@ -23,14 +23,15 @@ else
     // $photo=$_FILES["photo"]["name"];
     $cgpa=$_POST['cgpa'];
     // move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
-    $ret=mysqli_query($con,"UPDATE userstable SET UserName='$studentname',
-                                                  UserEmail='$studentemail',
-                                                  UserPhone='$studentphone',
-                                                  UserDOB='$studentdob',
-                                                  UserStreet1='$studentstreet1',
-                                                  UserStreet2='$studentstreet2',
-                                                  UserCity='$studentcity',
-                                                  UserState='$studentstate' WHERE UserId='".$_SESSION['id']."'");
+    $ret=mysqli_query($con,"UPDATE studenttable SET StudentName='$studentname',
+                                                  StudentEmail='$studentemail',
+                                                  StudentPhone='$studentphone',
+                                                  StudentDOB='$studentdob',
+                                                  StudentStreet1='$studentstreet1',
+                                                  StudentStreet2='$studentstreet2',
+                                                  StudentCity='$studentcity',
+                                                  StudentState='$studentstate',
+                                                  StudentPinCode='$studentpincode' WHERE StudentId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Profile Updated Successfully!";
     else
@@ -99,8 +100,8 @@ if($_SESSION['email']!="")
                               </div>
 
                               <div class="form-group">
-                                <label for="studentdob">Date of Birth (YYYY-MM-DD) </label>
-                                <input type="text" class="form-control" id="studentdob" name="studentdob" value="<?php echo htmlentities($row['StudentDOB']);?>"  />
+                                <label for="studentdob">Date of Birth </label>
+                                <input type="date" class="form-control" id="studentdob" name="studentdob" value="<?php echo htmlentities($row['StudentDOB']);?>"  />
                               </div>
 
                               <div class="form-group">
@@ -125,7 +126,7 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label for="studentpincode">Pincode  </label>
-                                <input type="text" class="form-control" id="studentpincode" name="studentpincode" value="<?php echo htmlentities($row['StudentPinCode']);?>" required />
+                                <input type="text" class="form-control" id="studentpincode" name="studentpincode" value="<?php echo htmlentities($row['StudentPincode']);?>" required />
                               </div>
 
                               <!-- <div class="form-group">
