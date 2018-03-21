@@ -105,9 +105,9 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
             },
             error: function(html) {
               alert(html);
-            }            
+            }
         });
-        // window.location.href="enrolhistory.php";
+        location.reload();
     }
     </script>
 </body>
