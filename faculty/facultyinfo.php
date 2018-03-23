@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('includes/config.php');
+require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
@@ -43,45 +43,22 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                             <div class="panel-body">
 
                               <p>
-                                        <b>Course Code:</b>
-                                        <?php echo $row['CourseCode']; ?>
+                                        <b>Lecturer:</b>
+
                               </p>
                               <p>
-                                        <b>Scope:</b>
+                                        <b>Educational Information:</b>
                                         <br>
-                                        <?php echo $row['CourseScope']; ?>
-                              </p>
-                              <p>
-                                        <b>Level:</b>
-                                        <?php if($row['CourseLevel']==1)
-                                              echo "Beginner";
-                                              elseif($row['CourseLevel']==2)
-                                              echo "Intermediate";
-                                              elseif($row['CourseLevel']==3)
-                                              echo "Expert";
-                                        ?>
-                              </p>
-                              <p>
-                                        <b>Location:</b>
-                                        <?php echo $row['CourseLocation']; ?>
-                              </p>
-                              <p>
-                                        <b>Remaining Seats:</b>
-                                        <?php echo $row['RemainingSeats']; ?>
-                              </p>
-                              <p>
-                                        <b>Start Date - End Date:</b>
-                                        <?php echo $row['CourseStartDate']." - ".$row['CourseEndDate']; ?>
-                              </p>
-                              <p>
-                                        <b>Faculty Name:</b>
-                                        <a href="faculty/facultyinfo.php"><?php echo $row['FacultyName']; ?></a>
-                              </p>
-                              <br>
 
-                              <button id="enrolbtn" name="enrolbtn" onclick="enrolStudent()" class="btn btn-default" style="width:100%;height:60px" type="submit"><span class="glyphicon glyphicon-education"></span> &nbsp;Enrol</button>
+                              </p>
+                              <p>
+                                        <b>Academic Experience:</b>
 
-                              <p id="message"></p>
+                              </p>
+                              <p>
+                                        <b>Contact Information:</b>
+
+                              </p>
                             </div>
 
                          <!--  End  Bordered Table  -->
