@@ -11,7 +11,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>View Enrolment</title>
+    <title>Your Courses</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -67,7 +67,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                 {
           ?>
-          <td> <a href="courseenrol.php?courseid=<?php echo $row['CourseId']?>">
+          <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>">
                 <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;View Students</button> </a>
                       </td>
             <?php } ?>
