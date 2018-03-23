@@ -3,6 +3,8 @@ session_start();
 require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
+{
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +13,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Your Courses</title>
+    <title>Students</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -26,7 +28,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Courses You Conduct</h1>
+                        <h1 class="page-head-line"><?php echo $_GET['coursename']; ?></h1>
                     </div>
                     <div class="row" >
 
@@ -39,37 +41,31 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Course Code </th>
-                                                <th>Course Name </th>                                                
-                                                <th>Course Level</th>
-                                                <?php
-                                                if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
-                                                    echo "<th>View Students</th>";
-                                                ?>
+                                                <th>Student ID </th>
+                                                <th>Student Name </th>                                                
+                                                <th>Student Email</th>
+                                                <th>Marks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, CourseLevel FROM coursetable WHERE CourseFacultyId=".$_SESSION['userid']);
+    $sql=mysqli_query($con, "SELECT studenttable.StudentId, StudentName, StudentEmail, Marks FROM courseenrolmenttable 
+                            JOIN studenttable ON studenttable.StudentId=courseenrolmenttable.StudentId
+                            JOIN coursetable ON coursetable.CourseId=courseenrolmenttable.CourseEnrolId
+                            WHERE coursetable.CourseId=".$_GET['courseid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
         <tr>
-            <td><?php echo htmlentities($row['CourseCode']);?></td>
-            <td><?php echo htmlentities($row['CourseName']);?></td>
-            <td><?php if($row['CourseLevel']==1)
-                echo htmlentities("Beginner");
-                elseif($row['CourseLevel']==2)
-                    echo htmlentities("Intermediate");
-                elseif($row['CourseLevel']==3)
-                    echo htmlentities("Expert");?></td>            
-            <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>&coursename=<?php echo $row['CourseName']?>">
-                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;View Students</button> </a></td>
+            <td><?php echo htmlentities($row['StudentId']);?></td>
+            <td><?php echo htmlentities($row['StudentName']);?></td>
+            <td><?php echo htmlentities($row['StudentEmail']);?></td>
+            <td><input type="text" name="marks<?php echo $row['StudentId'] ?>" value="<?php echo $row['Marks'];?>"></td>            
+            <td><a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>">
+                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Save Marks</button> </a></td>
         </tr>
     <?php
     } ?>
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -86,3 +82,11 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
+<?php
+}
+else
+{
+    header("Location:http://$host$uri/login.php");
+    exit();
+}
+?>
