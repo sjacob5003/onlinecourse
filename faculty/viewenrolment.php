@@ -39,6 +39,7 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
+                                        <form name="coursestudentsform" method="post" action="updatemarks.php">
                                         <thead>
                                             <tr>
                                                 <th>Student ID </th>
@@ -49,24 +50,26 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT studenttable.StudentId, StudentName, StudentEmail, Marks FROM courseenrolmenttable 
+    $sql=mysqli_query($con, "SELECT studenttable.StudentId, studenttable.StudentName, studenttable.StudentEmail, courseenrolmenttable.Marks                     FROM courseenrolmenttable 
                             JOIN studenttable ON studenttable.StudentId=courseenrolmenttable.StudentId
-                            JOIN coursetable ON coursetable.CourseId=courseenrolmenttable.CourseEnrolId
+                            JOIN coursetable ON coursetable.CourseId=courseenrolmenttable.CourseId
                             WHERE coursetable.CourseId=".$_GET['courseid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
         <tr>
-            <td><?php echo htmlentities($row['StudentId']);?></td>
+            <td><?php echo htmlentities($row['StudentId']);?><input type="hidden" name="studentid[]" value=<?php echo htmlentities($row['StudentId']);?>></td>
             <td><?php echo htmlentities($row['StudentName']);?></td>
             <td><?php echo htmlentities($row['StudentEmail']);?></td>
-            <td><input type="text" name="marks<?php echo $row['StudentId'] ?>" value="<?php echo $row['Marks'];?>"></td>            
-            <td><a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>">
-                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Save Marks</button> </a></td>
+            <td><input type="text" name="marks[]" value="<?php echo $row['Marks'];?>"></td>            
+            <!-- <td><a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>">
+                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Save Marks</button> </a></td> -->
         </tr>
     <?php
     } ?>
+        <tr><td colspan=4 align=center><input type="submit" class="btn btn-primary" name="Submit" value="Submit Marks"></td></tr>        
                                         </tbody>
+                                    </form>
                                     </table>
                                 </div>
                             </div>
