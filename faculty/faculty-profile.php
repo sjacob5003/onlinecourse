@@ -36,7 +36,7 @@ else
       $_SESSION['msg']="Profile Updated Successfully!";
     else
       $_SESSION['msg']="Error : Your Profile could not be updated";
-    header("Location:http://$host$uri/faculty/faculty-profile.php");
+    header("Location:http://$host$uri/faculty-profile.php");
     exit();
   }
 ?>
@@ -96,12 +96,12 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label for="facultyphone">Phone number  </label>
-                                <input type="text" class="form-control" id="facultyphone" name="facultyphone" value="<?php echo htmlentities($row['facultyPhone']);?>"  />
+                                <input type="text" class="form-control" id="facultyphone" name="facultyphone" value="<?php echo htmlentities($row['FacultyPhone']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="facultydob">Date of Birth </label>
-                                <input type="date" class="form-control" id="facultydob" name="facultydob" value="<?php echo htmlentities($row['facultyDOB']);?>"  />
+                                <input type="date" class="form-control" id="facultydob" name="facultydob" value="<?php echo htmlentities($row['FacultyDOB']);?>"  />
                               </div>
 
                               <div class="form-group">
@@ -121,7 +121,7 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label for="facultystate">State  </label>
-                                <input type="text" class="form-control" id="facultystate" name="facultystate" value="<?php echo htmlentities($row['facultyState']);?>"  />
+                                <input type="text" class="form-control" id="facultystate" name="facultystate" value="<?php echo htmlentities($row['FacultyState']);?>"  />
                               </div>
 
                               <div class="form-group">
