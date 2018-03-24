@@ -32,7 +32,7 @@ else
                                                   FacultyCity='$facultycity',
                                                   FacultyState='$facultystate',
                                                   FacultyPinCode='$facultypincode',
-                                                  UniversityUpdationDate=curtime() WHERE UniversityId='".$_SESSION['userid']."'");
+                                                  FacultyUpdationDate=curtime() WHERE FacultyId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Profile Updated Successfully!";
     else
