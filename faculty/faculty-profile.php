@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../includes/config.php');
+require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email'])==0)
@@ -32,7 +32,7 @@ else
                                                   FacultyCity='$facultycity',
                                                   FacultyState='$facultystate',
                                                   FacultyPinCode='$facultypincode',
-                                                  FacultyUpdationDate=curtime() WHERE FacultyId='".$_SESSION['userid']."'");
+                                                  UniversityUpdationDate=curtime() WHERE UniversityId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Profile Updated Successfully!";
     else
