@@ -31,7 +31,8 @@ else
                                                   StudentStreet2='$studentstreet2',
                                                   StudentCity='$studentcity',
                                                   StudentState='$studentstate',
-                                                  StudentPinCode='$studentpincode' WHERE StudentId='".$_SESSION['userid']."'");
+                                                  StudentPinCode='$studentpincode',
+                                                  StudentUpdationDate=curtime() WHERE StudentId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Profile Updated Successfully!";
     else
