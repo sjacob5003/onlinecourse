@@ -9,8 +9,6 @@ if(strlen($_SESSION['email'])==0)
 }
 else
 {
-  date_default_timezone_set('Asia/Kolkata');// change according timezone
-  $currentTime = date( 'Y-m-d h:i:s', time () );
   if(isset($_POST['submit']))
   {
     if($_SESSION['usertype']=="Student")
@@ -19,7 +17,7 @@ else
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate='$currentTime' WHERE StudentEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate=curtime() WHERE StudentEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -31,7 +29,7 @@ else
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE facultytable SET FacultyPassword='".$_POST['newpass']."', FacultyUpdationDate='$currentTime' WHERE FacultyEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE facultytable SET FacultyPassword='".$_POST['newpass']."', FacultyUpdationDate=curtime() WHERE FacultyEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -43,7 +41,7 @@ else
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE universitytable SET UniversityPassword='".$_POST['newpass']."', UniversityUpdationDate='$currentTime' WHERE UniversityEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE universitytable SET UniversityPassword='".$_POST['newpass']."', UniversityUpdationDate=curtime() WHERE UniversityEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -55,7 +53,7 @@ else
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE admintable SET AdminPassword='".$_POST['newpass']."', AdminUpdationDate='$currentTime' WHERE AdminEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE admintable SET AdminPassword='".$_POST['newpass']."', AdminUpdationDate=curtime() WHERE AdminEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else

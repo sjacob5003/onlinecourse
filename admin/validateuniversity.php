@@ -44,12 +44,12 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                 <th>University Email </th>
                                                 <th>Contact Person </th>
                                                 <th>Phone Number </th>
-                                                <th>Verify </th>
+                                                <th>Verification Status </th>
                                             </tr>
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT UniversityName, UniversityEmail, UniversityContactPerson, UniversityPhone FROM universitytable where UniversityIsActive=0");
+    $sql=mysqli_query($con, "SELECT UniversityId, UniversityName, UniversityEmail, UniversityContactPerson, UniversityPhone, UniversityIsActive, AdminName FROM universitytable LEFT JOIN admintable ON UniversityVerifiedBy=AdminId");
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -58,12 +58,17 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             <td><?php echo htmlentities($row['UniversityEmail']);?></td>
             <td><?php echo htmlentities($row['UniversityContactPerson']);?></td>
             <td><?php echo htmlentities($row['UniversityPhone']);?></td>
-            <td>A</td>
+            <td><?php
+            if($row['UniversityIsActive']==1)
+                echo "Verified by ".$row['AdminName'];
+            else
+            {
+            ?>
+                <button class="btn btn-primary" onclick=verifyUni(<?php echo $row['UniversityId'] ?>)><i class="fa fa-book "></i>&nbsp;&nbsp;Validate</button></td>
+            <?php } ?>
         </tr>
     <?php
     } ?>
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -78,5 +83,25 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+    function verifyUni(id) {
+    var universityid=parseInt(id);
+    var adminid=parseInt(<?php echo $_SESSION['userid'];?>);
+    var dataString='universityid='+universityid+"&adminid="+adminid; 
+        $.ajax({
+            type: "POST",
+            url: "verify-university.php",
+            data: dataString,
+            cache: false,
+            success: function(html) {
+                alert(html);              
+            },
+            error: function(html) {
+                alert(html);
+            }
+        });
+        location.reload();
+    }
+    </script>
 </body>
 </html>

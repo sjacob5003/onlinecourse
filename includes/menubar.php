@@ -38,9 +38,9 @@ if($_SESSION['email']!="")
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="pincode-verification.php">Validate Faculty </a></li>
-              <li><a href="enroll-history.php">Validate Course</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/university/create-program.php">Create Program</a></li>
               <li><a href="<?php $host ?>/onlinecourse/university/university-profile.php">Update Details</a></li>
-              <li><a href="change-password.php">Change Password</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
@@ -49,7 +49,7 @@ if($_SESSION['email']!="")
           {            
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
-              <li><a href="<?php $host ?>/onlinecourse/admin/index.php">Validate University </a></li>
+              <li><a href="<?php $host ?>/onlinecourse/admin/validateuniversity.php">Validate University </a></li>
               <li><a href="enroll-history.php">View Enrolment</a></li>
               <li><a href="change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
