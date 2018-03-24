@@ -39,7 +39,7 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
-                                        <form name="coursestudentsform" method="post" action="updatemarks.php">
+                                        <form>
                                         <thead>
                                             <tr>
                                                 <th>Student ID </th>
@@ -62,8 +62,6 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
             <td><?php echo htmlentities($row['StudentName']);?></td>
             <td><?php echo htmlentities($row['StudentEmail']);?></td>
             <td><input type="text" name="marks[]" value="<?php echo $row['Marks'];?>"></td>            
-            <!-- <td><a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>">
-                <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Save Marks</button> </a></td> -->
         </tr>
     <?php
     } ?>
@@ -83,6 +81,26 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+
+        $('form').on('submit', function (e) {
+
+          e.preventDefault();
+
+          $.ajax({
+            type: 'post',
+            url: 'updatemarks.php',
+            data: $('form').serialize(),
+            success: function () {
+              alert('Marks Entered');
+            }
+          });
+
+        });
+
+      });
+    </script>
 </body>
 </html>
 <?php

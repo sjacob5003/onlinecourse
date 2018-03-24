@@ -11,9 +11,7 @@ while ($i < $size)
 	$studentid = $_POST['studentid'][$i];
 	$marks=$_POST['marks'][$i];
 
-	mysqli_query($con,"UPDATE courseenrolmenttable SET marks='$marks' WHERE StudentId='$studentid'");
+	mysqli_query($con,"UPDATE courseenrolmenttable SET marks='$marks', EnrolmentUpdationTime=CURTIME() WHERE StudentId='$studentid'");
 	++$i;
-	header("Location:http://$host$uri/viewcourses.php");
-    exit();
 }
 ?> 

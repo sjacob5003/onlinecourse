@@ -31,7 +31,8 @@ else
                                                   FacultyStreet2='$facultystreet2',
                                                   FacultyCity='$facultycity',
                                                   FacultyState='$facultystate',
-                                                  FacultyPinCode='$facultypincode' WHERE FacultyId='".$_SESSION['userid']."'");
+                                                  FacultyPinCode='$facultypincode',
+                                                  FacultyUpdationDate=curtime() WHERE FacultyId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Profile Updated Successfully!";
     else
