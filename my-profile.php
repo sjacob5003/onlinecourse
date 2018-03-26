@@ -145,7 +145,7 @@ if($_SESSION['email']!="")
 
                           <?php } ?>
 
-                             <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
+                             <button type="submit" name="submit" id="submit" style="width:100%" class="btn btn-default">Update</button>
                             </form>
                         </div>
                       </div>

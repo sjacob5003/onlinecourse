@@ -170,7 +170,7 @@ if(isset($_POST['submit']))
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <center><h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Registration Form </h4></center>
+                    <center><h4 class="page-head-line"><span class="fa fa-user-plus"></span> &nbsp;Registration Form </h4></center>
                 </div>
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
@@ -178,41 +178,33 @@ if(isset($_POST['submit']))
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
 
-        	   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                          <div class="form-group">
+                           <label>Full Name</label>
                     <input id="name" type="text" class="form-control" name="name" placeholder="Full Name" required>
                 </div>
-                <br>
-              <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+
+                <div class="form-group">
+                 <label>Email ID</label>
                         <input id="email" type="text" class="form-control" name="email" placeholder="Email" required>
               </div>
 
-<br>
-
-		      <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+              <div class="form-group">
+              <label>Mobile Number</label>
                 <input id="phone" type="text" class="form-control" name="phone" maxlength=10 placeholder="Mobile Number" required>
             </div>
 
-<br>
-
-                          <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <div class="form-group">
+                    <label>Password</label>
                                     <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                           </div>
 
-<br>
-
-						  <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <div class="form-group">
+                     <label>Confirm Password</label>
                                     <input id="confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password" required>
                           </div>
 
-<br>
-
-                          <div class="input-group">
-                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                          <div class="form-group">
+                                    <label>Register type</label>
                                <select class="selectpicker" name="usertype" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Registration Type">
                                          <option value="Student">Student</option>
                                          <option value="Faculty">Faculty</option>
@@ -220,8 +212,8 @@ if(isset($_POST['submit']))
                               </select>
                            </div>
 <br>
-                    <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>&nbsp;
-		<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
+                    <button type="submit" name="submit" style="width:49%" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>
+		<button type="reset" name="submit" style="width:49%" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
                 </div>
                 </form>

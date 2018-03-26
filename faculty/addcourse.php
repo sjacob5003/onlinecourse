@@ -82,7 +82,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <center>
-                            <h4 class="page-head-line"><span class="glyphicon glyphicon-envelope"></span> &nbsp;Add course </h4>
+                            <h4 class="page-head-line"><span class="fa fa-book"></span> &nbsp;Add course </h4>
                         </center>
                     </div>
                 </div>
@@ -91,55 +91,43 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
 
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                  <div class="form-group">
+                                  <label>Course Name</label>
                                 <input id="coursename" type="text" class="form-control" name="coursename" placeholder="Course Name" required>
                             </div>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+
+                            <div class="form-group">
+                            <label>Course Code</label>
                                 <input id="coursecode" type="text" class="form-control" name="coursecode" maxlength="5" placeholder="Course Code" required>
                             </div>
 
-                            <br>
-
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                            <div class="form-group">
+                            <label>Course Seats</label>
                                 <input id="courseseats" type="number" min="0" max="50" class="form-control" name="courseseats" maxlength=10 placeholder="Course Seats" required>
                             </div>
 
-                            <br>
-
-                            <div class="input-group">
-                                <span class="input-group-addon">Scope</span>
+                            <div class="form-group">
+                            <label>Course Scope</label>
                                 <textarea name="coursescope" id="editor"></textarea>
                             </div>
 
-
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-addon">Start Date</span>
+                            <div class="form-group">
+                            <label>Start Date</label>
                                 <input id="start" name="start" type="date" class="form-control" required>
                             </div>
 
-                            <br>
-
-                            <div class="input-group">
-                                <span class="input-group-addon">End Date &nbsp;</span>
+                            <div class="form-group">
+                            <label>End Date</label>
                                 <input id="end" name="end" type="date" class="form-control" required>
                             </div>
 
-                            <br>
-
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                            <div class="form-group">
+                            <label>Course Location</label>
                                 <input id="courselocation" type="text" class="form-control" name="courselocation" placeholder="Course Location" required>
                             </div>
 
-                            <br>
-
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <div class="form-group">
+                            <label>Course Level</label>
                                 <select class="selectpicker" name="courselevel" data-style="btn" data-width="100%" data-border="1px" title="Choose Course Level" required>
                                     <option value=1>Beginner</option>
                                     <option value=2>Intermediate</option>
@@ -149,7 +137,7 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 
                             <br>
 
-                            <button type="submit" name="add" style="width:50%" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>
+                            <button type="submit" name="add" style="width:49%" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>
                             <button type="reset" name="submit" style="width:49%" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
                         </div>

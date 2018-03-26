@@ -17,6 +17,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -38,7 +39,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
-                                    <table class="table">
+                                    <table id="example" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Course Code </th>
@@ -63,10 +64,10 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                 elseif($row['CourseLevel']==2)
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
-                    echo htmlentities("Expert");?></td>            
+                    echo htmlentities("Expert");?></td>
           <td>
                 <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['CourseId']; ?>)" class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
-                      </td>            
+                      </td>
         </tr>
     <?php
     } ?>
@@ -86,12 +87,19 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+              $('#example').DataTable();
+   });
+    </script>
     <script type="text/javascript">
       function dereg(id) {
     var course_id=parseInt(id);
     var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
     var dataString='courseid='+course_id+"&studentid="+student_id;
- 
+
 // AJAX code to send data to php file.
         $.ajax({
             type: "POST",
@@ -101,7 +109,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
             // data: {course_id:course_id,student_id:student_id},
             // dataType: "JSON",
             success: function(html) {
-              alert(html);              
+              alert(html);
             },
             error: function(html) {
               alert(html);

@@ -4,7 +4,7 @@ require_once('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
-{   
+{
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +18,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -33,14 +34,14 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                     </div>
                 </div>
                 <div class="row" >
-            
+
                 <div class="col-md-12">
                     <!--    Bordered Table  -->
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive table-bordered">
-                                <table class="table">
+                                <table id="example" class="table">
                                     <thead>
                                         <tr>
                                             <th>Course Code</th>
@@ -71,10 +72,10 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                                 ?></td>
                                             <td><?php echo $row['Marks'];?></td>
                                         </tr>
-    <?php 
+    <?php
     } ?>
 
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -93,6 +94,13 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     <script src="assets/js/jquery-1.11.1.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+              $('#example').DataTable();
+   });
+    </script>
 </body>
 </html>
 <?php }
