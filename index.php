@@ -38,7 +38,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
-                                    <table class="table">
+                                    <table id="example" class="table">
                                         <thead>
                                             <tr class="bg-danger">
                                                 <th>Course Code </th>
