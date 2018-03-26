@@ -149,8 +149,8 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
 
                             <br>
 
-                            <button type="submit" name="add" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>&nbsp;
-                            <button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
+                            <button type="submit" name="add" style="width:50%" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> &nbsp;Add </button>
+                            <button type="reset" name="submit" style="width:49%" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
                         </div>
                 </form>

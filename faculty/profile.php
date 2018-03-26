@@ -127,11 +127,11 @@ if($_SESSION['email']!="")
                                                        </thead>
                                                        <tbody>
                                                                <tr class="info">
-                                                                   <td>value </td>
-                                                                   <td>value </td>
-                                                                   <td>value </td>
-                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Button</button> </a>
-                                                                       <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Button</button> </a>
+                                                                   <td>value here </td>
+                                                                   <td>value here </td>
+                                                                   <td>value here </td>
+                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Modify</button> </a>
+                                                                       <button class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
                                                                    </td>
                                                                </tr>
                                                        </tbody>
@@ -169,7 +169,7 @@ if($_SESSION['email']!="")
                               <div class="col-md-12">
                                 <div class="panel panel-default">
                                       <div class="panel-body">
-                                                <div class="table-responsive">
+                                                <div class="table-responsive table-bordered">
                                                    <table class="table">
                                                        <thead>
                                                            <tr class="bg-danger">
@@ -182,12 +182,12 @@ if($_SESSION['email']!="")
                                                        </thead>
                                                        <tbody>
                                                                <tr class="info">
-                                                                   <td>value </td>
-                                                                   <td>value </td>
-                                                                   <td>value </td>
-                                                                   <td>value </td>
-                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Edit</button> </a>
-                                                                       <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
+                                                                   <td>value here </td>
+                                                                   <td>value here </td>
+                                                                   <td>value here </td>
+                                                                   <td>value here </td>
+                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Modify</button> </a>
+                                                                       <button class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
                                                                    </td>
                                                                </tr>
                                                        </tbody>
