@@ -8,11 +8,11 @@ if($_SESSION['email']!="")
     <div class="row">
       <div class="col-md-12">
         <div class="navbar-collapse collapse ">
-          <?php 
+          <?php
           if($_SESSION['usertype']=="Student")
           {
           ?>
-            <ul id="menu-top" class="nav navbar-nav navbar-right">              
+            <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/enrolhistory.php">Enroll History  </a></li>
               <li><a href="<?php $host ?>/onlinecourse/deregister.php">Deregister </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
@@ -27,7 +27,7 @@ if($_SESSION['email']!="")
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/faculty/addcourse.php">Add Course </a></li>
               <li><a href="<?php $host ?>/onlinecourse/faculty/viewcourses.php">Your Courses</a></li>
-              <li><a href="<?php $host ?>/onlinecourse/faculty/faculty-profile.php">My Profile</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/faculty/profile.php">My Profile</a></li>
               <li><a href="<?php $host ?>/onlinecourse/change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
@@ -46,7 +46,7 @@ if($_SESSION['email']!="")
           <?php
           }
           else
-          {            
+          {
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/admin/validateuniversity.php">Validate University </a></li>

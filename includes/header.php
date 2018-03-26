@@ -3,7 +3,9 @@ error_reporting(0);
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 ?>
+
 <header>
+
     <div class="container">
       <?php
         if($_SESSION['email']!="")
@@ -34,7 +36,6 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 </button>
 
             <a class="navbar-brand" href="<?php $host ?>/onlinecourse/index.php" style="color:#fff; font-size:24px;4px; line-height:30px; ">
-
                Course Registration
             </a>
 
