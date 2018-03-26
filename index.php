@@ -39,7 +39,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                 <div class="table-responsive table-bordered">
                                     <table class="table">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-danger">
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Faculty Name </th>
@@ -56,7 +56,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     while($row=mysqli_fetch_array($sql))
     {
     ?>
-        <tr>
+        <tr class="info">
             <td><?php echo htmlentities($row['CourseCode']);?></td>
             <td><?php echo htmlentities($row['CourseName']);?></td>
             <td><?php echo htmlentities($row['FacultyName']);?></td>

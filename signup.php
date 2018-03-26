@@ -18,7 +18,7 @@ if(isset($_POST['submit']))
     $pass1=$_POST['confirmpassword'];
     $usertype=$_POST['usertype'];
     $email=filter_var($email, FILTER_SANITIZE_EMAIL);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL))    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         $_SESSION['errmsg']="Please enter a valid Email ID";
         header("Location:http://$host$uri/signup.php");
@@ -40,13 +40,13 @@ if(isset($_POST['submit']))
             exit();
         }
         else
-        {       
+        {
             $token="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             $token=str_shuffle($token);
             $token=substr($token, 0, 10);
             if(mysqli_query($con, "INSERT INTO studenttable (StudentName,StudentEmail,StudentPassword,StudentPhone, StudentTokenString) VALUES ('$name','$email','$pass','$phone','$token')"))
-            {                
-                try 
+            {
+                try
                 {
                     $mail = new PHPMailer(true);
                     $mail->SMTPDebug = 0; //SMTP Debug
@@ -59,7 +59,7 @@ if(isset($_POST['submit']))
                     $mail->Port = '587';
                     /**
                      * SMTPOptions work-around by @author : Synchro
-                     * This setting should removed on server and 
+                     * This setting should removed on server and
                      * mailing should be working on the server
                      */
                     $mail->SMTPOptions = array(
@@ -69,7 +69,7 @@ if(isset($_POST['submit']))
                             'allow_self_signed' => true
                         )
                     );
-                    
+
                     //Recipients
                     $mail->setFrom('no-reply@confirmation.com', 'Do Not Reply');
                     $mail->addAddress($email,'CourseManagement@NUV');     // Add a recipient
@@ -134,7 +134,7 @@ if(isset($_POST['submit']))
             exit();
         }
         else
-        {       
+        {
             $token="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             $token=str_shuffle($token);
             $token=substr($token, 0, 10);
@@ -150,7 +150,7 @@ if(isset($_POST['submit']))
                 exit();
             }
         }
-    }    
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -219,10 +219,9 @@ if(isset($_POST['submit']))
                                          <option value="University">University</option>
                               </select>
                            </div>
-                           <br>
-
+<br>
                     <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-ok"></span> &nbsp;Submit </button>&nbsp;
-					<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
+		<button type="reset" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-remove"></span> &nbsp;Reset </button>&nbsp;
 
                 </div>
                 </form>
