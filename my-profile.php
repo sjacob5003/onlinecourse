@@ -4,7 +4,7 @@ include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email'])==0)
-{   
+{
   header("Location:http://$host$uri/index.php");
 }
 else
@@ -64,8 +64,8 @@ if($_SESSION['email']!="")
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">My Profile</h1>
+                    <div class="col-md-6 col-md-offset-3">
+                        <center><h1 class="page-head-line">My Profile</h1></center>
                     </div>
                 </div>
                 <div class="row" >
@@ -82,7 +82,7 @@ if($_SESSION['email']!="")
                             <form name="dept" method="post" enctype="multipart/form-data">
                               <div class="form-group">
                                 <label for="studentid">Student ID   </label>
-                                <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo htmlentities($row['StudentId']);?>"  placeholder="Student Reg no" readonly />    
+                                <input type="text" class="form-control" id="studentid" name="studentid" value="<?php echo htmlentities($row['StudentId']);?>"  placeholder="Student Reg no" readonly />
                               </div>
 
                               <div class="form-group">
@@ -137,7 +137,7 @@ if($_SESSION['email']!="")
                                <img src="studentphoto/<?php echo htmlentities($row['studentPhoto']);?>" width="200" height="200">
                                <?php } ?>
                               </div>
-                              
+
                               <div class="form-group">
                                 <label for="Pincode">Upload New Photo  </label>
                                 <input type="file" class="form-control" id="photo" name="photo"  value="<?php echo htmlentities($row['studentPhoto']);?>" />
@@ -149,7 +149,7 @@ if($_SESSION['email']!="")
                             </form>
                         </div>
                       </div>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>
