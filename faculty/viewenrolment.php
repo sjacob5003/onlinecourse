@@ -17,6 +17,8 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -38,19 +40,19 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
-                                    <table class="table">
+                                    <table id="example" class="table">
                                         <form>
                                         <thead>
                                             <tr>
                                                 <th>Student ID </th>
-                                                <th>Student Name </th>                                                
+                                                <th>Student Name </th>
                                                 <th>Student Email</th>
                                                 <th>Marks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT studenttable.StudentId, studenttable.StudentName, studenttable.StudentEmail, courseenrolmenttable.Marks                     FROM courseenrolmenttable 
+    $sql=mysqli_query($con, "SELECT studenttable.StudentId, studenttable.StudentName, studenttable.StudentEmail, courseenrolmenttable.Marks                     FROM courseenrolmenttable
                             JOIN studenttable ON studenttable.StudentId=courseenrolmenttable.StudentId
                             JOIN coursetable ON coursetable.CourseId=courseenrolmenttable.CourseId
                             WHERE coursetable.CourseId=".$_GET['courseid']);
@@ -61,11 +63,11 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
             <td><?php echo htmlentities($row['StudentId']);?><input type="hidden" name="studentid[]" value=<?php echo htmlentities($row['StudentId']);?>></td>
             <td><?php echo htmlentities($row['StudentName']);?></td>
             <td><?php echo htmlentities($row['StudentEmail']);?></td>
-            <td><input type="text" name="marks[]" value="<?php echo $row['Marks'];?>"></td>            
+            <td><input type="text" name="marks[]" value="<?php echo $row['Marks'];?>"></td>
         </tr>
     <?php
     } ?>
-        <tr><td colspan=4 align=center><input type="submit" class="btn btn-primary" name="Submit" value="Submit Marks"></td></tr>        
+        <tr><td colspan=4 align=center><input type="submit" class="btn btn-primary" name="Submit" value="Submit Marks"></td></tr>
                                         </tbody>
                                     </form>
                                     </table>
@@ -81,6 +83,13 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+              $('#example').DataTable();
+   });
+    </script>
     <script>
       $(function () {
 

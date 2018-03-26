@@ -36,7 +36,7 @@ if(isset($_POST['submit']))
                 $_SESSION['errmsg']="Invalid Email/Password Combination";
                 header("Location:http://$host$uri/login.php");
                 exit();
-            }    
+            }
         }
         elseif($usertype=="Faculty")
         {
@@ -56,7 +56,7 @@ if(isset($_POST['submit']))
                 $_SESSION['errmsg']="Invalid Email/Password Combination";
                 header("Location:http://$host$uri/login.php");
                 exit();
-            }   
+            }
         }
         elseif($usertype=="Admin")
         {
@@ -76,7 +76,7 @@ if(isset($_POST['submit']))
                 $_SESSION['errmsg']="Invalid Email/Password Combination";
                 header("Location:http://$host$uri/login.php");
                 exit();
-            }   
+            }
         }
         elseif($usertype=="University")
         {
@@ -126,22 +126,18 @@ if(isset($_POST['submit']))
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                          <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                          <div class="form-group">
+                          <label>Email</label>
                                     <input id="email" type="text" class="form-control" name="email" placeholder="Email">
                           </div>
 
-<br>
-
-                          <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                              <div class="form-group">
+                               <label>Password</label>
                                     <input id="password" type="password" class="form-control" name="password" placeholder="Password">
                           </div>
 
-<br>
-
-                          <div class="input-group">
-                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                          <div class="form-group">
+                           <label>Login type</label>
                                <select class="selectpicker" name="usertype" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Login Type" required>
                                          <option value="Student">Student</option>
                                          <option value="Faculty">Faculty</option>
@@ -151,7 +147,7 @@ if(isset($_POST['submit']))
                            </div>
 
                      <br>
-                     <button type="submit" name="submit" class="btn btn-info"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Log In </button>&nbsp;
+                     <button type="submit" name="submit" class="btn btn-primary" style="width:100%"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Log In </button>&nbsp;
 
                         <p style="text-align:center;color:grey;font-size:130%">New here? <a href="signup.php"> <u>Register now</u> </a></p>
                 </div>

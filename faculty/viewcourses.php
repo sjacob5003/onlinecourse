@@ -15,6 +15,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -36,11 +38,11 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive table-bordered">
-                                    <table class="table">
+                                    <table id="example" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Course Code </th>
-                                                <th>Course Name </th>                                                
+                                                <th>Course Name </th>
                                                 <th>Course Level</th>
                                                 <?php
                                                 if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
@@ -62,7 +64,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 elseif($row['CourseLevel']==2)
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
-                    echo htmlentities("Expert");?></td>            
+                    echo htmlentities("Expert");?></td>
             <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>&coursename=<?php echo $row['CourseName']?>">
                 <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;View Students</button> </a></td>
         </tr>
@@ -84,5 +86,12 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+              $('#example').DataTable();
+   });
+    </script>
 </body>
 </html>
