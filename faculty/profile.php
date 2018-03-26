@@ -112,31 +112,48 @@ if($_SESSION['email']!="")
                           <center><h3>Educational Details</h3></center>
                           <div class="row" >
                             <div class="col-md-3"></div>
-                              <div class="col-md-6">
+                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                       <div class="panel-body">
+                                                <div class="table-responsive">
+                                                   <table class="table">
+                                                       <thead>
+                                                           <tr class="bg-danger">
+                                                               <th>Degree Name </th>
+                                                               <th>University Name </th>
+                                                               <th>Passing Year </th>
+                                                               <th>Action </th>
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                               <tr class="info">
+                                                                   <td>value </td>
+                                                                   <td>value </td>
+                                                                   <td>value </td>
+                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Button</button> </a>
+                                                                       <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Button</button> </a>
+                                                                   </td>
+                                                               </tr>
+                                                       </tbody>
+                                                   </table>
+                                         </div>
                                       <form name="dept" method="post" enctype="multipart/form-data">
-                                        <div class="form-group col-xs-6">
-                                          <label for="bachelorsdegree">Bachelors Degree </label>
+                                        <div class="form-group">
+                                          <label for="bachelorsdegree">Degree Name </label>
                                           <input type="text" class="form-control" id="facultyid" name="facultyid" value="<?php echo htmlentities($row['FacultyId']);?>" />
                                         </div>
 
-                                        <div class="form-group col-xs-6">
-                                          <label for="passing year">Passing Year </label>
-                                          <input type="date" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
-                                        </div>
-
-                                        <div class="form-group col-xs-6">
-                                          <label for="mastersdegree">Masters Degree </label>
+                                        <div class="form-group">
+                                          <label for="passing year">University Name </label>
                                           <input type="text" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
-                                        <div class="form-group col-xs-6">
-                                          <label for="passing year">Passing Year </label>
+                                        <div class="form-group">
+                                          <label for="mastersdegree">Passing Year </label>
                                           <input type="date" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
-                                       <button type="submit" name="submit" id="submit" class="btn btn-default" style="width:100%">Save</button>
+                                       <button type="submit" name="submit" formtarget="_self" id="submit" class="btn btn-default" style="width:100%">Save</button>
 
                                       </form>
                                   </div>
@@ -149,9 +166,33 @@ if($_SESSION['email']!="")
                           <center><h3>Professional Details</h3></center>
                           <div class="row" >
                             <div class="col-md-3"></div>
-                              <div class="col-md-6">
+                              <div class="col-md-12">
                                 <div class="panel panel-default">
                                       <div class="panel-body">
+                                                <div class="table-responsive">
+                                                   <table class="table">
+                                                       <thead>
+                                                           <tr class="bg-danger">
+                                                               <th>Job Title </th>
+                                                               <th>University/ Company </th>
+                                                               <th>Start Date </th>
+                                                               <th>End Date </th>
+                                                               <th>Action </th>
+                                                           </tr>
+                                                       </thead>
+                                                       <tbody>
+                                                               <tr class="info">
+                                                                   <td>value </td>
+                                                                   <td>value </td>
+                                                                   <td>value </td>
+                                                                   <td>value </td>
+                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Edit</button> </a>
+                                                                       <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
+                                                                   </td>
+                                                               </tr>
+                                                       </tbody>
+                                                   </table>
+                                         </div>
                                       <form name="dept" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                           <label for="facultyid">Job Title </label>
