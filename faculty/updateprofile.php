@@ -21,18 +21,37 @@ switch ($formtype)
 		$degreename=$_POST['degreename'];
 		$universityname=$_POST['universityname'];
 		$passingyear=$_POST['passingyear'];
-		$row=mysqli_query($con, "SELECT * FROM facultyeducationaltable WHERE FacultyId='$facultyid' AND FacultyDegreeName='$degreename' AND FacultyCollegeName='$universityname' AND FacultyPassingYear='$passingyear'");
-		if (mysqli_num_rows($row)>0)
-			echo "Data Already Exists";
+		$facultyeducationalid=$_POST['formeduid'];
+		$toupdate=$_POST['toupdateedu'];
+		if($toupdate=="1")
+		{
+			if($row=mysqli_query($con, "UPDATE facultyeducationaltable SET FacultyDegreeName='$degreename', FacultyCollegeName='$universityname', FacultyPassingYear='$passingyear', FacultyEducationalUpdationTime=CURTIME() WHERE FacultyEducationalId='$facultyeducationalid'"))
+				echo "Data Updated";
+			else
+				echo "Data could not be updated";
+		}
 		else
 		{
-			if(mysqli_query($con, "INSERT INTO facultyeducationaltable (FacultyId, FacultyDegreeName, FacultyCollegeName, FacultyPassingYear) VALUES ('$facultyid', '$degreename', '$universityname','$passingyear')"))
-				echo "Data Added";
+			$row=mysqli_query($con, "SELECT * FROM facultyeducationaltable WHERE FacultyId='$facultyid' AND FacultyDegreeName='$degreename' AND FacultyCollegeName='$universityname' AND FacultyPassingYear='$passingyear'");
+			if (mysqli_num_rows($row)>0)
+				echo "Data Already Exists";
 			else
-				echo "Data could not be added";
-		}		
+			{
+				if(mysqli_query($con, "INSERT INTO facultyeducationaltable (FacultyId, FacultyDegreeName, FacultyCollegeName, FacultyPassingYear) VALUES ('$facultyid', '$degreename', '$universityname','$passingyear')"))
+					echo "Data Added";
+				else
+					echo "Data could not be added";
+			}
+		}				
 		break;
-	default: echo "Fuck off";		
+	case 'deleteedu':
+		$facultyeducationalid=$_POST['facultyeduid'];
+		if(mysqli_query($con, "DELETE FROM facultyeducationaltable WHERE FacultyEducationalId='$facultyeducationalid'"))
+			echo "Data deleted";
+		else
+			echo "Data could not be deleted";
+		break;
+	default: echo "Operation Failed";		
 		break;
 }
 ?>

@@ -128,17 +128,26 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                                <th>Passing Year </th>
                                                                <th>Action </th>
                                                            </tr>
-                                                       </thead>
+                                                       </thead>                                                       
                                                        <tbody>
-                                                               <tr class="info">
-                                                                   <td>value here </td>
-                                                                   <td>value here </td>
-                                                                   <td>value here </td>
-                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Modify</button> </a>
-                                                                       <button class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
-                                                                   </td>
-                                                               </tr>
-                                                       </tbody>
+                                                        <?php 
+                                                       $sql=mysqli_query($con, "SELECT FacultyEducationalId, FacultyDegreeName, FacultyCollegeName, FacultyPassingYear FROM facultyeducationaltable WHERE FacultyId=".$_SESSION['userid']);
+                                                       while ($row=mysqli_fetch_array($sql))
+                                                       {
+                                                       ?>
+                                                         <tr class="info">
+                                                             <td><?php echo $row['FacultyDegreeName'] ?></td>
+                                                             <td><?php echo $row['FacultyCollegeName'] ?> </td>
+                                                             <td><?php echo $row['FacultyPassingYear'] ?> </td>
+                                                             <td>
+                                                              <button onclick="modifyEdu('<?php echo $row['FacultyEducationalId'].'\',\''.$row['FacultyDegreeName'].'\',\''.$row['FacultyCollegeName'].'\',\''.$row['FacultyPassingYear']; ?>')" id="modifyEdu" class="btn btn-primary">Modify</button>
+                                                                 <button onclick="deleteEdu(<?php echo $row['FacultyEducationalId']; ?>)" class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button>
+                                                             </td>
+                                                         </tr>
+                                                       <?php
+                                                     }
+                                                     ?>
+                                                       </tbody>                                                       
                                                    </table>
                                          </div>
                                       <form name="FacultyEducational" id="FacultyEducational" method="post" enctype="multipart/form-data">
@@ -156,6 +165,9 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                           <label for="passingyear">Passing Year </label>
                                           <input type="number" class="form-control" id="passingyear" name="passingyear" min='1900' max='2018'/>
                                         </div>
+
+                                        <input type="hidden" id="formeduid" name="formeduid" />
+                                        <input type="hidden" id="toupdateedu" name="toupdateedu" value="0" />
 
                                        <button type="submit" name="submitEducational" formtarget="_self" id="submitEducational" class="btn btn-default" style="width:100%">Save</button>
 
@@ -235,7 +247,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
-    <script>
+    <script type="text/javascript">
       var formType;
       $(function () {        
         $('#FacultyPersonal').on('submit', function (e) {
@@ -273,6 +285,36 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         });
 
       });
+      function modifyEdu(id, deg, uniname, passyear) {
+        var facultyeduid=parseInt(id);
+        var degname=deg;
+        var uniname=uniname;
+        var passyear=parseInt(passyear);
+        document.getElementById("degreename").value=degname;
+        document.getElementById("universityname").value=uniname;
+        document.getElementById("passingyear").value=passyear;
+        document.getElementById("toupdateedu").value="1";
+        document.getElementById("formeduid").value=facultyeduid;
+      }      
+    </script>
+    <script type="text/javascript">
+      function deleteEdu(id) {
+        var facultyeducationalid=parseInt(id);
+        formType="deleteedu";
+        var dataString='facultyeduid='+facultyeducationalid+'&formtype='+formType;
+          $.ajax({
+              type: "POST",
+              url: "updateprofile.php",
+              data: dataString,
+              cache: false,
+              success: function(data) {
+                alert(data);
+              },
+              error: function(data) {
+                alert(data);
+              }
+          });
+      }
     </script>
 </body>
 </html>
