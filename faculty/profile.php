@@ -20,7 +20,6 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
 <body>
 <?php include('../includes/header.php');
-if($_SESSION['email']!="")
   include('../includes/menubar.php');
 ?>
     <!-- MENU SECTION END-->
@@ -28,27 +27,31 @@ if($_SESSION['email']!="")
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Faculty Name</h1>
+                        <h1 class="page-head-line"><?php echo $_SESSION['username']; ?></h1>
                     </div>
                 </div>
                 <div class="container">
 
                       <ul class="nav nav-pills nav-justified">
-                        <li class="active"><a data-toggle="pill" href="#home">Personal Details</a></li>
-                        <li><a data-toggle="pill" href="#menu1">Educational Details</a></li>
-                        <li><a data-toggle="pill" href="#menu2">Professional Details</a></li>
+                        <li class="active"><a data-toggle="pill" href="#personal">Personal Details</a></li>
+                        <li><a data-toggle="pill" href="#educational">Educational Details</a></li>
+                        <li><a data-toggle="pill" href="#professional">Professional Details</a></li>
                       </ul>
 
                       <div class="tab-content">
 
-                        <div id="home" class="tab-pane fade in active">
+                        <div id="personal" class="tab-pane fade in active">
                           <center><h3>Personal Details</h3></center>
                           <div class="row" >
                             <div class="col-md-3"></div>
                               <div class="col-md-6">
                                 <div class="panel panel-default">
+                                  <?php $sql=mysqli_query($con, "SELECT * FROM facultytable WHERE FacultyId='".$_SESSION['userid']."'");
+                                  while($row=mysqli_fetch_array($sql))
+                                  {
+                                  ?>
                                       <div class="panel-body">
-                                      <form name="dept" method="post" enctype="multipart/form-data">
+                                      <form name="FacultyPersonal" id="FacultyPersonal" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                           <label for="facultyid">Faculty ID   </label>
                                           <input type="text" class="form-control" id="facultyid" name="facultyid" value="<?php echo htmlentities($row['FacultyId']);?>" readonly />
@@ -99,16 +102,17 @@ if($_SESSION['email']!="")
                                           <input type="text" class="form-control" id="facultypincode" name="facultypincode" value="<?php echo htmlentities($row['FacultyPincode']);?>" required />
                                         </div>
 
-                                       <button type="submit" name="submit" id="submit" class="btn btn-default" style="width:100%">Save</button>
+                                       <button type="submit" name="submitPersonal" id="submitPersonal" class="btn btn-default" style="width:100%">Save</button>
 
                                       </form>
                                   </div>
+                                  <?php } ?>
                                 </div>
                               </div>
                           </div>
                         </div>
 
-                        <div id="menu1" class="tab-pane fade">
+                        <div id="educational" class="tab-pane fade">
                           <center><h3>Educational Details</h3></center>
                           <div class="row" >
                             <div class="col-md-3"></div>
@@ -137,23 +141,23 @@ if($_SESSION['email']!="")
                                                        </tbody>
                                                    </table>
                                          </div>
-                                      <form name="dept" method="post" enctype="multipart/form-data">
+                                      <form name="FacultyEducational" id="FacultyEducational" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
-                                          <label for="bachelorsdegree">Degree Name </label>
-                                          <input type="text" class="form-control" id="facultyid" name="facultyid" value="<?php echo htmlentities($row['FacultyId']);?>" />
+                                          <label for="degreename">Degree Name </label>
+                                          <input type="text" class="form-control" id="degreename" name="degreename" value="<?php echo htmlentities($row['FacultyId']);?>" />
                                         </div>
 
                                         <div class="form-group">
-                                          <label for="passing year">University Name </label>
-                                          <input type="text" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <label for="universityname">University Name </label>
+                                          <input type="text" class="form-control" id="universityname" name="universityname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
                                         <div class="form-group">
-                                          <label for="mastersdegree">Passing Year </label>
-                                          <input type="date" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <label for="passingyear">Passing Year </label>
+                                          <input type="date" class="form-control" id="passingyear" name="passingyear" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
-                                       <button type="submit" name="submit" formtarget="_self" id="submit" class="btn btn-default" style="width:100%">Save</button>
+                                       <button type="submit" name="submitEducational" formtarget="_self" id="submitEducational" class="btn btn-default" style="width:100%">Save</button>
 
                                       </form>
                                   </div>
@@ -162,7 +166,7 @@ if($_SESSION['email']!="")
                           </div>
                         </div>
 
-                        <div id="menu2" class="tab-pane fade">
+                        <div id="professional" class="tab-pane fade">
                           <center><h3>Professional Details</h3></center>
                           <div class="row" >
                             <div class="col-md-3"></div>
@@ -193,28 +197,28 @@ if($_SESSION['email']!="")
                                                        </tbody>
                                                    </table>
                                          </div>
-                                      <form name="dept" method="post" enctype="multipart/form-data">
+                                      <form name="FacultyProfessional" id="FacultyProfessional" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
-                                          <label for="facultyid">Job Title </label>
-                                          <input type="text" class="form-control" id="facultyid" name="facultyid" value="<?php echo htmlentities($row['FacultyId']);?>" />
+                                          <label for="jobtitle">Job Title </label>
+                                          <input type="text" class="form-control" id="jobtitle" name="jobtitle" value="<?php echo htmlentities($row['FacultyId']);?>" />
                                         </div>
 
                                         <div class="form-group">
-                                          <label for="facultyname">University / Company </label>
-                                          <input type="text" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <label for="companyname">University / Company </label>
+                                          <input type="text" class="form-control" id="companyname" name="companyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
                                         <div class="form-group col-xs-6">
-                                          <label for="passing year">Start Date </label>
-                                          <input type="date" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <label for="jobstartdate">Start Date </label>
+                                          <input type="date" class="form-control" id="jobstartdate" name="jobstartdate" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
                                         <div class="form-group col-xs-6">
-                                          <label for="passing year">End Date </label>
-                                          <input type="date" class="form-control" id="facultyname" name="facultyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <label for="jobenddate">End Date </label>
+                                          <input type="date" class="form-control" id="jobenddate" name="jobenddate" value="<?php echo htmlentities($row['FacultyName']);?>"  />
                                         </div>
 
-                                       <button type="submit" name="submit" id="submit" class="btn btn-default" style="width:100%">Save</button>
+                                       <button type="submit" name="submitProfessional" id="submitProfessional" class="btn btn-default" style="width:100%">Save</button>
 
                                       </form>
                                   </div>
@@ -231,6 +235,28 @@ if($_SESSION['email']!="")
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script>
+      var formType;
+      $(function () {
+        formType="personal";
+        $('#FacultyPersonal').on('submit', function (e) {
+          e.preventDefault();
+          $.ajax({
+            type: 'post',
+            url: 'updateprofile.php',
+            data: $('#FacultyPersonal').serialize()+ "&formtype=" + formType,
+            success: function (data) {
+              alert("data updated");
+            },
+            error: function(data)
+            {
+              console.log(data);
+            } 
+          });
 
+        });
+
+      });
+    </script>
 </body>
 </html>
