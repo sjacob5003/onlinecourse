@@ -144,17 +144,17 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                       <form name="FacultyEducational" id="FacultyEducational" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                           <label for="degreename">Degree Name </label>
-                                          <input type="text" class="form-control" id="degreename" name="degreename" value="<?php echo htmlentities($row['FacultyId']);?>" />
+                                          <input type="text" class="form-control" id="degreename" name="degreename" />
                                         </div>
 
                                         <div class="form-group">
                                           <label for="universityname">University Name </label>
-                                          <input type="text" class="form-control" id="universityname" name="universityname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <input type="text" class="form-control" id="universityname" name="universityname" />
                                         </div>
 
                                         <div class="form-group">
                                           <label for="passingyear">Passing Year </label>
-                                          <input type="date" class="form-control" id="passingyear" name="passingyear" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <input type="number" class="form-control" id="passingyear" name="passingyear" min='1900' max='2018'/>
                                         </div>
 
                                        <button type="submit" name="submitEducational" formtarget="_self" id="submitEducational" class="btn btn-default" style="width:100%">Save</button>
@@ -237,10 +237,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <script src="assets/js/bootstrap.js"></script>
     <script>
       var formType;
-      $(function () {
-        formType="personal";
+      $(function () {        
         $('#FacultyPersonal').on('submit', function (e) {
           e.preventDefault();
+          formType="personal";
           $.ajax({
             type: 'post',
             url: 'updateprofile.php',
@@ -251,6 +251,22 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             error: function(data)
             {
               console.log(data);
+            } 
+          });
+        });
+        $('#FacultyEducational').on('submit', function (e) {
+          e.preventDefault();
+          formType="educational";
+          $.ajax({
+            type: 'post',
+            url: 'updateprofile.php',
+            data: $('#FacultyEducational').serialize()+ "&formtype=" + formType,
+            success: function (data) {
+              alert(data);
+            },
+            error: function(data)
+            {
+              alert(data);
             } 
           });
 
