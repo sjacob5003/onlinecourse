@@ -128,12 +128,12 @@ if(isset($_POST['submit']))
                 <div class="col-md-6 col-md-offset-3">
                           <div class="form-group">
                           <label>Email</label>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email@example.com" required>
                           </div>
 
                               <div class="form-group">
                                <label>Password</label>
-                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                           </div>
 
                           <div class="form-group">
