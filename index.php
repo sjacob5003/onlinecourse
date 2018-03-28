@@ -28,7 +28,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Available Courses</h1>
+                        <h1 class="page-head-line">Upcoming Courses</h1>
                     </div>
                     <div class="row" >
 
@@ -45,6 +45,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                 <th>Course Name </th>
                                                 <th>Faculty Name </th>
                                                 <th>Course Level</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <?php
                                                 if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
                                                     echo "<th>Enrol</th>";
@@ -53,7 +55,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, FacultyName, CourseLevel FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
+    $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, FacultyName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId JOIN coursedurationtable ON coursedurationtable.CourseId=coursetable.CourseId WHERE coursedurationtable.CourseStartDate>CURRENT_DATE");
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -67,6 +69,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
+                <td><?php echo htmlentities($row['CourseStartDate']);?></td>
+                <td><?php echo htmlentities($row['CourseEndDate']);?></td>
             <?php
             if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
                 {
@@ -96,7 +100,6 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <script src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-
     <script type="text/javascript">
     $(document).ready(function() {
               $('#example').DataTable();
