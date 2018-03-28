@@ -197,38 +197,49 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                            </tr>
                                                        </thead>
                                                        <tbody>
-                                                               <tr class="info">
-                                                                   <td>value here </td>
-                                                                   <td>value here </td>
-                                                                   <td>value here </td>
-                                                                   <td>value here </td>
-                                                                   <td><button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Modify</button> </a>
-                                                                       <button class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button> </a>
-                                                                   </td>
-                                                               </tr>
+                                                       <?php 
+                                                       $sql=mysqli_query($con, "SELECT FacultyProfessionalId, FacultyJobTitle, FacultyCompanyName, FacultyStartDate, FacultyEndDate FROM facultyprofessionaltable WHERE FacultyId=".$_SESSION['userid']);
+                                                       while ($row=mysqli_fetch_array($sql))
+                                                       {
+                                                       ?>
+                                                         <tr class="info">
+                                                             <td><?php echo $row['FacultyJobTitle'] ?></td>
+                                                             <td><?php echo $row['FacultyCompanyName'] ?></td>
+                                                             <td><?php echo $row['FacultyStartDate'] ?></td>
+                                                             <td><?php echo $row['FacultyEndDate'] ?></td>
+                                                             <td><button onclick="modifyPro('<?php echo $row['FacultyProfessionalId'].'\',\''.$row['FacultyJobTitle'].'\',\''.$row['FacultyCompanyName'].'\',\''.$row['FacultyStartDate'].'\',\''.$row['FacultyEndDate']; ?>')" id="modifyPro" class="btn btn-primary">Modify</button> </a>
+                                                                 <button onclick="deletePro(<?php echo $row['FacultyProfessionalId']; ?>)" class="btn btn-danger">Delete</button> </a>
+                                                             </td>
+                                                         </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                        </tbody>
                                                    </table>
                                          </div>
                                       <form name="FacultyProfessional" id="FacultyProfessional" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                           <label for="jobtitle">Job Title </label>
-                                          <input type="text" class="form-control" id="jobtitle" name="jobtitle" value="<?php echo htmlentities($row['FacultyId']);?>" />
+                                          <input type="text" class="form-control" id="jobtitle" name="jobtitle" />
                                         </div>
 
                                         <div class="form-group">
                                           <label for="companyname">University / Company </label>
-                                          <input type="text" class="form-control" id="companyname" name="companyname" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <input type="text" class="form-control" id="companyname" name="companyname" />
                                         </div>
 
                                         <div class="form-group col-xs-6">
                                           <label for="jobstartdate">Start Date </label>
-                                          <input type="date" class="form-control" id="jobstartdate" name="jobstartdate" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <input type="date" class="form-control" id="jobstartdate" name="jobstartdate" />
                                         </div>
 
                                         <div class="form-group col-xs-6">
                                           <label for="jobenddate">End Date </label>
-                                          <input type="date" class="form-control" id="jobenddate" name="jobenddate" value="<?php echo htmlentities($row['FacultyName']);?>"  />
+                                          <input type="date" class="form-control" id="jobenddate" name="jobenddate" />
                                         </div>
+
+                                        <input type="hidden" id="formproid" name="formproid" />
+                                        <input type="hidden" id="toupdatepro" name="toupdatepro" value="0" />
 
                                        <button type="submit" name="submitProfessional" id="submitProfessional" class="btn btn-default" style="width:100%">Save</button>
 
@@ -283,6 +294,23 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
           });
 
         });
+        $('#FacultyProfessional').on('submit', function (e) {
+          e.preventDefault();
+          formType="professional";
+          $.ajax({
+            type: 'post',
+            url: 'updateprofile.php',
+            data: $('#FacultyProfessional').serialize()+ "&formtype=" + formType,
+            success: function (data) {
+              alert(data);
+            },
+            error: function(data)
+            {
+              alert(data);
+            } 
+          });
+
+        });
 
       });
       function modifyEdu(id, deg, uniname, passyear) {
@@ -295,13 +323,43 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         document.getElementById("passingyear").value=passyear;
         document.getElementById("toupdateedu").value="1";
         document.getElementById("formeduid").value=facultyeduid;
-      }      
+      }
+      function modifyPro(id, jobname, collegename, jobstart, jobend) {
+        var facultyproid=parseInt(id);
+        var jobtitle=jobname;
+        var companyname=collegename;
+        var startdate=jobstart;
+        var enddate=jobend;
+        document.getElementById("jobtitle").value=jobtitle;
+        document.getElementById("companyname").value=companyname;
+        document.getElementById("jobstartdate").value=startdate;
+        document.getElementById("jobenddate").value=enddate;
+        document.getElementById("toupdatepro").value="1";
+        document.getElementById("formproid").value=facultyproid;
+      }
     </script>
     <script type="text/javascript">
       function deleteEdu(id) {
         var facultyeducationalid=parseInt(id);
         formType="deleteedu";
         var dataString='facultyeduid='+facultyeducationalid+'&formtype='+formType;
+          $.ajax({
+              type: "POST",
+              url: "updateprofile.php",
+              data: dataString,
+              cache: false,
+              success: function(data) {
+                alert(data);
+              },
+              error: function(data) {
+                alert(data);
+              }
+          });
+      }
+      function deletePro(id) {
+        var facultyprofessionalid=parseInt(id);
+        formType="deletepro";
+        var dataString='facultyproid='+facultyprofessionalid+'&formtype='+formType;
           $.ajax({
               type: "POST",
               url: "updateprofile.php",

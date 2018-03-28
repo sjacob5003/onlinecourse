@@ -22,8 +22,8 @@ switch ($formtype)
 		$universityname=$_POST['universityname'];
 		$passingyear=$_POST['passingyear'];
 		$facultyeducationalid=$_POST['formeduid'];
-		$toupdate=$_POST['toupdateedu'];
-		if($toupdate=="1")
+		$toupdateedu=$_POST['toupdateedu'];
+		if($toupdateedu=="1")
 		{
 			if($row=mysqli_query($con, "UPDATE facultyeducationaltable SET FacultyDegreeName='$degreename', FacultyCollegeName='$universityname', FacultyPassingYear='$passingyear', FacultyEducationalUpdationTime=CURTIME() WHERE FacultyEducationalId='$facultyeducationalid'"))
 				echo "Data Updated";
@@ -47,6 +47,41 @@ switch ($formtype)
 	case 'deleteedu':
 		$facultyeducationalid=$_POST['facultyeduid'];
 		if(mysqli_query($con, "DELETE FROM facultyeducationaltable WHERE FacultyEducationalId='$facultyeducationalid'"))
+			echo "Data deleted";
+		else
+			echo "Data could not be deleted";
+		break;
+	case 'professional':
+		$jobtitle=$_POST['jobtitle'];
+		$companyname=$_POST['companyname'];
+		$jobstartdate=$_POST['jobstartdate'];
+		$jobenddate=$_POST['jobenddate'];
+		$facultyprofessionalid=$_POST['formproid'];
+		$toupdatepro=$_POST['toupdatepro'];
+		if($toupdatepro=="1")
+		{
+			if($row=mysqli_query($con, "UPDATE facultyprofessionaltable SET FacultyJobTitle='$jobtitle', FacultyCompanyName='$companyname', FacultyStartDate='$jobstartdate', FacultyEndDate='$jobenddate', FacultyProfessionalUpdationTime=CURTIME() WHERE FacultyProfessionalId='$facultyprofessionalid'"))
+				echo "Data Updated";
+			else
+				echo "Data could not be updated";
+		}
+		else
+		{
+			$row=mysqli_query($con, "SELECT * FROM facultyprofessionaltable WHERE FacultyId='$facultyid' AND FacultyJobTitle='$jobtitle' AND FacultyCompanyName='$companyname' AND FacultyStartDate='$jobstartdate' AND FacultyEndDate='$jobenddate'");
+			if (mysqli_num_rows($row)>0)
+				echo "Data Already Exists";
+			else
+			{
+				if(mysqli_query($con, "INSERT INTO facultyprofessionaltable (FacultyId, FacultyJobTitle, FacultyCompanyName, FacultyStartDate, FacultyEndDate) VALUES ('$facultyid', '$jobtitle', '$companyname','$jobstartdate','$jobenddate')"))
+					echo "Data Added";
+				else
+					echo "Data could not be added";
+			}
+		}				
+		break;
+	case 'deletepro':
+		$facultyprofessionalid=$_POST['facultyproid'];
+		if(mysqli_query($con, "DELETE FROM facultyprofessionaltable WHERE FacultyProfessionalId='$facultyprofessionalid'"))
 			echo "Data deleted";
 		else
 			echo "Data could not be deleted";
