@@ -52,7 +52,8 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
     <?php
     $sql=mysqli_query($con, "SELECT studenttable.StudentId, studenttable.StudentName, studenttable.StudentEmail, courseenrolmenttable.Marks                     FROM courseenrolmenttable
                             JOIN studenttable ON studenttable.StudentId=courseenrolmenttable.StudentId
-                            JOIN coursetable ON coursetable.CourseId=courseenrolmenttable.CourseId
+                            JOIN coursedurationtable ON coursedurationtable.DurationId=courseenrolmenttable.CourseDurationId
+                            JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId
                             WHERE coursetable.CourseId=".$_GET['courseid']);
     while($row=mysqli_fetch_array($sql))
     {

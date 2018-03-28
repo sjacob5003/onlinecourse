@@ -42,6 +42,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Course Level</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <?php
                                                 if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                                                     echo "<th>View Students</th>";
@@ -50,7 +52,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseId, CourseCode, CourseName, CourseLevel FROM coursetable WHERE CourseFacultyId=".$_SESSION['userid']);
+    $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId=facultytable.FacultyId LEFT JOIN coursedurationtable ON coursetable.CourseId=coursedurationtable.CourseId WHERE facultytable.FacultyId=".$_SESSION['userid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -63,6 +65,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     echo htmlentities("Intermediate");
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
+            <td><?php echo htmlentities($row['CourseStartDate']);?></td>
+            <td><?php echo htmlentities($row['CourseEndDate']);?></td>
             <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>&coursename=<?php echo $row['CourseName']?>">
                 <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;View Students</button> </a></td>
         </tr>
