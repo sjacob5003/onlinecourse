@@ -12,10 +12,18 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Faculty Profile</title>
+    <title>Program Page</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/statestyle.css" rel="stylesheet" />
+    <style type="text/css">
+  #regiration_form fieldset:not(:first-of-type) {
+    display: none;
+  }
+  </style>
+
 </head>
 
 <body>
@@ -37,39 +45,84 @@ if($_SESSION['email']!="")
                     <div class="col-md-6">
                       <div class="panel panel-default">
                             <div class="panel-body">
-                            <form name="dept" method="post" enctype="multipart/form-data">
-                              <div class="form-group">
-                                <label for="facultyid">Program Name </label>
-                                <input type="text" class="form-control" id="facultyid" name="facultyid" value="" />
-                              </div>
+                                      <div class="progress" style="height:40px">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <form id="regiration_form" novalidate action="action.php"  method="post">
+  <fieldset>
+    <h3>Step 1: Program Name</h3>
+    <div id="selection" class="form-group">
+              <select class="selectpicker" name="programname" data-style="btn" data-width="100%" data-border="1px"  title="Choose Your Program" required >
+                    <option>Bachelors in computer applications</option>
+                    <option>Bachelors in business administration</option>
+                    <option>Bachelors in mass communication</option>
+          </select>
+</div>
+<div id="selection" class="form-group">
+         <select class="selectpicker" name="shortname" data-style="btn" data-width="100%" data-border="1px" title="Choose Your Program" required >
+                <option>BCA</option>
+                <option>BBA</option>
+                <option>BMC</option>
+      </select>
+</div>
 
-                              <div class="form-group">
-                                <label for="facultyname">Abbreviated Name </label>
-                                <input type="text" class="form-control" id="facultyname" name="facultyname" value=""  />
-                              </div>
+    <input type="button" name="password" style="width:100%" class="next btn btn-default" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h3> Step 2: Select Courses</h3>
+    <div id="selection" class="form-group">
+              <select class="selectpicker" name="course" data-style="btn" data-width="100%" data-border="1px" multiple title="Choose Courses" multiple data-actions-box="true" data-live-search="true" required >
+                    <option>Java</option>
+                    <option>Ruby</option>
+                    <option>Php</option>
+          </select>
+</div>
+    <input type="button" name="previous" style="width:49%" class="previous btn btn-warning" value="Previous" />
+    <input type="button" name="submit" style="width:49%" class="next btn btn-default" value="Submit" />
 
-                              <div class="form-group col-xs-6">
-                                <label for="facultyid">Start Date </label>
-                                <input type="date" class="form-control" id="facultyid" name="facultyid" value="" />
-                              </div>
-
-                              <div class="form-group col-xs-6">
-                                <label for="facultyname">End Date </label>
-                                <input type="date" class="form-control" id="facultyname" name="facultyname" value=""  />
-                              </div>
-
-                             <button type="submit" name="submit" id="submit" class="btn btn-default" style="width:100%">Submit</button>
-
-                            </form>
+  </fieldset>
+  </form>
                         </div>
                       </div>
                     </div>
                 </div>
       </div>
 </div>
+
                 <?php include('/includes/footer.php');?>
                   <script src="assets/js/jquery-1.11.1.js"></script>
                   <script src="assets/js/bootstrap.js"></script>
-
+                  <script src="assets/js/bootstrap-select.min.js"></script>
+                  <script src="assets/js/state.js"></script>
+                  <script src="assets/js/statejquery.js"></script>
+                  <script>
+                  $(document).ready(function(){
+  var current = 1,current_step,next_step,steps;
+  steps = $("fieldset").length;
+  $(".next").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().next();
+    next_step.show();
+    current_step.hide();
+    setProgressBar(++current);
+  });
+  $(".previous").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().prev();
+    next_step.show();
+    current_step.hide();
+    setProgressBar(--current);
+  });
+  setProgressBar(current);
+  // Change progress bar action
+  function setProgressBar(curStep){
+    var percent = parseFloat(100 / steps) * curStep;
+    percent = percent.toFixed();
+    $(".progress-bar")
+      .css("width",percent+"%")
+      .html(percent+"%");
+  }
+});
+</script>
               </body>
               </html>
