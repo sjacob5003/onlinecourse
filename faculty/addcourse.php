@@ -40,21 +40,16 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         else
             echo "No EndDate";
         $facultyid=$_SESSION['userid'];
-        $durationid=0;
-        $query=mysqli_query($con, "SELECT DurationId FROM coursedurationtable WHERE CourseStartDate='$start' AND CourseEndDate = '$end'");
-        $num=mysqli_fetch_array($query);
-        if($num>0)
-            $durationid=$num['DurationId'];
-        else
+        $courseid=0;
+        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location')"))
         {
-            mysqli_query($con, "INSERT IGNORE INTO coursedurationtable (CourseStartDate, CourseEndDate) VALUES ('$start','$end')");
-            $durationid=mysqli_insert_id($con);
-        }
-        if(mysqli_query($con, "INSERT INTO coursetable (CourseName, CourseCode, CourseNoOfSeats, CourseScope, CourseLevel, CourseFacultyId, CourseLocation, CourseDurationId) VALUES ('$name','$code','$noofseats', '$scope','$level','$facultyid','$location','$durationid')"))
-        {
-            $_SESSION['errmsg']="Course Successfully Added";
-            header("Location:http://$host$uri/addcourse.php");
-            exit();
+            $courseid=mysqli_insert_id($con);
+            if(mysqli_query($con, "INSERT IGNORE INTO coursedurationtable (CourseId, CourseStartDate, CourseEndDate) VALUES ('$courseid','$start','$end')"))
+            {
+                $_SESSION['errmsg']="Course Successfully Added";
+                header("Location:http://$host$uri/addcourse.php");
+                exit();   
+            }            
         }
         $_SESSION['errmsg']="Course Could Not Be Added";
         header("Location:http://$host$uri/addcourse.php");
