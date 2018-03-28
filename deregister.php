@@ -51,7 +51,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseLevel, CourseStartDate, Marks FROM coursetable JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE CourseStartDate>CURDATE() AND StudentId=".$_SESSION['userid']);
+    $sql=mysqli_query($con, "SELECT DurationId, CourseCode, CourseName, CourseLevel, CourseStartDate, Marks FROM coursedurationtable JOIN coursetable ON coursetable.CourseId=coursedurationtable.CourseId JOIN courseenrolmenttable ON coursedurationtable.DurationId = courseenrolmenttable.CourseDurationId WHERE CourseStartDate>CURDATE() AND StudentId=".$_SESSION['userid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -66,7 +66,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
           <td>
-                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['CourseId']; ?>)" class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
+                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['DurationId']; ?>)" class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
                       </td>
         </tr>
     <?php
@@ -96,9 +96,9 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     </script>
     <script type="text/javascript">
       function dereg(id) {
-    var course_id=parseInt(id);
+    var duration_id=parseInt(id);
     var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
-    var dataString='courseid='+course_id+"&studentid="+student_id;
+    var dataString='durationid='+duration_id+"&studentid="+student_id;
 
 // AJAX code to send data to php file.
         $.ajax({
