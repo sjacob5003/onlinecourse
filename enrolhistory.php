@@ -53,7 +53,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                     </thead>
                                     <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT CourseCode, CourseName, CourseLevel, CourseStartDate, CourseEndDate, Marks FROM coursetable JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE StudentId=".$_SESSION['userid']);
+    $sql=mysqli_query($con, "SELECT CourseCode, CourseName, CourseLevel, CourseStartDate, CourseEndDate, Marks FROM coursedurationtable JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId WHERE StudentId=".$_SESSION['userid']);
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -74,7 +74,6 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                         </tr>
     <?php
     } ?>
-
 
                                     </tbody>
                                 </table>

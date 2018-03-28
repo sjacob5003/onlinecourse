@@ -5,7 +5,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 {
-  $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseScope, CourseNoOfSeats-count(StudentId) AS RemainingSeats, CourseLocation, FacultyName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId JOIN coursedurationtable ON CourseDurationId=DurationId JOIN courseenrolmenttable ON coursetable.CourseId = courseenrolmenttable.CourseId WHERE coursetable.CourseId=".$_GET['courseid']);
+  $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseScope, CourseNoOfSeats-count(StudentId) AS RemainingSeats, CourseLocation, FacultyName, CourseLevel, coursedurationtable.CourseStartDate, CourseEndDate FROM coursedurationtable JOIN coursetable ON coursetable.CourseId=coursedurationtable.CourseId LEFT JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId=coursedurationtable.DurationId JOIN facultytable ON facultytable.FacultyId=coursetable.CourseFacultyId WHERE DurationId=".$_GET['durationid']);
   while($row=mysqli_fetch_array($sql))
   {
 ?>
@@ -92,10 +92,9 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     </div>
     <script type="text/javascript">
       function enrolStudent() {
-    var course_id=parseInt(<?php echo $_GET['courseid'];?>);
+    var duration_id=parseInt(<?php echo $_GET['durationid'];?>);
     var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
-    var dataString='courseid='+course_id+"&studentid="+student_id;
-
+    var dataString='durationid='+duration_id+"&studentid="+student_id;
 // AJAX code to send data to php file.
         $.ajax({
             type: "POST",

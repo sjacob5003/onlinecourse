@@ -55,7 +55,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, FacultyName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId JOIN coursedurationtable ON coursedurationtable.CourseId=coursetable.CourseId WHERE coursedurationtable.CourseStartDate>CURRENT_DATE");
+    $sql=mysqli_query($con, "SELECT DurationId, CourseCode, CourseName, FacultyName, CourseLevel, CourseStartDate, CourseEndDate FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId JOIN coursedurationtable ON coursedurationtable.CourseId=coursetable.CourseId WHERE coursedurationtable.CourseStartDate>CURRENT_DATE");
     while($row=mysqli_fetch_array($sql))
     {
     ?>
@@ -75,7 +75,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Student')
                 {
           ?>
-          <td> <a href="courseenrol.php?courseid=<?php echo $row['CourseId']?>">
+          <td> <a href="courseenrol.php?durationid=<?php echo $row['DurationId']?>">
                 <button class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Enrol</button> </a>
                       </td>
             <?php } ?>
