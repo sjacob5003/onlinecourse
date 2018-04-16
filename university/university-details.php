@@ -50,8 +50,8 @@ if($_SESSION['email']!="")
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-head-line">Details</h1>
+                    <div class="col-md-6 col-md-offset-3">
+                        <center><h1 class="page-head-line">Details</h1></center>
                     </div>
                 </div>
                 <div class="row" >
@@ -68,7 +68,7 @@ if($_SESSION['email']!="")
                             <form name="dept" method="post" enctype="multipart/form-data">
                               <div class="form-group">
                                 <label for="universityid">University ID   </label>
-                                <input type="text" class="form-control" id="universityid" name="universityid" value="<?php echo htmlentities($row['UniversityId']);?>"  placeholder="University ID" readonly />    
+                                <input type="text" class="form-control" id="universityid" name="universityid" value="<?php echo htmlentities($row['UniversityId']);?>"  placeholder="University ID" readonly />
                               </div>
 
                               <div class="form-group">
@@ -80,7 +80,7 @@ if($_SESSION['email']!="")
                                 <label for="universityemail">University Email  </label>
                                 <input type="text" class="form-control" id="universityemail" name="universityemail" value="<?php echo htmlentities($row['UniversityEmail']);?>"  />
                               </div>
-                              
+
                               <div class="form-group">
                                 <label for="universitycontact">Contact Person Name  </label>
                                 <input type="text" class="form-control" id="universitycontact" name="universitycontact" value="<?php echo htmlentities($row['UniversityContactPerson']);?>"  />
@@ -93,11 +93,11 @@ if($_SESSION['email']!="")
 
                           <?php } ?>
 
-                             <button type="submit" name="submit" id="submit" class="btn btn-default">Update</button>
+                             <button type="submit" name="submit" style="width:100%" id="submit" class="btn btn-default">Update</button>
                             </form>
                         </div>
                       </div>
-                    </div>                  
+                    </div>
                 </div>
             </div>
         </div>

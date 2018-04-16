@@ -172,7 +172,7 @@ header {
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
-    background-color: #F0677C!important;
+    background-color: #1d76b6!important;
 }
 
 .menu-section .dropdown-menu > li > a:hover,.menu-section .dropdown-menu > li > a:focus {
@@ -185,7 +185,7 @@ header {
 }
 
 .navbar-toggle {
-    background-color: #F0677C;
+    background-color: #1d76b6;
     border: 1px solid #fff;
 }
 

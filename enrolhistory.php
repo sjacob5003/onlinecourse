@@ -39,11 +39,10 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                     <!--    Bordered Table  -->
                     <div class="panel panel-default">
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table id="example" class="table">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped table-bordered">
                                     <thead>
-                                        <tr>
+                                        <tr class="bg-primary">
                                             <th>Course Code</th>
                                             <th>Course Name </th>
                                             <th>Duration </th>
@@ -78,7 +77,6 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
                     </div>
                      <!--  End  Bordered Table  -->
                 </div>
@@ -95,10 +93,24 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
     <script src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
     <script type="text/javascript">
     $(document).ready(function() {
-              $('#example').DataTable();
-   });
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+        ]
+    } );
+} );
     </script>
 </body>
 </html>

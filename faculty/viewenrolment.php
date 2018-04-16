@@ -37,11 +37,11 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <div class="table-responsive table-bordered">
-                                    <table id="example" class="table">
+                                <div class="table-responsive">
+                                    <table id="temp" class="table table-striped">
                                         <form>
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-primary">
                                                 <th>Student ID </th>
                                                 <th>Student Name </th>
                                                 <th>Student Email</th>
@@ -84,9 +84,6 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 
     <script>
       $(function () {
