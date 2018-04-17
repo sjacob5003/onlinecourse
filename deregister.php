@@ -37,11 +37,10 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                         <!--    Bordered Table  -->
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive table-bordered">
-                                    <table id="example" class="table">
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-primary">
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Start Date </th>
@@ -66,7 +65,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                 elseif($row['CourseLevel']==3)
                     echo htmlentities("Expert");?></td>
           <td>
-                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['DurationId']; ?>)" class="btn btn-primary"><i class="fa fa-book "></i>&nbsp;&nbsp;Deregister</button> </a>
+                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['DurationId']; ?>)" class="btn btn-primary"><i class="fa fa-user-times "></i>&nbsp;&nbsp;Deregister</button> </a>
                       </td>
         </tr>
     <?php
@@ -76,7 +75,6 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
                         </div>
                          <!--  End  Bordered Table  -->
                     </div>

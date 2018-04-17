@@ -27,6 +27,12 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <div class="content-wrapper">
         <div class="container">
               <div class="row">
+
+	<div class="alert alert-info alert-dismissible" role="alert">
+  <button type="button" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+  <strong><i class="fa fa-warning"></i> Notice</strong> <marquee><p style="font-family: Impact; font-size: 17pt">This website contains free courses for learning purpose. Please scroll through the below content for further details.</p></marquee>
+</div>
+
                     <div class="col-md-12">
                         <h1 class="page-head-line">Upcoming Courses</h1>
                     </div>
@@ -36,11 +42,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                         <!--    Bordered Table  -->
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <div class="table-responsive table-bordered">
-                                    <table id="example" class="table">
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered">
                                         <thead>
-                                            <tr class="bg-danger">
+                                            <tr class="bg-primary">
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Faculty Name </th>
@@ -59,7 +64,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     while($row=mysqli_fetch_array($sql))
     {
     ?>
-        <tr class="info">
+        <tr>
             <td><?php echo htmlentities($row['CourseCode']);?></td>
             <td><?php echo htmlentities($row['CourseName']);?></td>
             <td><?php echo htmlentities($row['FacultyName']);?></td>
@@ -87,7 +92,6 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
                         </div>
                          <!--  End  Bordered Table  -->
                     </div>

@@ -18,7 +18,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 </head>
 
 <body>
-<?php 
+<?php
     include('../includes/header.php');
     include('../includes/menubar.php');
 ?>
@@ -36,10 +36,10 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                         <div class="panel panel-default">
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <div class="table-responsive table-bordered">
-                                    <table class="table">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-primary">
                                                 <th>University Name </th>
                                                 <th>University Email </th>
                                                 <th>Contact Person </th>
@@ -64,7 +64,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             else
             {
             ?>
-                <button class="btn btn-primary" onclick=verifyUni(<?php echo $row['UniversityId'] ?>)><i class="fa fa-book "></i>&nbsp;&nbsp;Validate</button></td>
+                <button class="btn btn-primary" onclick=verifyUni(<?php echo $row['UniversityId']; ?>)><i class="fa fa-book "></i>&nbsp;&nbsp;Validate</button></td>
             <?php } ?>
         </tr>
     <?php
@@ -83,18 +83,19 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+
     <script type="text/javascript">
     function verifyUni(id) {
     var universityid=parseInt(id);
     var adminid=parseInt(<?php echo $_SESSION['userid'];?>);
-    var dataString='universityid='+universityid+"&adminid="+adminid; 
+    var dataString='universityid='+universityid+"&adminid="+adminid;
         $.ajax({
             type: "POST",
             url: "verify-university.php",
             data: dataString,
             cache: false,
             success: function(html) {
-                alert(html);              
+                alert(html);
             },
             error: function(html) {
                 alert(html);

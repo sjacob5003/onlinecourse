@@ -16,6 +16,8 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -41,7 +43,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                       <div class="tab-content">
 
                         <div id="personal" class="tab-pane fade in active">
-                          <center><h3>Personal Details</h3></center>
+                                  <br>
                           <div class="row" >
                             <div class="col-md-3"></div>
                               <div class="col-md-6">
@@ -113,41 +115,43 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                         </div>
 
                         <div id="educational" class="tab-pane fade">
-                          <center><h3>Educational Details</h3></center>
+                                  <br>
                           <div class="row" >
                             <div class="col-md-3"></div>
                               <div class="col-md-12">
                                 <div class="panel panel-default">
                                       <div class="panel-body">
                                                 <div class="table-responsive">
-                                                   <table class="table">
+                                                   <table id="example" class="table table-striped table-bordered">
                                                        <thead>
-                                                           <tr class="bg-danger">
+                                                           <tr class="bg-primary">
+                                                                     <th><input name="select_all" value="1" type="checkbox"></th>
                                                                <th>Degree Name </th>
                                                                <th>University Name </th>
                                                                <th>Passing Year </th>
                                                                <th>Action </th>
                                                            </tr>
-                                                       </thead>                                                       
+                                                       </thead>
                                                        <tbody>
-                                                        <?php 
+                                                        <?php
                                                        $sql=mysqli_query($con, "SELECT FacultyEducationalId, FacultyDegreeName, FacultyCollegeName, FacultyPassingYear FROM facultyeducationaltable WHERE FacultyId=".$_SESSION['userid']);
                                                        while ($row=mysqli_fetch_array($sql))
                                                        {
                                                        ?>
-                                                         <tr class="info">
+                                                         <tr>
+                                                                   <td></td>
                                                              <td><?php echo $row['FacultyDegreeName'] ?></td>
                                                              <td><?php echo $row['FacultyCollegeName'] ?> </td>
                                                              <td><?php echo $row['FacultyPassingYear'] ?> </td>
                                                              <td>
-                                                              <button onclick="modifyEdu('<?php echo $row['FacultyEducationalId'].'\',\''.$row['FacultyDegreeName'].'\',\''.$row['FacultyCollegeName'].'\',\''.$row['FacultyPassingYear']; ?>')" id="modifyEdu" class="btn btn-primary">Modify</button>
-                                                                 <button onclick="deleteEdu(<?php echo $row['FacultyEducationalId']; ?>)" class="btn btn-danger"><i class="fa fa-book "></i>&nbsp;&nbsp;Delete</button>
+                                                              <button onclick="modifyEdu('<?php echo $row['FacultyEducationalId'].'\',\''.$row['FacultyDegreeName'].'\',\''.$row['FacultyCollegeName'].'\',\''.$row['FacultyPassingYear']; ?>')" id="modifyEdu" class="btn btn-primary"><i class="fa fa-edit "></i></button>
+                                                                 <button onclick="deleteEdu(<?php echo $row['FacultyEducationalId']; ?>)" class="btn btn-danger"><i class="fa fa-trash "></i></button>
                                                              </td>
                                                          </tr>
                                                        <?php
                                                      }
                                                      ?>
-                                                       </tbody>                                                       
+                                                       </tbody>
                                                    </table>
                                          </div>
                                       <form name="FacultyEducational" id="FacultyEducational" method="post" enctype="multipart/form-data">
@@ -179,16 +183,17 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                         </div>
 
                         <div id="professional" class="tab-pane fade">
-                          <center><h3>Professional Details</h3></center>
+                                  <br>
                           <div class="row" >
                             <div class="col-md-3"></div>
                               <div class="col-md-12">
                                 <div class="panel panel-default">
                                       <div class="panel-body">
-                                                <div class="table-responsive table-bordered">
-                                                   <table class="table">
+                                                <div class="table-responsive">
+                                                   <table id="demo" class="table table-striped table-bordered">
                                                        <thead>
-                                                           <tr class="bg-danger">
+                                                           <tr class="bg-primary">
+                                                                     <th><input name="select_all" value="1" type="checkbox"></th>
                                                                <th>Job Title </th>
                                                                <th>University/ Company </th>
                                                                <th>Start Date </th>
@@ -197,18 +202,19 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                                            </tr>
                                                        </thead>
                                                        <tbody>
-                                                       <?php 
+                                                       <?php
                                                        $sql=mysqli_query($con, "SELECT FacultyProfessionalId, FacultyJobTitle, FacultyCompanyName, FacultyStartDate, FacultyEndDate FROM facultyprofessionaltable WHERE FacultyId=".$_SESSION['userid']);
                                                        while ($row=mysqli_fetch_array($sql))
                                                        {
                                                        ?>
-                                                         <tr class="info">
+                                                         <tr>
+                                                                   <td></td>
                                                              <td><?php echo $row['FacultyJobTitle'] ?></td>
                                                              <td><?php echo $row['FacultyCompanyName'] ?></td>
                                                              <td><?php echo $row['FacultyStartDate'] ?></td>
                                                              <td><?php echo $row['FacultyEndDate'] ?></td>
-                                                             <td><button onclick="modifyPro('<?php echo $row['FacultyProfessionalId'].'\',\''.$row['FacultyJobTitle'].'\',\''.$row['FacultyCompanyName'].'\',\''.$row['FacultyStartDate'].'\',\''.$row['FacultyEndDate']; ?>')" id="modifyPro" class="btn btn-primary">Modify</button> </a>
-                                                                 <button onclick="deletePro(<?php echo $row['FacultyProfessionalId']; ?>)" class="btn btn-danger">Delete</button> </a>
+                                                             <td><button onclick="modifyPro('<?php echo $row['FacultyProfessionalId'].'\',\''.$row['FacultyJobTitle'].'\',\''.$row['FacultyCompanyName'].'\',\''.$row['FacultyStartDate'].'\',\''.$row['FacultyEndDate']; ?>')" id="modifyPro" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                                                                 <button onclick="deletePro(<?php echo $row['FacultyProfessionalId']; ?>)" class="btn btn-danger"><i class="fa fa-trash "></i></button> </a>
                                                              </td>
                                                          </tr>
                                                         <?php
@@ -260,7 +266,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <script src="assets/js/bootstrap.js"></script>
     <script type="text/javascript">
       var formType;
-      $(function () {        
+      $(function () {
         $('#FacultyPersonal').on('submit', function (e) {
           e.preventDefault();
           formType="personal";
@@ -274,7 +280,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             error: function(data)
             {
               console.log(data);
-            } 
+            }
           });
         });
         $('#FacultyEducational').on('submit', function (e) {
@@ -290,7 +296,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             error: function(data)
             {
               alert(data);
-            } 
+            }
           });
 
         });
@@ -307,7 +313,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             error: function(data)
             {
               alert(data);
-            } 
+            }
           });
 
         });
@@ -374,5 +380,319 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
           });
       }
     </script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+    <script type="text/javascript">
+    function updateDataTableSelectAllCtrl(table){
+   var $table             = table.table().node();
+   var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
+   var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
+   var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+
+   // If none of the checkboxes are checked
+   if($chkbox_checked.length === 0){
+      chkbox_select_all.checked = false;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If all of the checkboxes are checked
+   } else if ($chkbox_checked.length === $chkbox_all.length){
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+      }
+
+   // If some of the checkboxes are checked
+   } else {
+      chkbox_select_all.checked = true;
+      if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = true;
+      }
+   }
+}
+
+$(document).ready(function (){
+   // Array holding selected row IDs
+   var rows_selected = [];
+   var table = $('#example').DataTable({
+
+             dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+ ],
+
+      'columnDefs': [{
+         'targets': 0,
+         'searchable':false,
+         'orderable':false,
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox">';
+         }
+      }],
+
+      'order': [1, 'asc'],
+      'rowCallback': function(row, data, dataIndex){
+         // Get row ID
+         var rowId = data[0];
+
+         // If row ID is in the list of selected row IDs
+         if($.inArray(rowId, rows_selected) !== -1){
+            $(row).find('input[type="checkbox"]').prop('checked', true);
+            $(row).addClass('selected');
+         }
+      }
+   });
+
+   // Handle click on checkbox
+   $('#example tbody').on('click', 'input[type="checkbox"]', function(e){
+      var $row = $(this).closest('tr');
+
+      // Get row data
+      var data = table.row($row).data();
+
+      // Get row ID
+      var rowId = data[0];
+
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle click on table cells with checkboxes
+   $('#example').on('click', 'tbody td, thead th:first-child', function(e){
+      $(this).parent().find('input[type="checkbox"]').trigger('click');
+   });
+
+   // Handle click on "Select all" control
+   $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+      if(this.checked){
+         $('tbody input[type="checkbox"]:not(:checked)', table.table().container()).trigger('click');
+      } else {
+         $('tbody input[type="checkbox"]:checked', table.table().container()).trigger('click');
+      }
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+   // Handle table draw event
+   table.on('draw', function(){
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl(table);
+   });
+
+   // Handle form submission event
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+
+      // Output form data to a console
+      $('#example-console').text($(form).serialize());
+      console.log("Form submission", $(form).serialize());
+
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+
+      // Prevent actual form submission
+      e.preventDefault();
+   });
+});
+    </script>
+
+    <script type="text/javascript">
+    function updateDataTableSelectAllCtrl(table){
+    var $table             = table.table().node();
+    var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
+    var $chkbox_checked    = $('tbody input[type="checkbox"]:checked', $table);
+    var chkbox_select_all  = $('thead input[name="select_all"]', $table).get(0);
+
+    // If none of the checkboxes are checked
+    if($chkbox_checked.length === 0){
+     chkbox_select_all.checked = false;
+     if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+     }
+
+    // If all of the checkboxes are checked
+    } else if ($chkbox_checked.length === $chkbox_all.length){
+     chkbox_select_all.checked = true;
+     if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = false;
+     }
+
+    // If some of the checkboxes are checked
+    } else {
+     chkbox_select_all.checked = true;
+     if('indeterminate' in chkbox_select_all){
+         chkbox_select_all.indeterminate = true;
+     }
+    }
+    }
+
+    $(document).ready(function (){
+    // Array holding selected row IDs
+    var rows_selected = [];
+    var table = $('#demo').DataTable({
+
+             dom: 'Bfrtip',
+        buttons: [
+           'excel', 'pdf', 'print'
+    ],
+
+     'columnDefs': [{
+         'targets': 0,
+         'searchable':false,
+         'orderable':false,
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox">';
+         }
+     }],
+
+     'order': [1, 'asc'],
+     'rowCallback': function(row, data, dataIndex){
+         // Get row ID
+         var rowId = data[0];
+
+         // If row ID is in the list of selected row IDs
+         if($.inArray(rowId, rows_selected) !== -1){
+           $(row).find('input[type="checkbox"]').prop('checked', true);
+           $(row).addClass('selected');
+         }
+     }
+    });
+
+    // Handle click on checkbox
+    $('#demo tbody').on('click', 'input[type="checkbox"]', function(e){
+     var $row = $(this).closest('tr');
+
+     // Get row data
+     var data = table.row($row).data();
+
+     // Get row ID
+     var rowId = data[0];
+
+     // Determine whether row ID is in the list of selected row IDs
+     var index = $.inArray(rowId, rows_selected);
+
+     // If checkbox is checked and row ID is not in list of selected row IDs
+     if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+     // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+     } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+     }
+
+     if(this.checked){
+         $row.addClass('selected');
+     } else {
+         $row.removeClass('selected');
+     }
+
+     // Update state of "Select all" control
+     updateDataTableSelectAllCtrl(table);
+
+     // Prevent click event from propagating to parent
+     e.stopPropagation();
+    });
+
+    // Handle click on table cells with checkboxes
+    $('#demo').on('click', 'tbody td, thead th:first-child', function(e){
+     $(this).parent().find('input[type="checkbox"]').trigger('click');
+    });
+
+    // Handle click on "Select all" control
+    $('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+     if(this.checked){
+         $('tbody input[type="checkbox"]:not(:checked)', table.table().container()).trigger('click');
+     } else {
+         $('tbody input[type="checkbox"]:checked', table.table().container()).trigger('click');
+     }
+
+     // Prevent click event from propagating to parent
+     e.stopPropagation();
+    });
+
+    // Handle table draw event
+    table.on('draw', function(){
+     // Update state of "Select all" control
+     updateDataTableSelectAllCtrl(table);
+    });
+
+    // Handle form submission event
+    $('#frm-demo').on('submit', function(e){
+     var form = this;
+
+     // Iterate over all selected checkboxes
+     $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+     });
+
+     // FOR DEMONSTRATION ONLY
+
+     // Output form data to a console
+     $('#demo-console').text($(form).serialize());
+     console.log("Form submission", $(form).serialize());
+
+     // Remove added elements
+     $('input[name="id\[\]"]', form).remove();
+
+     // Prevent actual form submission
+     e.preventDefault();
+    });
+    });
+    </script>
+
 </body>
 </html>
