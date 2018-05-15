@@ -17,6 +17,8 @@ if($_SESSION['email']!="")
               <li><a href="<?php $host ?>/onlinecourse/deregister.php">Deregister </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="change-password.php">Change Password</a></li>
+			  <li><a href="<?php $host ?>/onlinecourse/documents.php">Documents</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/feedback.php">Feedback</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
