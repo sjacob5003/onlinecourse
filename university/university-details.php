@@ -20,12 +20,13 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='University')
                                                   UniversityContactPerson='$universitycontact',
                                                   UniversityUpdationDate=curtime() WHERE UniversityId='".$_SESSION['userid']."'");
     if($ret)
-      $_SESSION['msg']="Details Updated Successfully!";
+      $_SESSION['msg']="Update success";
     else
       $_SESSION['msg']="Error : Details could not be updated";
     header("Location:http://$host$uri/university-details.php");
     exit();
   }
+
 ?>
 
 <!DOCTYPE html>
