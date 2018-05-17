@@ -13,6 +13,12 @@ else
   {
     $feedbacksubject = $_POST['feedbacksubject'];
     $feedbackdescription = $_POST['feedbackdescription'];
+    $feedbackcourseid = $_POST['feedbackcourseid'];
+    $studentid = $_SESSION['userid'];
+    if(mysqli_query($con,"INSERT INTO feedbacktable (CourseDurationId, FeedbackStudentId, FeedbackSubject, FeedbackDescription) VALUES ('$feedbackcourseid', '$studentid', '$feedbacksubject', '$feedbackdescription') "))
+      $_SESSION['msg'] = "Thank you for your feedback";
+    else
+      $_SESSION['msg'] = "Could not submit your feedback. Please try again";
   }
 ?>
 
@@ -46,20 +52,22 @@ if($_SESSION['email']!="")
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                       <div class="panel panel-default">
-                          <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
+                          <font color="green" align="center">
+                          <?php echo htmlentities($_SESSION['msg']);  
+                                $_SESSION['msg']="";?></font>
 
                             <div class="panel-body">
                             <form name="dept" method="post" enctype="multipart/form-data">
 
                               <div class="form-group">
                                 <label>Select Course</label>
-                                  <select class="selectpicker" data-live-search="true" name="courseid" data-style="btn" data-width="100%" data-border="1px" title="Select the Course" required>
+                                  <select class="selectpicker" data-live-search="true" name="feedbackcourseid" data-style="btn" data-width="100%" data-border="1px" title="Select the Course" required>
                                   <?php
-                                    $sql=mysqli_query($con, "SELECT coursedurationtable.CourseId, CourseName FROM coursedurationtable JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId WHERE StudentId=".$_SESSION['userid']);
+                                    $sql=mysqli_query($con, "SELECT coursedurationtable.DurationId, CourseName FROM coursedurationtable JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId WHERE StudentId=".$_SESSION['userid']);
                                     while($row = mysqli_fetch_array($sql))
                                     {
                                     ?>
-                                      <option value=<?php echo $row['CourseId']; ?>><?php echo $row['CourseName']; ?></option>
+                                      <option value=<?php echo $row['DurationId']; ?>><?php echo $row['CourseName']; ?></option>
                                   <?php
                                     }
                                   ?>
