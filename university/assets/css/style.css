@@ -311,3 +311,6 @@ footer {
 .btn-google {
     background-color: #c32f10;
 }
+.displaynone {
+    display: none;
+}
