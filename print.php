@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['login'])==0)
     {   
 header('location:index.php');
 }
@@ -100,7 +100,7 @@ else{
     <div class="invoice-box">
 <?php
 $cid=intval($_GET['id']);
-$sql=mysql_query("select course.courseName as courname,course.courseCode as ccode,course.courseUnit as cunit,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate,semester.semester as sem ,students.studentName as studentname,students.studentPhoto as photo,students.cgpa as scgpa,students.StudentRegno as sregno,students.creationdate as studentregdate from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level join students on students.StudentRegno=courseenrolls.StudentRegno join semester on semester.id=courseenrolls.semester where courseenrolls.course='$cid'");
+$sql=mysql_query("select course.courseName as courname,course.courseCode as ccode,course.courseUnit as cunit,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate,semester.semester as sem ,students.studentName as studentname,students.studentPhoto as photo,students.cgpa as scgpa,students.creationdate as studentregdate from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level join students on students.StudentRegno=courseenrolls.StudentRegno join semester on semester.id=courseenrolls.semester where courseenrolls.studentRegno='".$_SESSION['login']."' and courseenrolls.course='$cid'");
 $cnt=1;
 while($row=mysql_fetch_array($sql))
 {?>
@@ -113,13 +113,13 @@ while($row=mysql_fetch_array($sql))
                         <tr>
                             <td class="title">
                                   <?php if($row['photo']==""){ ?>
-   <img src="../studentphoto/noimage.png" width="200" height="200"><?php } else {?>
+   <img src="studentphoto/noimage.png" width="200" height="200"><?php } else {?>
    <img src="studentphoto/<?php echo htmlentities($row['photo']);?>" width="200" height="200">
    <?php } ?>
                             </td>
                             
                             <td>
-                               <b> Reg No: </b><?php echo htmlentities($row['sregno']);?><br>
+                               <b> Reg No: </b><?php echo htmlentities($_SESSION['login']);?><br>
                                <b> Student Name: </b>  <?php echo htmlentities($row['studentname']);?><br>
                                <b> Student Reg Date:</b> <?php echo htmlentities($row['studentregdate']);?><br>
                                 <b> Student Course Enroll Date:</b> <?php echo htmlentities($row['edate']);?><br>
