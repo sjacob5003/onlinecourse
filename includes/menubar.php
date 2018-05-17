@@ -16,9 +16,9 @@ if($_SESSION['email']!="")
               <li><a href="<?php $host ?>/onlinecourse/enrolhistory.php">Enroll History  </a></li>
               <li><a href="<?php $host ?>/onlinecourse/deregister.php">Deregister </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
-              <li><a href="change-password.php">Change Password</a></li>
-			  <li><a href="<?php $host ?>/onlinecourse/documents.php">Documents</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/documents.php">Documents</a></li>
               <li><a href="<?php $host ?>/onlinecourse/feedback.php">Feedback</a></li>
+              <li><a href="change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
           <?php
@@ -30,6 +30,7 @@ if($_SESSION['email']!="")
               <li><a href="<?php $host ?>/onlinecourse/faculty/addcourse.php">Add Course </a></li>
               <li><a href="<?php $host ?>/onlinecourse/faculty/viewcourses.php">Your Courses</a></li>
               <li><a href="<?php $host ?>/onlinecourse/faculty/profile.php">My Profile</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/faculty/documents.php">Documents</a></li>
               <li><a href="<?php $host ?>/onlinecourse/change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
             </ul>
