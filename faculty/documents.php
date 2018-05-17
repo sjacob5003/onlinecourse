@@ -47,10 +47,34 @@ if($_SESSION['email']!="")
                       <div class="panel panel-default">
 
                             <div class="panel-body">
-                            <form name="dept" method="post" enctype="multipart/form-data">
+                            <form action="upload.php" method="post" enctype="multipart/form-data">
                               <!-- Button trigger modal -->
 
-							  <p style="text-align:center"> Documents will be seen here </p>
+
+                              <table class="table" width="80%" border="1">
+                                  <tr>
+                                  <td>File Name</td>
+                                  <td>File Type</td>
+                                  <td>File Size(KB)</td>
+                                  <td>View</td>
+                                  </tr>
+                                  <?php
+                               $sql="SELECT * FROM uploadtable";
+                               $result_set=mysql_query($sql);
+                               while($row=mysql_fetch_array($result_set))
+                               {
+                                ?>
+                                      <tr>
+                                      <td><?php echo $row['file'] ?></td>
+                                      <td><?php echo $row['type'] ?></td>
+                                      <td><?php echo $row['size'] ?></td>
+                                      <td><a href="uploads/<?php echo $row['file'] ?>" target="_blank">view file</a></td>
+                                      </tr>
+                                      <?php
+                               }
+                               ?>
+                              </table>
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="width:100%">
   Upload Document
@@ -67,13 +91,16 @@ if($_SESSION['email']!="")
         </button>
       </div>
       <div class="modal-body">
+
         <span class="btn btn-primary">
                   <input type="file" class="form-control-file" name="file"/>
         </span>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Upload</button>
+        <button type="submit" class="btn btn-primary" name="btn-upload">Upload</button>
+
       </div>
     </div>
   </div>
