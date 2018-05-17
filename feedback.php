@@ -11,7 +11,8 @@ else
 {
   if(isset($_POST['submit']))
   {
-	//database config for feedback and will be sent to admin
+    $feedbacksubject = $_POST['feedbacksubject'];
+    $feedbackdescription = $_POST['feedbackdescription'];
   }
 ?>
 
@@ -27,7 +28,6 @@ else
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
-
 <body>
 <?php include('includes/header.php');
 if($_SESSION['email']!="")
@@ -46,9 +46,25 @@ if($_SESSION['email']!="")
                     <div class="col-md-6">
                       <div class="panel panel-default">
                           <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-                  
+
                             <div class="panel-body">
                             <form name="dept" method="post" enctype="multipart/form-data">
+
+                              <div class="form-group">
+                                <label>Select Course</label>
+                                  <select class="selectpicker" name="courseid" data-style="btn" data-width="100%" data-border="1px" title="Select the Course" required>
+                                  <?php
+                                    $sql=mysqli_query($con, "SELECT coursedurationtable.CourseId, CourseName FROM coursedurationtable JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId WHERE StudentId=".$_SESSION['userid']);
+                                    while($row = mysqli_fetch_array($sql))
+                                    {
+                                    ?>
+                                      <option value=<?php echo $row['CourseId']; ?>><?php echo $row['CourseName']; ?></option>
+                                  <?php
+                                    }
+                                  ?>
+                                  </select>
+                                </div>
+                            
                               <div class="form-group">
                                 <label for="studentid">Subject </label>
                                 <input type="text" class="form-control" placeholder="Your subject" name="feedbacksubject" value=""/>
@@ -56,7 +72,7 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label for="studentname">Description </label>
-                                <textarea class="form-control rounded-0" rows="10" placeholder="Feedback / Complaint"></textarea>
+                                <textarea class="form-control rounded-0" rows="10" placeholder="Feedback / Complaint" name="feedbackdescription"></textarea>
                               </div>
 
                           <?php } ?>
