@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('includes/config.php');
+include('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email'])==0)
@@ -29,9 +29,9 @@ else
 </head>
 
 <body>
-<?php include('includes/header.php');
+<?php include('../includes/header.php');
 if($_SESSION['email']!="")
-  include('includes/menubar.php');
+  include('../includes/menubar.php');
 ?>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
@@ -67,9 +67,9 @@ if($_SESSION['email']!="")
         </button>
       </div>
       <div class="modal-body">
-        <div class="btn btn-primary">
+        <span class="btn btn-primary">
                   <input type="file" class="form-control-file" name="file"/>
-        </div>
+        </span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,7 +89,7 @@ if($_SESSION['email']!="")
             </div>
         </div>
     </div>
-  <?php include('includes/footer.php');?>
+  <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 
