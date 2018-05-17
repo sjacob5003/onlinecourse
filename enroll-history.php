@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['login'])==0)
     {   
 header('location:index.php');
 }
@@ -27,7 +27,7 @@ else{
 <body>
 <?php include('includes/header.php');?>
     <!-- LOGO HEADER END-->
-<?php if($_SESSION['alogin']!="")
+<?php if($_SESSION['login']!="")
 {
  include('includes/menubar.php');
 }
@@ -55,19 +55,18 @@ else{
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                                
-                                                    <th>Student Reg no </th>
-                                            <th>IP  </th>
-                                            <th>Login Time </th>
-                                            
-                                                <th>Logout Time</th>
-                                             <th>Status</th>
-                                    
+                                            <th>Course Name </th>
+                                            <th>Session </th>
+                                            <th> Department</th>
+                                             <th>Level</th>
+                                                <th>Semester</th>
+                                             <th>Enrollment Date</th>
+                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 <?php
-$sql=mysql_query("select * from userlog");
+$sql=mysql_query("select courseenrolls.course as cid, course.courseName as courname,session.session as session,department.department as dept,level.level as level,courseenrolls.enrollDate as edate ,semester.semester as sem from courseenrolls join course on course.id=courseenrolls.course join session on session.id=courseenrolls.session join department on department.id=courseenrolls.department join level on level.id=courseenrolls.level  join semester on semester.id=courseenrolls.semester  where courseenrolls.studentRegno='".$_SESSION['login']."'");
 $cnt=1;
 while($row=mysql_fetch_array($sql))
 {
@@ -76,11 +75,18 @@ while($row=mysql_fetch_array($sql))
 
                                         <tr>
                                             <td><?php echo $cnt;?></td>
-                                              <td><?php echo htmlentities($row['studentRegno']);?></td>
-                                            <td><?php echo htmlentities($row['userip']);?></td>
-                                            <td><?php echo htmlentities($row['loginTime']);?></td>
-                                            <td><?php echo htmlentities($row['logout']);?></td>
-                                            <td><?php echo htmlentities($row['status']);?></td>
+                                            <td><?php echo htmlentities($row['courname']);?></td>
+                                            <td><?php echo htmlentities($row['session']);?></td>
+                                            <td><?php echo htmlentities($row['dept']);?></td>
+                                            <td><?php echo htmlentities($row['level']);?></td>
+                                            <td><?php echo htmlentities($row['sem']);?></td>
+                                             <td><?php echo htmlentities($row['edate']);?></td>
+                                            <td>
+                                            <a href="print.php?id=<?php echo $row['cid']?>" target="_blank">
+<button class="btn btn-primary"><i class="fa fa-print "></i> Print</button> </a>                                        
+
+
+                                            </td>
                                         </tr>
 <?php 
 $cnt++;
