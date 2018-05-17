@@ -45,21 +45,20 @@ if($_SESSION['email']!="")
                   <div class="col-md-3"></div>
                     <div class="col-md-6">
                       <div class="panel panel-default">
-                          <font color="green" align="center"><?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?></font>
-                  
+
                             <div class="panel-body">
                             <form name="dept" method="post" enctype="multipart/form-data">
                               <!-- Button trigger modal -->
-							  
+
 							  <p style="text-align:center"> Documents will be seen here </p>
-							  
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="width:100%">
   Upload Document
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Select File</h5>
@@ -69,9 +68,8 @@ if($_SESSION['email']!="")
       </div>
       <div class="modal-body">
         <div class="btn btn-primary">
-							Choose
-							<input type="file" name="file"/>
-						</div>
+                  <input type="file" class="form-control-file" name="file"/>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,4 +95,3 @@ if($_SESSION['email']!="")
 
 </body>
 </html>
-

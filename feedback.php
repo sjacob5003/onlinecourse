@@ -25,6 +25,7 @@ else
     <meta name="author" content="" />
     <title>Feedback / Complaint</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
@@ -52,7 +53,7 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label>Select Course</label>
-                                  <select class="selectpicker" name="courseid" data-style="btn" data-width="100%" data-border="1px" title="Select the Course" required>
+                                  <select class="selectpicker" data-live-search="true" name="courseid" data-style="btn" data-width="100%" data-border="1px" title="Select the Course" required>
                                   <?php
                                     $sql=mysqli_query($con, "SELECT coursedurationtable.CourseId, CourseName FROM coursedurationtable JOIN coursetable ON coursedurationtable.CourseId=coursetable.CourseId JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId WHERE StudentId=".$_SESSION['userid']);
                                     while($row = mysqli_fetch_array($sql))
@@ -64,7 +65,7 @@ if($_SESSION['email']!="")
                                   ?>
                                   </select>
                                 </div>
-                            
+
                               <div class="form-group">
                                 <label for="studentid">Subject </label>
                                 <input type="text" class="form-control" placeholder="Your subject" name="feedbacksubject" value=""/>
@@ -88,8 +89,8 @@ if($_SESSION['email']!="")
     </div>
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/bootstrap.js"></script>
 
 </body>
 </html>
-
