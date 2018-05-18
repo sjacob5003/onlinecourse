@@ -62,7 +62,7 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
             <td><?php echo htmlentities($row['StudentId']);?><input type="hidden" name="studentid[]" value=<?php echo htmlentities($row['StudentId']);?>></td>
             <td><?php echo htmlentities($row['StudentName']);?></td>
             <td><?php echo htmlentities($row['StudentEmail']);?></td>
-            <td><input type="text" class="form-control" name="marks[]" value="<?php echo $row['Marks'];?>"></td>
+            <td><input type="text" class="form-control markinput" name="marks[]" value="<?php echo $row['Marks'];?>"></td>
         </tr>
     <?php
     } ?>
@@ -87,6 +87,14 @@ if($_SESSION['email']!=NULL && $_SESSION['usertype']=='Faculty')
 
     <script>
       $(function () {
+        $('.markinput').on('blur', function(){
+            if( this.value < 0 || this.value > 100)
+            {
+                alert("Marks must be between 0 and 100");
+                this.value = null;
+                this.focus();
+            }
+        });
         $('form').on('submit', function (e) {
           e.preventDefault();
           $.ajax({

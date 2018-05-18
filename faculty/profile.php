@@ -265,7 +265,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script type="text/javascript">
-      var formType;
+      var formType,emptycheck = false;
       $(function () {
         $('#FacultyPersonal').on('submit', function (e) {
           e.preventDefault();
@@ -285,6 +285,17 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         });
         $('#FacultyEducational').on('submit', function (e) {
           e.preventDefault();
+          $('#FacultyEducational :input').not(':input[type=button], :input[type=hidden], :input[type=submit], :input[type=reset]').each(function (){
+            if (this.value == null || this.value == '')
+            {
+              alert($(this).siblings('label').html() + ' cannot be empty');
+              emptycheck = true;
+            }
+            if (emptycheck === true)
+              return false;
+          });
+          if(emptycheck === true)
+            return;
           formType="educational";
           $.ajax({
             type: 'post',
@@ -298,10 +309,20 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
               alert(data);
             }
           });
-
         });
         $('#FacultyProfessional').on('submit', function (e) {
           e.preventDefault();
+          $('#FacultyProfessional :input').not(':input[type=button], :input[type=hidden], :input[type=submit], :input[type=reset]').each(function (){
+            if (this.value == null || this.value == '')
+            {
+              alert($(this).siblings('label').html() + ' cannot be empty');
+              emptycheck = true;
+            }
+            if (emptycheck === true)
+              return false;
+          });
+          if(emptycheck === true)
+            return;
           formType="professional";
           $.ajax({
             type: 'post',
