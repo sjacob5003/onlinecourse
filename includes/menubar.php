@@ -41,7 +41,7 @@ if($_SESSION['email']!="")
           ?>
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/university/validatefaculty.php">Validate Faculty </a></li>
-              <li><a href="<?php $host ?>/onlinecourse/university/create-program.php">Create Program</a></li>
+              <li><a href="<?php $host ?>/onlinecourse/university/program.php">Manage Programs</a></li>
               <li><a href="<?php $host ?>/onlinecourse/university/university-details.php">Update Details</a></li>
               <li><a href="<?php $host ?>/onlinecourse/change-password.php">Change Password</a></li>
               <li><a href="<?php $host ?>/onlinecourse/logout.php">Logout</a></li>
