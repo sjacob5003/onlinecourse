@@ -123,7 +123,7 @@ if($_SESSION['email']!="")
 </div>
 
 	<input type="button" name="previous" style="width:49%" class="previous btn btn-default" value="Previous" />
-	<input type="button" name="submit" style="width:49%" class="btn btn-default" value="Submit" />
+	<input type="button" name="submit" style="width:49%" class="btn btn-default sub-ajax" value="Submit" />
 
   </fieldset>
   </form>
@@ -193,15 +193,15 @@ if($_SESSION['email']!="")
 			}
 		}
 	});
-	$('#regiration_form').on('submit', function (e) {
-		alert('abc');
-          e.preventDefault();
+	$('.sub-ajax').on('click', function (e) {		
+        //   e.preventDefault();
+		console.log($('form').serialize());
           $.ajax({
             type: 'post',
             url: 'manageprogram.php',
             data: $('form').serialize(),
             success: function () {
-              alert('Marks Entered Successfully');
+              alert('Program Created');
             }
           });
         });
@@ -239,10 +239,11 @@ if($_SESSION['email']!="")
 
 	$(document).ready(function (){
 	// Array holding selected row IDs
+	
 	var rows_selected = [];
 	var table = $('#example').DataTable({
 
-			dom: 'Bfrtip',
+		dom: 'Bfrtip',
 		buttons: [
 		'excel', 'pdf', 'print'
 	],
@@ -273,13 +274,13 @@ if($_SESSION['email']!="")
 	// Handle click on checkbox
 	$('#example tbody').on('click', 'input[type="checkbox"]', function(e){
 	var $row = $(this).closest('tr');
-
+	
 	// Get row data
 	var data = table.row($row).data();
 
 	// Get row ID
 	var rowId = data[0];
-
+	console.table(data);
 	// Determine whether row ID is in the list of selected row IDs
 	var index = $.inArray(rowId, rows_selected);
 
@@ -306,29 +307,46 @@ if($_SESSION['email']!="")
 	});
 
 	// Handle click on table cells with checkboxes
-	$('#example').on('click', 'tbody td, thead th:first-child', function(e){
-	$(this).parent().find('input[type="checkbox"]').trigger('click');
-	});
-
-	// Handle click on "Select all" control
-	$('thead input[name="select_all"]', table.table().container()).on('click', function(e){
-	if(this.checked){
-		$('tbody input[type="checkbox"]:not(:checked)', table.table().container()).trigger('click');
-	} else {
-		$('tbody input[type="checkbox"]:checked', table.table().container()).trigger('click');
-	}
-
-	// Prevent click event from propagating to parent
-	e.stopPropagation();
-	});
-
-	// Handle table draw event
-	table.on('draw', function(){
-	// Update state of "Select all" control
-	updateDataTableSelectAllCtrl(table);
-	});
-
-	
+$('#example').on('click', 'tbody td, thead th:first-child', function(e){
+ $(this).parent().find('input[type="checkbox"]').trigger('click');
+});
+// Handle click on "Select all" control
+$('thead input[name="select_all"]', table.table().container()).on('click', function(e){
+ if(this.checked){
+     $('tbody input[type="checkbox"]:not(:checked)', table.table().container()).trigger('click');
+ } else {
+     $('tbody input[type="checkbox"]:checked', table.table().container()).trigger('click');
+ }
+ // Prevent click event from propagating to parent
+ e.stopPropagation();
+});
+// Handle table draw event
+table.on('draw', function(){
+ // Update state of "Select all" control
+ updateDataTableSelectAllCtrl(table);
+});
+// Handle form submission event
+$('#frm-example').on('submit', function(e){
+ var form = this;
+ // Iterate over all selected checkboxes
+ $.each(rows_selected, function(index, rowId){
+     // Create a hidden element
+     $(form).append(
+         $('<input>')
+            .attr('type', 'hidden')
+            .attr('name', 'id[]')
+            .val(rowId)
+     );
+ });
+ // FOR DEMONSTRATION ONLY
+ // Output form data to a console
+ $('#example-console').text($(form).serialize());
+ console.log("Form submission", $(form).serialize());
+ // Remove added elements
+ $('input[name="id\[\]"]', form).remove();
+ // Prevent actual form submission
+ e.preventDefault();
+});
 });
 </script>
 </body>
