@@ -92,27 +92,23 @@ if($_SESSION['email']!="")
 							<tr class="bg-primary">
 								<th><input name="select_all" value="1" type="checkbox"></th>
 								<th>Course Name </th>
-								<th>Course Code </th>
+								<th>Faculty Name </th>
 							</tr>
 						</thead>
 						<tbody>
+						<?php
+						$sql=mysqli_query($con, "SELECT FacultyName, CourseName, CourseId FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId = facultytable.FacultyId");
+						while($row=mysqli_fetch_array($sql))
+						{
+						?>
 							<tr>
-								<td></td>
-								<td>Java</td>
-								<td>JV101</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>Php</td>
-								<td>PHP101</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>Html</td>
-								<td>HTML101</td>
-							</tr>
-
-
+								<td><?php echo $row['CourseId'] ?></td>
+								<td><?php echo $row['CourseName'] ?></td>
+								<td><?php echo $row['FacultyName'] ?></td>
+							</tr>							
+						<?php
+						}
+						?>
 						</tbody>
 					</table>
 				</div>
@@ -193,18 +189,18 @@ if($_SESSION['email']!="")
 			}
 		}
 	});
-	$('.sub-ajax').on('click', function (e) {		
+	$('.sub-ajax').on('click', function (e) {
         //   e.preventDefault();
-		console.log($('form').serialize());
-          $.ajax({
-            type: 'post',
-            url: 'manageprogram.php',
-            data: $('form').serialize(),
-            success: function () {
-              alert('Program Created');
-            }
-          });
-        });
+		// console.log($('form').serialize());
+        //   $.ajax({
+        //     type: 'post',
+        //     url: 'manageprogram.php',
+        //     data: $('form').serialize(),
+        //     success: function () {
+        //       alert('Program Created');
+        //     }
+        //   });
+        // });
 	});
 
 	function updateDataTableSelectAllCtrl(table)
@@ -280,7 +276,6 @@ if($_SESSION['email']!="")
 
 	// Get row ID
 	var rowId = data[0];
-	console.table(data);
 	// Determine whether row ID is in the list of selected row IDs
 	var index = $.inArray(rowId, rows_selected);
 
@@ -326,7 +321,7 @@ table.on('draw', function(){
  updateDataTableSelectAllCtrl(table);
 });
 // Handle form submission event
-$('#frm-example').on('submit', function(e){
+$('.sub-ajax').on('click', function (e) {
  var form = this;
  // Iterate over all selected checkboxes
  $.each(rows_selected, function(index, rowId){
@@ -338,14 +333,22 @@ $('#frm-example').on('submit', function(e){
             .val(rowId)
      );
  });
+ console.log($('form').serialize());
+          $.ajax({
+            type: 'post',
+            url: 'manageprogram.php',
+            data: $('form').serialize(),
+            success: function () {
+              alert('Program Created');
+            }
+          });
+        });
  // FOR DEMONSTRATION ONLY
  // Output form data to a console
  $('#example-console').text($(form).serialize());
  console.log("Form submission", $(form).serialize());
  // Remove added elements
  $('input[name="id\[\]"]', form).remove();
- // Prevent actual form submission
- e.preventDefault();
 });
 });
 </script>
