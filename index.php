@@ -28,10 +28,21 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         <div class="container">
               <div class="row">
 
-	<div class="alert alert-info alert-dismissible" role="alert">
-  <button type="button" onclick="this.parentNode.parentNode.removeChild(this.parentNode);" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-  <strong><i class="fa fa-warning"></i> Notice</strong> <marquee><p style="font-family: Impact; font-size: 17pt">This website contains free courses for learning purpose. Please scroll through the below content for further details.</p></marquee>
-</div>
+                        <center><h3>AFFILIATED UNIVERSITIES</h3></center>
+                        <br>
+ <section class="customer-logos slider">
+    <div class="slide"><img src="images/nuv.jpg"></div>
+    <div class="slide"><img src="images/msu.jpg"></div>
+    <div class="slide"><img src="images/parul.jpg"></div>
+    <div class="slide"><img src="images/itm.jpg"></div>
+    <div class="slide"><img src="images/nirma.jpg"></div>
+    <div class="slide"><img src="images/bits.jpg"></div>
+    <div class="slide"><img src="images/suman.jpg"></div>
+    <div class="slide"><img src="images/amity.jpeg"></div>
+ </section>
+
+<br>
+
 
                     <div class="col-md-12">
                         <h1 class="page-head-line">Upcoming Courses</h1>
@@ -101,6 +112,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     </div>
   <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
     <script src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -109,6 +121,29 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
               $('#example').DataTable();
    });
     </script>
-
+<script>
+$(document).ready(function(){
+    $('.customer-logos').slick({
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        arrows: false,
+        dots: false,
+        pauseOnHover: false,
+        responsive: [{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 4
+            }
+        }, {
+            breakpoint: 520,
+            settings: {
+                slidesToShow: 3
+            }
+        }]
+    });
+});
+</script>
 </body>
 </html>
