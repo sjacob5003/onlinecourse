@@ -39,13 +39,13 @@ if($_SESSION['email']!="")
 <div class="content-wrapper">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6 col-md-offset-3">
 				<center><h1 class="page-head-line">Program</h1></center>
 			</div>
 		</div>
 		<div class="row" >
-			<div class="col-md-3"></div>
-			<div class="col-md-12">
+			<div class="col-md-12"></div>
+			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="progress" style="height:20px">
@@ -55,7 +55,7 @@ if($_SESSION['email']!="")
   <fieldset>
 	<h3>Step 1: Program Name</h3>
 	<div id="selection" class="form-group">
-		<select class="selectpicker" name="programselector" id="programselector" data-style="btn" data-width="100%" data-border="1px"  title="Choose Your Program" required >
+		<select class="selectpicker" name="programselector" id="programselector" data-style="btn" data-width="100%" data-border="1px"  title="Choose Your Program" required>
 		<?php
 		$sql = mysqli_query($con, "SELECT ProgramName, AbbreviatedProgName FROM programtable");
 		while($row = mysqli_fetch_array($sql))
@@ -71,7 +71,7 @@ if($_SESSION['email']!="")
 		<input type="text" class="form-control" placeholder="Your subject" name="progname" value=""/>
 	</div>
 	<div class="form-group displaynone" id="programabbrinputbox">
-		<label for="progabbr">Specify Degree Name </label>
+		<label for="progabbr">Specify Abbreviated Name </label>
 		<input type="text" class="form-control" placeholder="Your subject" name="progabbr" value=""/>
 	</div>
 
@@ -105,7 +105,7 @@ if($_SESSION['email']!="")
 								<td><?php echo $row['CourseId'] ?></td>
 								<td><?php echo $row['CourseName'] ?></td>
 								<td><?php echo $row['FacultyName'] ?></td>
-							</tr>							
+							</tr>
 						<?php
 						}
 						?>
@@ -136,7 +136,7 @@ if($_SESSION['email']!="")
 				  <script src="assets/js/bootstrap-select.min.js"></script>
 				  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 				  <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-				  
+
 				  <script>
 				  $(document).ready(function(){
 	var current = 1,current_step,next_step,steps;
@@ -149,7 +149,7 @@ if($_SESSION['email']!="")
 			next_step.show();
 			current_step.hide();
 			setProgressBar(++current);
-		}		
+		}
 	});
 	$(".previous").click(function(){
 		current_step = $(this).parent();
@@ -235,7 +235,7 @@ if($_SESSION['email']!="")
 
 	$(document).ready(function (){
 	// Array holding selected row IDs
-	
+
 	var rows_selected = [];
 	var table = $('#example').DataTable({
 
@@ -270,7 +270,7 @@ if($_SESSION['email']!="")
 	// Handle click on checkbox
 	$('#example tbody').on('click', 'input[type="checkbox"]', function(e){
 	var $row = $(this).closest('tr');
-	
+
 	// Get row data
 	var data = table.row($row).data();
 

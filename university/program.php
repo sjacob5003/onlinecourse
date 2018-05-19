@@ -57,7 +57,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
             <td><?php echo htmlentities($row['AbbreviatedProgName']);?></td>
             <td><?php echo htmlentities($row['ProgramName']);?></td>
             <td> <a href="updatecourse.php?progid=<?php echo $row['ProgramId']; ?>">
-                <button class="btn btn-primary">Edit</button> </a></td>
+                <button class="btn btn-primary" id="editBtn">Edit</button> </a></td>
         </tr>
     <?php
     } ?>

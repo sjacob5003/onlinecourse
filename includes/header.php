@@ -1,3 +1,7 @@
+<head>
+          <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+          <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
 <?php
 error_reporting(0);
 $host  = $_SERVER['HTTP_HOST'];
@@ -36,13 +40,13 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                 </button>
 
             <a class="navbar-brand" href="<?php $host ?>/onlinecourse/index.php" style="color:#fff; font-size:24px;4px; line-height:30px; ">
-               Course Registration
+               THE OPEN - SCHOOL
             </a>
 
         </div>
 
         <div class="left-div">
-            <i class="fa fa-user-plus login-icon" ></i>
+            <IMG SRC="logo.png" ALT="some error" WIDTH=80 HEIGHT=80>
         </div>
     </div>
 </div>
