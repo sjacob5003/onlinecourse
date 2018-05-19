@@ -1,16 +1,48 @@
 <?php
-require_once('../includes/config.php');
-if(isset($_POST['btn-upload']))
+//check if form is submitted
+include('../includes/config.php');
+
+if (isset($_POST['submit']))
 {
+    $filename = $_FILES['file1']['name'];
 
- $file = rand(1000,100000)."-".$_FILES['file']['name'];
-    $file_loc = $_FILES['file']['tmp_name'];
- $file_size = $_FILES['file']['size'];
- $file_type = $_FILES['file']['type'];
- $folder="uploads/";
+    //upload file
+    if($filename != '')
+    {
+        $ext = pathinfo($filename, PATHINFO_EXTENSION);
+        $allowed = ['pdf', 'txt', 'doc', 'docx', 'png', 'jpg', 'jpeg',  'gif'];
 
- move_uploaded_file($file_loc,$folder.$file);
- $sql="INSERT INTO uploadtable(file,type,size) VALUES('$file','$file_type','$file_size')";
- mysql_query($sql);
+        //check if file type is valid
+        if (in_array($ext, $allowed))
+        {
+            // get last record id
+            $sql = 'select max(id) as id from tbl_files';
+            $result = mysqli_query($con, $sql);
+            if (count($result) > 0)
+            {
+                $row = mysqli_fetch_array($result);
+                $filename = ($row['id']+1) . '-' . $filename;
+            }
+            else
+                $filename = '1' . '-' . $filename;
+
+            //set target directory
+            $path = 'uploads/';
+
+            $created = @date('Y-m-d H:i:s');
+            move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
+
+            // insert file details into database
+            $sql = "INSERT INTO tbl_files(filename, created) VALUES('$filename', '$created')";
+            mysqli_query($con, $sql);
+            header("Location: index.php?st=success");
+        }
+        else
+        {
+            header("Location: index.php?st=error");
+        }
+    }
+    else
+        header("Location: index.php");
 }
 ?>
