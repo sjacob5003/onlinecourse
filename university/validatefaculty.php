@@ -48,7 +48,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                         </thead>
                                         <tbody>
     <?php
-    $sql=mysqli_query($con, "SELECT FacultyId, FacultyName, FacultyEmail, FacultyPhone, FacultyIsActive, UniversityName FROM facultytable LEFT JOIN universitytable ON FacultyVerifiedBy=UniversityId");
+    $sql=mysqli_query($con, "SELECT facultytable.FacultyId, facultytable.FacultyName, facultytable.FacultyEmail, facultytable.FacultyPhone, facultytable.FacultyIsActive, universitytable.UniversityName FROM facultyverificationtable JOIN universitytable ON facultyverificationtable.UniversityId = universitytable.UniversityId RIGHT JOIN facultytable ON facultyverificationtable.FacultyId = facultytable.FacultyId");
     while($row=mysqli_fetch_array($sql))
     {
     ?>
