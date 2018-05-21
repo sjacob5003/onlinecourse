@@ -168,6 +168,42 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
             if (end.value)
                 start.max = end.value;
         }, false);
+        $(document).ready(function() {
+            $('#coursename').on('blur', function(){
+                var thisElement = $(this);
+                var coursename = thisElement.val();
+                $.ajax({
+                    type: 'post',
+                    url: 'addcoursevalidate.php',
+                    data: 'coursename=' + coursename,
+                    success: function (data) {
+                        if(data == 'no')
+                        {
+                            alert(thisElement.siblings('label').html() + ' already exists');
+                            thisElement.val('');
+                            thisElement.focus();
+                        }
+                    }
+                });
+            });
+            $('#coursecode').on('blur', function(){
+                var thisElement = $(this);
+                var coursecode = thisElement.val();
+                $.ajax({
+                    type: 'post',
+                    url: 'addcoursevalidate.php',
+                    data: 'coursecode=' + coursecode,
+                    success: function (data) {
+                        if(data == 'no')
+                        {
+                            alert(thisElement.siblings('label').html() + ' already exists');
+                            thisElement.val('');
+                            thisElement.focus();
+                        }
+                    }
+                });
+            });
+        });
         </script>
     </body>
 
