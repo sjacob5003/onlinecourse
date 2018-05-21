@@ -154,17 +154,57 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         </script>
         <script>
         var start = document.getElementById('start');
-var end = document.getElementById('end');
-
-start.addEventListener('change', function() {
-    if (start.value)
-        end.min = start.value;
-}, false);
-end.addEventLiseter('change', function() {
-    if (end.value)
-        start.max = end.value;
-}, false);
-</script>
+        var end = document.getElementById('end');
+        end.disabled = true;
+        start.min = new Date().toJSON().split('T')[0];
+        start.addEventListener('change', function() {
+            if (start.value)
+            {
+                end.min = start.value;
+                end.disabled = false;
+            }
+        }, false);
+        end.addEventListener('change', function() {
+            if (end.value)
+                start.max = end.value;
+        }, false);
+        $(document).ready(function() {
+            $('#coursename').on('blur', function(){
+                var thisElement = $(this);
+                var coursename = thisElement.val();
+                $.ajax({
+                    type: 'post',
+                    url: 'addcoursevalidate.php',
+                    data: 'coursename=' + coursename,
+                    success: function (data) {
+                        if(data == 'no')
+                        {
+                            alert(thisElement.siblings('label').html() + ' already exists');
+                            thisElement.val('');
+                            thisElement.focus();
+                        }
+                    }
+                });
+            });
+            $('#coursecode').on('blur', function(){
+                var thisElement = $(this);
+                var coursecode = thisElement.val();
+                $.ajax({
+                    type: 'post',
+                    url: 'addcoursevalidate.php',
+                    data: 'coursecode=' + coursecode,
+                    success: function (data) {
+                        if(data == 'no')
+                        {
+                            alert(thisElement.siblings('label').html() + ' already exists');
+                            thisElement.val('');
+                            thisElement.focus();
+                        }
+                    }
+                });
+            });
+        });
+        </script>
     </body>
 
     </html>
