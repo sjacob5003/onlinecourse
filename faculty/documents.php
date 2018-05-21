@@ -7,51 +7,44 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 //set target directory
 $path = 'uploads/';
-if(strlen($_SESSION['email'])==0)
+$facultyid = $_SESSION['userid'];
+if($_SESSION['email'] == NULL || $_SESSION['email'] == '' )
 {
   header("Location:http://$host$uri/index.php");
 }
 else
 {
-  if(isset($_POST['submit']))
-  {
-            $filename = $_FILES['file1']['name'];
+    if(isset($_POST['submit']))
+    {
+        $filename = $_FILES['file1']['name'];
+        $courseid = $_POST['coursename'];
+        //upload file
+        if($filename != '')
+        {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            $allowed = ['pdf', 'txt', 'doc', 'docx', 'png', 'jpg', 'jpeg',  'gif'];
 
-     //upload file
-     if($filename != '')
-     {
-         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-         $allowed = ['pdf', 'txt', 'doc', 'docx', 'png', 'jpg', 'jpeg',  'gif'];
-         $maxsize = 2097152;
+            //check if file type is valid
+            if (in_array($ext, $allowed))
+            {
+                // get auto increment id
+                $sql = mysqli_query($con, "SHOW TABLE STATUS LIKE 'tbl_files'");
+                if ($row = mysqli_fetch_array($sql))
+                $filename = $row['Auto_increment'] . '-' . $filename;
 
-         //check if file type is valid
-         if (in_array($ext, $allowed))
-         {
-             // get last record id
-             $sql = 'select max(id) as id from tbl_files';
-             $result = mysqli_query($con, $sql);
-             if (count($result) > 0)
-             {
-                 $row = mysqli_fetch_array($result);
-                 $filename = ($row['id']+1) . '-' . $filename;
-             }
-             else
-                 $filename = '1' . '-' . $filename;
+                $created = @date('Y-m-d H:i:s');
+                move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
 
-             $created = @date('Y-m-d H:i:s');
-             move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
-
-             // insert file details into database
-             $sql = "INSERT INTO tbl_files(filename, created) VALUES('$filename', '$created')";
-             mysqli_query($con, $sql);
-             header("Location: documents.php?st=success");
-         }
-         else
-         {
-             header("Location: documents.php?st=error");
-         }
-     }
-  }
+                // insert file details into database            
+                if (mysqli_query($con, "INSERT INTO tbl_files (CourseDurationId, filename, created) VALUES('$courseid', '$filename', '$created')") )
+                    header("Location: documents.php?st=success");
+            }
+            else
+            {
+                header("Location: documents.php?st=error");
+            }
+        }
+    }
 }
 ?>
 
@@ -87,35 +80,42 @@ if($_SESSION['email']!="")
                     <div class="col-md-6">
                       <div class="panel panel-default">
 
-                            <div class="panel-body">
-                            <form action="#" method="post" enctype="multipart/form-data">
+                        <div class="panel-body">
+                        <form method="post" enctype="multipart/form-data">
 
-                                      <legend>Select File to Upload:</legend>
-                   <div class="form-group">
-                       <input type="file" name="file1" />
-                   </div>
+                            <legend>Select File to Upload:</legend>
+                            <div class="form-group">
+                                <input type="file" name="file1" />
+                            </div>
 
-                   <legend>Select Cousre Name:</legend>
+                           <legend>Select Course:</legend>
+                            <div class="form-group">
+                                <select class="selectpicker" name="coursename" data-style="btn" data-width="100%" data-border="1px" title="Choose Course" required>
+                                <?php
+                                $sql = mysqli_query($con, "SELECT coursedurationtable.DurationId, CourseName FROM coursetable JOIN facultytable ON coursetable.CourseFacultyId=facultytable.FacultyId LEFT JOIN coursedurationtable ON coursetable.CourseId=coursedurationtable.CourseId WHERE facultytable.FacultyId='$facultyid'");
+                                while ($row = mysqli_fetch_array($sql))
+                                {
+                                ?>
+                                    <option value=<?php echo $row['DurationId'] ?>><?php echo $row['CourseName'] ?></option>
+                                <?php
+                                }
+                                ?>
+                                </select>
+                            </div>
 
-                   <div class="form-group">
-                           <select class="selectpicker" name="usertype" data-style="btn" data-width="100%" data-border="1px" title="Choose Course" required>
-                                     <option value="Coursename">Course Name</option>
-                           </select>
-                   </div>
-
-                   <div class="form-group">
-                       <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
-                   </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
+                            </div>
 
   <?php if(isset($_GET['st'])) { ?>
-                  <div class="alert alert-danger text-center">
-                  <?php if ($_GET['st'] == 'success') {
-                          echo "File Uploaded Successfully!";
-                      }
-                      else
-                      {
-                          echo 'Invalid File Extension!';
-                      } ?>
+        <div class="alert alert-danger text-center">
+        <?php if ($_GET['st'] == 'success') {
+                echo "File Uploaded Successfully!";
+            }
+            else
+            {
+                echo 'Invalid File Extension!';
+            } ?>
 
 </div>
 
