@@ -154,17 +154,21 @@ if($_SESSION['userid']!=NULL && $_SESSION['usertype']=='Faculty')
         </script>
         <script>
         var start = document.getElementById('start');
-var end = document.getElementById('end');
-
-start.addEventListener('change', function() {
-    if (start.value)
-        end.min = start.value;
-}, false);
-end.addEventLiseter('change', function() {
-    if (end.value)
-        start.max = end.value;
-}, false);
-</script>
+        var end = document.getElementById('end');
+        end.disabled = true;
+        start.min = new Date().toJSON().split('T')[0];
+        start.addEventListener('change', function() {
+            if (start.value)
+            {
+                end.min = start.value;
+                end.disabled = false;
+            }
+        }, false);
+        end.addEventListener('change', function() {
+            if (end.value)
+                start.max = end.value;
+        }, false);
+        </script>
     </body>
 
     </html>
