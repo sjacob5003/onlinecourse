@@ -64,6 +64,7 @@ else
     <meta name="author" content="" />
     <title>Upload Document</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
@@ -93,6 +94,15 @@ if($_SESSION['email']!="")
                    <div class="form-group">
                        <input type="file" name="file1" />
                    </div>
+
+                   <legend>Select Cousre Name:</legend>
+
+                   <div class="form-group">
+                           <select class="selectpicker" name="usertype" data-style="btn" data-width="100%" data-border="1px" title="Choose Course" required>
+                                     <option value="Coursename">Course Name</option>
+                           </select>
+                   </div>
+
                    <div class="form-group">
                        <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
                    </div>
@@ -112,8 +122,6 @@ if($_SESSION['email']!="")
                           <?php } ?>
 
                             </form>
-
-
                         </div>
 
                       <div class="row">
@@ -153,5 +161,6 @@ if($_SESSION['email']!="")
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
 </body>
 </html>
