@@ -5,6 +5,8 @@ $sql = "select filename from tbl_files";
 $result = mysqli_query($con, $sql);
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+//set target directory
+$path = 'uploads/';
 if(strlen($_SESSION['email'])==0)
 {
   header("Location:http://$host$uri/index.php");
@@ -20,6 +22,7 @@ else
      {
          $ext = pathinfo($filename, PATHINFO_EXTENSION);
          $allowed = ['pdf', 'txt', 'doc', 'docx', 'png', 'jpg', 'jpeg',  'gif'];
+         $maxsize = 2097152;
 
          //check if file type is valid
          if (in_array($ext, $allowed))
@@ -34,9 +37,6 @@ else
              }
              else
                  $filename = '1' . '-' . $filename;
-
-             //set target directory
-             $path = 'uploads/';
 
              $created = @date('Y-m-d H:i:s');
              move_uploaded_file($_FILES['file1']['tmp_name'],($path . $filename));
@@ -88,37 +88,14 @@ if($_SESSION['email']!="")
 
                             <div class="panel-body">
                             <form action="#" method="post" enctype="multipart/form-data">
-                              <!-- Button trigger modal -->
 
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="width:100%">
-  Upload Document
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Select File</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <span class="btn btn-primary">
-                  <input type="file" class="form-control-file" name="file1"/>
-        </span>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="submit" value="Upload">Upload</button>
-
-      </div>
-    </div>
-  </div>
+                                      <legend>Select File to Upload:</legend>
+                   <div class="form-group">
+                       <input type="file" name="file1" />
+                   </div>
+                   <div class="form-group">
+                       <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
+                   </div>
 
   <?php if(isset($_GET['st'])) { ?>
                   <div class="alert alert-danger text-center">
@@ -138,13 +115,13 @@ if($_SESSION['email']!="")
 
 
                         </div>
-                      </div>
 
                       <div class="row">
-                              <div class="col-xs-8 col-xs-offset-2">
+                              <div class="col-xs-12">
+                                        <div class="table-responsive">
                                   <table class="table table-striped table-hover">
                                       <thead>
-                                          <tr>
+                                          <tr class="bg-primary">
                                               <th>#</th>
                                               <th>File Name</th>
                                               <th>View</th>
@@ -158,12 +135,13 @@ if($_SESSION['email']!="")
                                       <tr>
                                           <td><?php echo $i++; ?></td>
                                           <td><?php echo $row['filename']; ?></td>
-                                          <td><a href="uploads/<?php echo $row['filename']; ?>" target="_blank">View</a></td>
+                                          <td><a href="<?php echo $path.$row['filename']; ?>" target="_blank">View</a></td>
                                           <td><a href="uploads/<?php echo $row['filename']; ?>" download>Download</td>
                                       </tr>
                                       <?php } ?>
                                       </tbody>
                                   </table>
+                        </div>
                               </div>
                           </div>
 
