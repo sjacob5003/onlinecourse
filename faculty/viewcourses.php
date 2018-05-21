@@ -3,6 +3,26 @@ session_start();
 require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+if($_SESSION['email'] != NULL && $_SESSION['email'] != '')
+{
+    if(isset($_POST['submit']))
+    {
+        $courseid = $_POST['courseidhidden'];
+        $startdate = $_POST['start'];
+        $enddate = $_POST['end'];
+        if(mysqli_query($con, "INSERT IGNORE INTO coursedurationtable (CourseId, CourseStartDate, CourseEndDate) VALUES ('$courseid','$startdate','$enddate')"))
+        {
+            $_SESSION['errmsg']="Course Successfully Renewed";
+            header("Location:http://$host$uri/viewcourses.php");
+            exit();   
+        }
+        else
+        {
+            $_SESSION['errmsg']="Course Could Not Be Renewed";
+            header("Location:http://$host$uri/viewcourses.php");
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,6 +36,18 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <style>
+    .renewmodal {
+        position: fixed;
+        left: 10%;;
+        top: 10%;
+        right: 10%;
+        bottom: 10%;
+        z-index: 100;
+        border: 2px solid black;
+        background: #bbbddc;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,8 +61,34 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                     <div class="col-md-12">
                         <h1 class="page-head-line">Courses You Conduct</h1>
                     </div>
+                    <span style="color:red;">
+                    <?php 
+                    echo htmlentities($_SESSION['errmsg']); 
+                    $_SESSION['errmsg']="";
+                    ?>
+                    </span>
                     <div class="row" >
-
+                    <div class="modal">
+                        <div class="renewmodal">                        
+                        <div id="close" style="float: right; margin-right: 10px;" ><span class="glyphicon glyphicon-remove"></span></div>
+                        <div style="text-align: center;">
+                            <h2></h2>
+                        </div>
+                        <form name="courserenewalform" method="post">
+                            <div class="form-group">                                
+                                <label>Start Date</label>
+                                <input id="start" name="start" type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input id="end" name="end" type="date" class="form-control" required>
+                            </div>
+                            <input type="hidden" name="courseidhidden" id="courseidhidden">
+                            <button type="submit" name="submit" style="width: 100%;" class="btn btn-primary">Renew </button>
+                        </form>
+                            
+                        </div>                    
+                    </div>
                     <div class="col-md-12">
                         <!--    Bordered Table  -->
                         <div class="panel panel-default">
@@ -39,6 +97,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                                     <table id="example" class="table table-striped table-bordered">
                                         <thead>
                                             <tr class="bg-primary">
+                                                <th class="displaynone"></th>
                                                 <th>Course Code </th>
                                                 <th>Course Name </th>
                                                 <th>Course Level</th>
@@ -57,6 +116,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     {
     ?>
         <tr>
+            <td class="displaynone"><?php echo htmlentities($row['CourseId']);?></td>
             <td><?php echo htmlentities($row['CourseCode']);?></td>
             <td><?php echo htmlentities($row['CourseName']);?></td>
             <td><?php if($row['CourseLevel']==1)
@@ -68,7 +128,9 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
             <td><?php echo htmlentities($row['CourseStartDate']);?></td>
             <td><?php echo htmlentities($row['CourseEndDate']);?></td>
             <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>&coursename=<?php echo $row['CourseName']?>">
-                <button class="btn btn-primary"><i class="fa fa-eye "></i></button> </a></td>
+                <button class="btn btn-primary"><i class="fa fa-eye "></i></button> </a>
+                <button class="btn btn-primary renew" id='renew'>Renew</button>
+            </td>
         </tr>
     <?php
     } ?>
@@ -101,13 +163,45 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
     <script type="text/javascript">
     $(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ]
-    } );
-} );
+        $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+        $('.renew').on('click', function() {
+            var courseid = $(this).closest('tr').find('td').first().html();
+            var coursename = $(this).closest('tr').find('td:nth-child(3)').html();
+            $('.renewmodal h2').html(coursename);
+            $('#courseidhidden').val(courseid);
+            $('.modal').css('display', 'block');
+        });
+        $('#close').on('click', function() {
+            $('.modal').css('display', 'none');
+        });
+    });
+    var start = document.getElementById('start');
+    var end = document.getElementById('end');
+    end.disabled = true;
+    start.min = new Date().toJSON().split('T')[0];
+    start.addEventListener('change', function() {
+        if (start.value)
+        {
+            end.min = start.value;
+            end.disabled = false;
+        }
+    }, false);
+    end.addEventListener('change', function() {
+        if (end.value)
+            start.max = end.value;
+    }, false);
     </script>
-
+    </body>
 </html>
+<?php
+}
+else
+{
+    header("Location:http://$host/onlinecourse/login.php");
+    exit();
+}
