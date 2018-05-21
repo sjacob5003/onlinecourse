@@ -40,19 +40,18 @@ if($_SESSION['email']!="")
                     <div class="col-md-6">
                       <div class="panel panel-default">
                           <font color="green" align="center">
-                          <?php echo htmlentities($_SESSION['msg']);
+                          <?php echo htmlentities($_SESSION['msg']);  
                                 $_SESSION['msg']="";?></font>
 
-                            <div class="panel-body">
+                            <div class="panel-body">                              
                               <div class="row">
-                              <div class="col-xs-12">
-                                        <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
+                              <div class="col-xs-8 col-xs-offset-2">
+                                <table class="table table-striped table-hover">
                                   <thead>
-                                    <tr class="bg-primary">
+                                    <tr>
                                       <th>#</th>
                                       <th>Course Name</th>
-                                      <th>File Name</th>
+                                      <th>File Name</th>                                      
                                       <th>View</th>
                                       <th>Download</th>
                                     </tr>
@@ -72,7 +71,6 @@ if($_SESSION['email']!="")
                                   <?php } ?>
                                   </tbody>
                                 </table>
-                      </div>
                               </div>
                           </div>
                         </div>
