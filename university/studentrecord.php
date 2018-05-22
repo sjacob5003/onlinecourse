@@ -5,7 +5,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(isset($_GET['studentid']))
 {
-    if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
+    if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='Faculty')
     {
         $studentid = $_GET['studentid'];
 ?>

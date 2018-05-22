@@ -128,7 +128,7 @@ if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='Faculty')
             <td><?php echo htmlentities($row['CourseStartDate']);?></td>
             <td><?php echo htmlentities($row['CourseEndDate']);?></td>
             <td> <a href="viewenrolment.php?courseid=<?php echo $row['CourseId']?>&coursename=<?php echo $row['CourseName']?>">
-                <button class="btn btn-primary"><i class="fa fa-eye "></i></button> </a>
+                <button class="btn btn-primary">View Students</button> </a>
                 <button class="btn btn-primary renew" id='renew'>Renew</button>
             </td>
         </tr>

@@ -4,12 +4,7 @@ include('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 $progid = $_GET['progid'];
-if(strlen($_SESSION['email'])==NULL)
-{
-  header("Location:http://$host$uri/index.php");
-  exit();
-}
-else
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='University')
 {
 ?>
 <!DOCTYPE html>
@@ -170,5 +165,11 @@ if($_SESSION['email']!="")
 </body>
 </html>
 <?php
+}
+else
+{
+    $_SESSION['errmsg']="Please Login";
+    header("Location:http://$host/onlinecourse/index.php");
+    exit();
 }
 ?>
