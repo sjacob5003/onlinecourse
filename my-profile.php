@@ -5,7 +5,7 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email'])==0)
 {
-  header("Location:http://$host$uri/index.php");
+  header("Location:http://$host$uri/login.php");
 }
 else
 {
