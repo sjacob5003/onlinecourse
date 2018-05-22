@@ -1,9 +1,10 @@
 <?php
 session_start();
 require_once("includes/config.php");
-$_SESSION['email']=="";
-date_default_timezone_set('Asia/Kolkata');
-$ldate=date( 'd-m-Y h:i:s A', time () );
+$_SESSION['email'] == "";
+$_SESSION['userid'] == "";
+$_SESSION['username'] == "";
+$_SESSION['usertype'] == "";
 session_unset();
 ?>
 <script language="javascript">
