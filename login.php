@@ -18,6 +18,7 @@ if(isset($_POST['submit']))
     else
     {
         $password=$_POST['password'];
+        $password = md5($password);
         if($usertype=="Student")
         {
             $query=mysqli_query($con, "SELECT * FROM studenttable WHERE StudentEmail='$email' AND StudentPassword='$password'");

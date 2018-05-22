@@ -7,13 +7,17 @@ if(strlen($_SESSION['email']) != 0)
 {
   if(isset($_POST['submit']))
   {
+    $cpass = $_POST['cpass'];
+    $cpass = md5($cpass);
+    $newpass = $_POST['newpass'];
+    $newpass = md5($newpass);
     if($_SESSION['usertype']=="Student")
     {
-      $sql=mysqli_query($con, "SELECT StudentPassword FROM studenttable WHERE StudentPassword='".$_POST['cpass']."' && StudentEmail='".$_SESSION['email']."'");
+      $sql=mysqli_query($con, "SELECT StudentPassword FROM studenttable WHERE StudentPassword='$cpass' && StudentEmail='".$_SESSION['email']."'");
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='".$_POST['newpass']."', StudentUpdationDate=curtime() WHERE StudentEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE studenttable SET StudentPassword='$newpass', StudentUpdationDate=curtime() WHERE StudentEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -21,11 +25,11 @@ if(strlen($_SESSION['email']) != 0)
     }
     elseif($_SESSION['usertype']=="Faculty")
     {
-      $sql=mysqli_query($con, "SELECT FacultyPassword FROM facultytable WHERE FacultyPassword='".$_POST['cpass']."' && FacultyEmail='".$_SESSION['email']."'");
+      $sql=mysqli_query($con, "SELECT FacultyPassword FROM facultytable WHERE FacultyPassword='$cpass' && FacultyEmail='".$_SESSION['email']."'");
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE facultytable SET FacultyPassword='".$_POST['newpass']."', FacultyUpdationDate=curtime() WHERE FacultyEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE facultytable SET FacultyPassword='$newpass', FacultyUpdationDate=curtime() WHERE FacultyEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -33,11 +37,11 @@ if(strlen($_SESSION['email']) != 0)
     }
     elseif($_SESSION['usertype']=="University")
     {
-      $sql=mysqli_query($con, "SELECT UniversityPassword FROM universitytable WHERE UniversityPassword='".$_POST['cpass']."' && UniversityEmail='".$_SESSION['email']."'");
+      $sql=mysqli_query($con, "SELECT UniversityPassword FROM universitytable WHERE UniversityPassword='$cpass' && UniversityEmail='".$_SESSION['email']."'");
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE universitytable SET UniversityPassword='".$_POST['newpass']."', UniversityUpdationDate=curtime() WHERE UniversityEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE universitytable SET UniversityPassword='$newpass', UniversityUpdationDate=curtime() WHERE UniversityEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else
@@ -45,11 +49,11 @@ if(strlen($_SESSION['email']) != 0)
     }
     elseif($_SESSION['usertype']=="Admin")
     {
-      $sql=mysqli_query($con, "SELECT AdminPassword FROM admintable WHERE AdminPassword='".$_POST['cpass']."' && AdminEmail='".$_SESSION['email']."'");
+      $sql=mysqli_query($con, "SELECT AdminPassword FROM admintable WHERE AdminPassword='$cpass' && AdminEmail='".$_SESSION['email']."'");
       $num=mysqli_fetch_array($sql);
       if($num>0)
       {
-        $con=mysqli_query($con, "UPDATE admintable SET AdminPassword='".$_POST['newpass']."', AdminUpdationDate=curtime() WHERE AdminEmail='".$_SESSION['email']."'");
+        $con=mysqli_query($con, "UPDATE admintable SET AdminPassword='$newpass', AdminUpdationDate=curtime() WHERE AdminEmail='".$_SESSION['email']."'");
         $_SESSION['msg']="Password Changed Successfully";
       }
       else

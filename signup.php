@@ -16,6 +16,8 @@ if(isset($_POST['submit']))
     $phone=$_POST['phone'];
     $pass=$_POST['password'];
     $pass1=$_POST['confirmpassword'];
+    $pass = md5($pass);
+    $pass1 = md5($pass1);
     $usertype=$_POST['usertype'];
     $email=filter_var($email, FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
