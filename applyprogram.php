@@ -6,6 +6,8 @@ $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if ( strlen($_SESSION['email']) != 0 && $_SESSION['usertype'] == 'Student')
 {
+    if( $_SESSION['isActive'] == 1)
+    {
 ?>
 
 <!DOCTYPE html>
@@ -111,6 +113,13 @@ if ( strlen($_SESSION['email']) != 0 && $_SESSION['usertype'] == 'Student')
 </body>
 </html>
 <?php
+    }
+    else
+    {
+        $_SESSION['errmsg'] == 'Please verify your email';
+        header("Location:http://$host$uri/index.php");
+        exit();    
+    }
 }
 else
 {

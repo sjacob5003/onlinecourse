@@ -28,6 +28,7 @@ if(isset($_POST['submit']))
                 $_SESSION['userid']=$num['StudentId'];
                 $_SESSION['username']=$num['StudentName'];
                 $_SESSION['usertype']="Student";
+                $_SESSION['isActive'] = $num['StudentIsActive'];
                 header("Location:http://$host$uri/index.php");
                 exit();
             }
