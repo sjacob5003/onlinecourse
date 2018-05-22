@@ -4,7 +4,7 @@ error_reporting(0);
 include("includes/config.php");
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if ( $_SESSION['email'] != NULL && $_SESSION['email'] != '')
+if ( strlen($_SESSION['email']) != 0 && $_SESSION['usertype'] == 'Student')
 {
 ?>
 
@@ -114,6 +114,6 @@ if ( $_SESSION['email'] != NULL && $_SESSION['email'] != '')
 }
 else
 {
-    header("Location:http://$host$uri/index.php");
+    header("Location:http://$host$uri/login.php");
     exit();
 }
