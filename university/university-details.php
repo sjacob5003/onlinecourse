@@ -104,27 +104,27 @@ if($_SESSION['email']!="")
 
                               <div class="form-group">
                                 <label for="studentstreet1">Address Street 1  </label>
-                                <input type="text" class="form-control" id="universitystreet1" name="studentstreet1" value="<?php echo htmlentities($row['UniversityStreet1']);?>"  />
+                                <input type="text" class="form-control" id="universitystreet1" name="universitystreet1" value="<?php echo htmlentities($row['UniversityStreet1']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentstreet2">Address Street 2  </label>
-                                <input type="text" class="form-control" id="universitystreet2" name="studentstreet2" value="<?php echo htmlentities($row['UniversityStreet2']);?>"  />
+                                <input type="text" class="form-control" id="universitystreet2" name="universitystreet2" value="<?php echo htmlentities($row['UniversityStreet2']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentcity">City  </label>
-                                <input type="text" class="form-control" id="universitycity" name="studentcity" value="<?php echo htmlentities($row['UniversityCity']);?>"  />
+                                <input type="text" class="form-control" id="universitycity" name="universitycity" value="<?php echo htmlentities($row['UniversityCity']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentstate">State  </label>
-                                <input type="text" class="form-control" id="universitystate" name="studentstate" value="<?php echo htmlentities($row['UniversityState']);?>"  />
+                                <input type="text" class="form-control" id="universitystate" name="universitystate" value="<?php echo htmlentities($row['UniversityState']);?>"  />
                               </div>
 
                               <div class="form-group">
                                 <label for="studentpincode">Pincode  </label>
-                                <input type="text" class="form-control" id="universitypincode" name="studentpincode" value="<?php echo htmlentities($row['UniversityPincode']);?>"/>
+                                <input type="text" class="form-control" id="universitypincode" name="universitypincode" value="<?php echo htmlentities($row['UniversityPincode']);?>"/>
                               </div>
 
                           <?php } ?>
