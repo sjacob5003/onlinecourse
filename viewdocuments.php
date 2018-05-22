@@ -4,7 +4,7 @@ include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 if(strlen($_SESSION['email']) == '' || $_SESSION['email'] == NULL)
-  header("Location:http://$host$uri/index.php");
+  header("Location:http://$host$uri/login.php");
 else
 {
 ?>
