@@ -80,7 +80,8 @@ if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype'] == "Admin")
 }
 else
 {
-    header("Location:http://$host$uri/login.php");
+    $_SESSION['errmsg']="Please Login";
+    header("Location:http://$host/onlinecourse/index.php");
     exit();
 }
 ?>
