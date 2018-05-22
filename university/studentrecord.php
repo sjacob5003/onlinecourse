@@ -13,7 +13,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Deregister</title>
+    <title>Student Record</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -29,7 +29,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Available Courses</h1>
+                        <h1 class="page-head-line">Student Record</h1>
                     </div>
                     <div class="row" >
 
@@ -41,35 +41,18 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
                                     <table id="example" class="table table-striped table-bordered">
                                         <thead>
                                             <tr class="bg-primary">
-                                                <th>Course Code </th>
+                                                <th>Student Name </th>
                                                 <th>Course Name </th>
-                                                <th>Start Date </th>
-                                                <th>Course Level</th>
-                                                <th>Deregister</th>
+                                                <th>Marks </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-    <?php
-    $sql=mysqli_query($con, "SELECT DurationId, CourseCode, CourseName, CourseLevel, CourseStartDate, Marks FROM coursedurationtable JOIN coursetable ON coursetable.CourseId=coursedurationtable.CourseId JOIN courseenrolmenttable ON coursedurationtable.DurationId = courseenrolmenttable.CourseDurationId WHERE CourseStartDate>CURDATE() AND StudentId=".$_SESSION['userid']);
-    while($row=mysqli_fetch_array($sql))
-    {
-    ?>
+
         <tr>
-            <td><?php echo htmlentities($row['CourseCode']);?></td>
-            <td><?php echo htmlentities($row['CourseName']);?></td>
-            <td><?php echo htmlentities($row['CourseStartDate']);?></td>
-            <td><?php if($row['CourseLevel']==1)
-                echo htmlentities("Beginner");
-                elseif($row['CourseLevel']==2)
-                    echo htmlentities("Intermediate");
-                elseif($row['CourseLevel']==3)
-                    echo htmlentities("Expert");?></td>
-          <td>
-                <button id="deregbtn" name="deregbtn" onclick="dereg(<?php echo $row['DurationId']; ?>)" class="btn btn-primary"><i class="fa fa-user-times "></i>&nbsp;&nbsp;Deregister</button> </a>
-                      </td>
+            <td>Temp student name</td>
+            <td>Temp course name</td>
+            <td>Temp marks</td>
         </tr>
-    <?php
-    } ?>
 
 
                                         </tbody>
@@ -91,30 +74,6 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
     $(document).ready(function() {
               $('#example').DataTable();
    });
-    </script>
-    <script type="text/javascript">
-      function dereg(id) {
-    var duration_id=parseInt(id);
-    var student_id=parseInt(<?php echo $_SESSION['userid'];?>);
-    var dataString='durationid='+duration_id+"&studentid="+student_id;
-
-// AJAX code to send data to php file.
-        $.ajax({
-            type: "POST",
-            url: "dereg-student.php",
-            data: dataString,
-            cache: false,
-            // data: {course_id:course_id,student_id:student_id},
-            // dataType: "JSON",
-            success: function(html) {
-              alert(html);
-            },
-            error: function(html) {
-              alert(html);
-            }
-        });
-        location.reload();
-    }
     </script>
 </body>
 </html>
