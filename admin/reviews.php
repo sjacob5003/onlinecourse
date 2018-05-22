@@ -39,15 +39,30 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                             <div class="list-group">
                                <a href="#" class="list-group-item">
                                  <h4 class="list-group-item-heading">Review 1</h4>
-                                 <p class="list-group-item-text">Feedback text appears here</p>
+                                 <label>Course Name:</label>
+                                           <p class="list-group-item-text">Course name</p>
+                                 <label>Subject:</label>
+                                           <p class="list-group-item-text">Subject name</p>
+                                 <label>Description:</label>
+                                           <p class="list-group-item-text">Description name</p>
                                </a>
                                <a href="#" class="list-group-item">
                                  <h4 class="list-group-item-heading">Review 2</h4>
-                                 <p class="list-group-item-text">Feedback text appears here</p>
+                                 <label>Course Name:</label>
+                                           <p class="list-group-item-text">Course name</p>
+                                 <label>Subject:</label>
+                                           <p class="list-group-item-text">Subject name</p>
+                                 <label>Description:</label>
+                                           <p class="list-group-item-text">Description name</p>
                                </a>
                                <a href="#" class="list-group-item">
                                  <h4 class="list-group-item-heading">Review 3</h4>
-                                 <p class="list-group-item-text">Feedback text appears here</p>
+                                 <label>Course Name:</label>
+                                           <p class="list-group-item-text">Course name</p>
+                                 <label>Subject:</label>
+                                           <p class="list-group-item-text">Subject name</p>
+                                 <label>Description:</label>
+                                           <p class="list-group-item-text">Description name</p>
                                </a>
                              </div>
 
