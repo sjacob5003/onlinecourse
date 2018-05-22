@@ -15,6 +15,7 @@ if($_SESSION['email']!="")
             <ul id="menu-top" class="nav navbar-nav navbar-right">
               <li><a href="<?php $host ?>/onlinecourse/enrolhistory.php">Enroll History  </a></li>
               <li><a href="<?php $host ?>/onlinecourse/deregister.php">Deregister </a></li>
+              <li><a href="<?php $host ?>/onlinecourse/applyprogram.php">Program </a></li>
               <li><a href="my-profile.php">My Profile</a></li>
               <li><a href="<?php $host ?>/onlinecourse/viewdocuments.php">Documents</a></li>
               <li><a href="<?php $host ?>/onlinecourse/feedback.php">Feedback</a></li>
