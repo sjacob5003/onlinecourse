@@ -29,8 +29,17 @@ if(isset($_POST['submit']))
                 $_SESSION['username']=$num['StudentName'];
                 $_SESSION['usertype']="Student";
                 $_SESSION['isActive'] = $num['StudentIsActive'];
-                header("Location:http://$host$uri/index.php");
-                exit();
+                if ($_SESSION['isActive'] == 0)
+                {
+                    $_SESSION['errmsg'] = "Please Verify Your Email";
+                    header("Location:http://$host$uri/login.php");
+                    exit();
+                }
+                else
+                {
+                    header("Location:http://$host$uri/index.php");
+                    exit();
+                }
             }
             else
             {
@@ -123,7 +132,8 @@ if(isset($_POST['submit']))
                     <center><h4 class="page-head-line"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Login To Enter </h4></center>
                 </div>
             </div>
-             <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
+             <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']);
+             $_SESSION['errmsg'] = "";?></span>
             <form name="admin" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
