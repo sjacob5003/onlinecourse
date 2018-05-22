@@ -11,6 +11,11 @@ if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='University')
     $universityemail=$_POST['universityemail'];
     $universityphone=$_POST['universityphone'];
     $universitycontact=$_POST['universitycontact'];
+    $universitystreet1 = $_POST['universitystreet1'];
+    $universitystreet2 = $_POST['universitystreet2'];
+    $universitycity = $_POST['universitycity'];
+    $universitystate = $_POST['universitystate'];
+    $universitypincode = $_POST['universitypincode'];
     // $photo=$_FILES["photo"]["name"];
     $cgpa=$_POST['cgpa'];
     // move_uploaded_file($_FILES["photo"]["tmp_name"],"studentphoto/".$_FILES["photo"]["name"]);
@@ -18,6 +23,11 @@ if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='University')
                                                   UniversityEmail='$universityemail',
                                                   UniversityPhone='$universityphone',
                                                   UniversityContactPerson='$universitycontact',
+                                                  UniversityStreet1='$universitystreet1',
+                                                  UniversityStreet2='$universitystreet2',
+                                                  UniversityCity='$universitycity',
+                                                  UniversityState='$universitystate',
+                                                  UniversityPincode='$universitypincode',
                                                   UniversityUpdationDate=curtime() WHERE UniversityId='".$_SESSION['userid']."'");
     if($ret)
       $_SESSION['msg']="Update success";
@@ -90,6 +100,31 @@ if($_SESSION['email']!="")
                               <div class="form-group">
                                 <label for="universityphone">Contact Person Phone Number  </label>
                                 <input type="text" class="form-control" id="universityphone" name="universityphone" value="<?php echo htmlentities($row['UniversityPhone']);?>"  />
+                              </div>
+
+                              <div class="form-group">
+                                <label for="studentstreet1">Address Street 1  </label>
+                                <input type="text" class="form-control" id="universitystreet1" name="studentstreet1" value="<?php echo htmlentities($row['UniversityStreet1']);?>"  />
+                              </div>
+
+                              <div class="form-group">
+                                <label for="studentstreet2">Address Street 2  </label>
+                                <input type="text" class="form-control" id="universitystreet2" name="studentstreet2" value="<?php echo htmlentities($row['UniversityStreet2']);?>"  />
+                              </div>
+
+                              <div class="form-group">
+                                <label for="studentcity">City  </label>
+                                <input type="text" class="form-control" id="universitycity" name="studentcity" value="<?php echo htmlentities($row['UniversityCity']);?>"  />
+                              </div>
+
+                              <div class="form-group">
+                                <label for="studentstate">State  </label>
+                                <input type="text" class="form-control" id="universitystate" name="studentstate" value="<?php echo htmlentities($row['UniversityState']);?>"  />
+                              </div>
+
+                              <div class="form-group">
+                                <label for="studentpincode">Pincode  </label>
+                                <input type="text" class="form-control" id="universitypincode" name="studentpincode" value="<?php echo htmlentities($row['UniversityPincode']);?>"/>
                               </div>
 
                           <?php } ?>
