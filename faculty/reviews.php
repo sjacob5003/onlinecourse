@@ -39,15 +39,15 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Faculty")
                             <!-- /.panel-heading -->
 
                             <div class="list-group">
-                               <a href="#" class="list-group-item">
+                               <a href="#" class="list-group-item" style="cursor: default;">
                                  <h4 class="list-group-item-heading">Review 1</h4>
                                  <p class="list-group-item-text">Feedback text appears here</p>
                                </a>
-                               <a href="#" class="list-group-item">
+                               <a href="#" class="list-group-item" style="cursor: default;">
                                  <h4 class="list-group-item-heading">Review 2</h4>
                                  <p class="list-group-item-text">Feedback text appears here</p>
                                </a>
-                               <a href="#" class="list-group-item">
+                               <a href="#" class="list-group-item" style="cursor: default;">
                                  <h4 class="list-group-item-heading">Review 3</h4>
                                  <p class="list-group-item-text">Feedback text appears here</p>
                                </a>
@@ -63,6 +63,11 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Faculty")
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script>
+    $('.list-group').on('click', function(e){
+        e.preventDefault();
+    });
+    </script>
 </body>
 </html>
 <?php
