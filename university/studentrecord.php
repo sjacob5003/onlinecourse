@@ -3,8 +3,11 @@ session_start();
 require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
+if(isset($_GET['studentid']))
 {
+    if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
+    {
+        $studentid = $_GET['studentid'];
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -47,14 +50,20 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
                                             </tr>
                                         </thead>
                                         <tbody>
-
-        <tr>
-            <td>Temp student name</td>
-            <td>Temp course name</td>
-            <td>Temp marks</td>
-        </tr>
-
-
+                                        <?php
+                                        $sql = mysqli_query($con, "SELECT studenttable.StudentName, coursetable.CourseName, courseenrolmenttable.Marks FROM courseenrolmenttable JOIN coursedurationtable ON courseenrolmenttable.CourseDurationId = coursedurationtable.DurationId JOIN coursetable ON coursetable.CourseId = coursedurationtable.CourseId JOIN studenttable ON studenttable.StudentId = courseenrolmenttable.StudentId WHERE studenttable.StudentId = '$studentid'");
+                                        while ($row = mysqli_fetch_array($sql))
+                                        {
+                                            $studentname = $row['StudentName'];
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row['StudentName'] ?></td>
+                                            <td><?php echo $row['CourseName'] ?></td>
+                                            <td><?php echo $row['Marks'] ?></td>
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -78,10 +87,16 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="University")
 </body>
 </html>
 <?php
+    }
+    else
+    {
+        header("Location:http://$host/onlinecourse/login.php");
+        exit();
+    }
 }
 else
 {
-    header("Location:http://$host$uri/login.php");
+    header("Location:http://$host/onlinecourse/login.php");
     exit();
 }
 ?>

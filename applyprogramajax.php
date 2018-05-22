@@ -3,7 +3,8 @@ session_start();
 require_once('includes/config.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
@@ -68,9 +69,10 @@ elseif ($reqtype == 2)
             $mail->isHTML(true);                    // Set email format to HTML
             $mail->Subject = 'Application For Degree';
             $mail->Body    = 'To '.$row['UniversityName'].'<br><br>
-                                Student: '.$studentname.' has applied for '.$row['ProgramName'].'<br>He/She has completed all requirements. Click on the link below to view their reports';
+                                Student: '.$studentname.' has applied for '.$row['ProgramName'].'<br>He/She has completed all requirements. Click on the link below to view their reports<br><br>
+                                <a href="http://'.$host.$uri.'/university/studentrecord.php?studentid='.$studentid.'">Click Here</a>';
             if($mail->send())
-                echo "Check email for activation";
+                echo "Application Forwarded";
             else
                 echo "Could Not send";
         }

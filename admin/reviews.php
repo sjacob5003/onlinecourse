@@ -3,6 +3,9 @@ session_start();
 require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+$facultyid = $_SESSION['userid'];
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype'] == "Admin")
+{
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +14,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Feedback Reviews</title>
+    <title>Feedback</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
@@ -27,7 +30,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
         <div class="container">
               <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-head-line">Your Feedback Reviews</h1>
+                        <h1 class="page-head-line">Feedback About Your Courses</h1>
                     </div>
                     <div class="row" >
 
@@ -37,40 +40,24 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
                             <!-- /.panel-heading -->
 
                             <div class="list-group">
-                               <a href="#" class="list-group-item">
-                                 <h4 class="list-group-item-heading">Review 1</h4>
-                                 <label>student Name:</label>
-                                           <p class="list-group-item-text">student name</p>
-                                 <label>Course Name:</label>
-                                           <p class="list-group-item-text">Course name</p>
-                                 <label>Subject:</label>
-                                           <p class="list-group-item-text">Subject name</p>
-                                 <label>Description:</label>
-                                           <p class="list-group-item-text">Description name</p>
-                               </a>
-                               <a href="#" class="list-group-item">
-                                 <h4 class="list-group-item-heading">Review 2</h4>
-                                 <label>student Name:</label>
-                                           <p class="list-group-item-text">student name</p>
-                                 <label>Course Name:</label>
-                                           <p class="list-group-item-text">Course name</p>
-                                 <label>Subject:</label>
-                                           <p class="list-group-item-text">Subject name</p>
-                                 <label>Description:</label>
-                                           <p class="list-group-item-text">Description name</p>
-                               </a>
-                               <a href="#" class="list-group-item">
-                                 <h4 class="list-group-item-heading">Review 3</h4>
-                                 <label>student Name:</label>
-                                           <p class="list-group-item-text">student name</p>
-                                 <label>Course Name:</label>
-                                           <p class="list-group-item-text">Course name</p>
-                                 <label>Subject:</label>
-                                           <p class="list-group-item-text">Subject name</p>
-                                 <label>Description:</label>
-                                           <p class="list-group-item-text">Description name</p>
-                               </a>
-                             </div>
+                                <?php
+                                $sql = mysqli_query($con, "SELECT FeedbackStudentId, FeedbackSubject, FeedbackDescription, coursetable.CourseName, studenttable.StudentName FROM feedbacktable JOIN coursedurationtable ON coursedurationtable.DurationId = feedbacktable.CourseDurationId JOIN coursetable ON coursedurationtable.CourseId = coursetable.CourseId JOIN facultytable ON facultytable.FacultyId = coursetable.CourseFacultyId JOIN studenttable ON feedbacktable.FeedbackStudentId = studenttable.StudentId WHERE facultytable.FacultyId = '$facultyid'");
+                                while ($row = mysqli_fetch_array($sql))
+                                {
+                                ?>
+                                <a href="#" class="list-group-item" style="cursor: default;">                                
+                                    <h4 class="list-group-item-heading" style="text-align: center; margin-top: 25px; margin-bottom: 25px;"><?php echo $row['CourseName']?></h4>
+                                    <label>Student Name:</label>
+                                    <p class="list-group-item-text"><?php echo $row['StudentName']?></p>
+                                    <label>Subject:</label>
+                                    <p class="list-group-item-text"><?php echo $row['FeedbackSubject']?></p>
+                                    <label>Description:</label>
+                                    <p class="list-group-item-text"><?php echo $row['FeedbackDescription']?></p>
+                                </a>
+                                <?php
+                                }
+                                ?>
+                            </div>
 
                         </div>
                          <!--  End  Bordered Table  -->
@@ -82,5 +69,18 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
   <?php include('../includes/footer.php');?>
     <script src="assets/js/jquery-1.11.1.js"></script>
     <script src="assets/js/bootstrap.js"></script>
+    <script>
+    $('.list-group').on('click', function(e){
+        e.preventDefault();
+    });
+    </script>
 </body>
 </html>
+<?php
+}
+else
+{
+    header("Location:http://$host$uri/login.php");
+    exit();
+}
+?>
