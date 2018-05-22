@@ -3,11 +3,7 @@ session_start();
 require_once('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['email'])==0)
-{
-  header('Location:http://$host$uri/index.php');
-}
-else
+if(strlen($_SESSION['email']) != 0)
 {
   if(isset($_POST['submit']))
   {
@@ -168,4 +164,11 @@ function valid()
     <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php
+}
+else
+{
+  header('Location: http://$host$uri/index.php');
+  exit();
+}  
+ ?>
