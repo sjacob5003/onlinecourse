@@ -3,11 +3,7 @@ session_start();
 include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['email'])==0)
-{
-  header("Location:http://$host$uri/login.php");
-}
-else
+if ( strlen($_SESSION['email']) != 0 && $_SESSION['usertype'] == 'Student')
 {
   if(isset($_POST['submit']))
   {
@@ -160,4 +156,11 @@ if($_SESSION['email']!="")
 
 </body>
 </html>
-<?php } ?>
+<?php
+}
+else
+{
+    header("Location:http://$host$uri/index.php");
+    exit();
+}
+?>

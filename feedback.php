@@ -3,11 +3,7 @@ session_start();
 include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['email']) == 0)
-{
-  header("Location:http://$host$uri/login.php");
-}
-else
+if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 {
   if(isset($_POST['submit']))
   {
@@ -84,8 +80,6 @@ if($_SESSION['email']!="")
                                 <textarea class="form-control rounded-0" rows="10" placeholder="Feedback / Complaint" name="feedbackdescription"></textarea>
                               </div>
 
-                          <?php } ?>
-
                              <button type="submit" name="submit" id="submit" style="width:100%" class="btn btn-default">Submit</button>
                             </form>
                         </div>
@@ -102,3 +96,11 @@ if($_SESSION['email']!="")
 
 </body>
 </html>
+<?php
+}
+else
+{
+  header("Location:http://$host$uri/index.php");
+  exit();
+}
+?>

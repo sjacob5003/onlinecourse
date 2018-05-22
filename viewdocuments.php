@@ -3,9 +3,7 @@ session_start();
 include('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['email']) == '' || $_SESSION['email'] == NULL)
-  header("Location:http://$host$uri/login.php");
-else
+if ( strlen($_SESSION['email']) != 0 && $_SESSION['usertype'] == 'Student')
 {
 ?>
 
@@ -89,5 +87,10 @@ if($_SESSION['email']!="")
 </body>
 </html>
 <?php
+}
+else
+{
+    header("Location:http://$host$uri/index.php");
+    exit();
 }
 ?>

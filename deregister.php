@@ -122,7 +122,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 }
 else
 {
-    header("Location:http://$host$uri/login.php");
+    header("Location:http://$host$uri/index.php");
     exit();
 }
 ?>

@@ -117,7 +117,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 <?php }
 else
 {
-    header("Location:http://$host$uri/login.php");
+    header("Location:http://$host$uri/index.php");
     exit();
 }
 ?>

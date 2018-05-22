@@ -3,7 +3,7 @@ session_start();
 require_once('includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype'] == "Student")
 {
   $sql=mysqli_query($con, "SELECT coursetable.CourseId, CourseCode, CourseName, CourseScope, CourseNoOfSeats-count(StudentId) AS RemainingSeats, CourseLocation, FacultyName, CourseLevel, coursedurationtable.CourseStartDate, CourseEndDate FROM coursedurationtable JOIN coursetable ON coursetable.CourseId=coursedurationtable.CourseId LEFT JOIN courseenrolmenttable ON courseenrolmenttable.CourseDurationId=coursedurationtable.DurationId JOIN facultytable ON facultytable.FacultyId=coursetable.CourseFacultyId WHERE DurationId=".$_GET['durationid']);
   while($row=mysqli_fetch_array($sql))
@@ -123,7 +123,7 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Student")
 }
 else
 {
-  header("Location:http://$host$uri/login.php");
+  header("Location:http://$host$uri/index.php");
   exit();
 }
 ?>
