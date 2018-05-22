@@ -64,11 +64,11 @@ if($_SESSION['email']!="")
 	</div>
 	<div class="form-group displaynone" id="programinputbox">
 		<label for="progname">Specify Degree Name </label>
-		<input type="text" class="form-control" placeholder="Your subject" name="progname" value=""/>
+		<input type="text" class="form-control" placeholder="Degree Name" name="progname" value=""/>
 	</div>
 	<div class="form-group displaynone" id="programabbrinputbox">
 		<label for="progabbr">Specify Abbreviated Name </label>
-		<input type="text" class="form-control" placeholder="Your subject" name="progabbr" value=""/>
+		<input type="text" class="form-control" placeholder="Degree Abbr" name="progabbr" value=""/>
 	</div>
 
 	<input type="button" name="nextBtn" style="width:100%" class="next btn btn-default" value="Next" />

@@ -75,7 +75,7 @@ if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype'] == "Student")
                               </p>
                               <p>
                                         <b>Faculty Name:</b>
-                                        <a href="faculty/facultyinfo.php"><?php echo $row['FacultyName']; ?></a>
+                                        <?php echo $row['FacultyName']; ?>
                               </p>
                               <br>
 
