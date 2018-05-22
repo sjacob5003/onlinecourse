@@ -8,11 +8,7 @@ $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 //set target directory
 $path = 'uploads/';
 $facultyid = $_SESSION['userid'];
-if($_SESSION['email'] == NULL || $_SESSION['email'] == '' )
-{
-  header("Location:http://$host$uri/index.php");
-}
-else
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='Faculty')
 {
     if(isset($_POST['submit']))
     {
@@ -45,7 +41,6 @@ else
             }
         }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -164,3 +159,12 @@ if($_SESSION['email']!="")
     <script src="assets/js/bootstrap-select.min.js"></script>
 </body>
 </html>
+<?php
+}
+else
+{
+    $_SESSION['errmsg']="Please Login";
+    header("Location:http://$host/onlinecourse/index.php");
+    exit();
+}
+?>

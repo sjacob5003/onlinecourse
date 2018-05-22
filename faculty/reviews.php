@@ -4,7 +4,7 @@ require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 $facultyid = $_SESSION['userid'];
-if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Faculty")
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='Faculty')
 {
 ?>
 <!DOCTYPE html>
@@ -78,7 +78,8 @@ if(strlen($_SESSION['userid'])!=NULL && $_SESSION['usertype']=="Faculty")
 }
 else
 {
-    header("Location:http://$host$uri/login.php");
+    $_SESSION['errmsg']="Please Login";
+    header("Location:http://$host/onlinecourse/index.php");
     exit();
 }
 ?>

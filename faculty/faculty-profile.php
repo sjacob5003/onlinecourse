@@ -3,11 +3,7 @@ session_start();
 require_once('../includes/config.php');
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(strlen($_SESSION['email'])==0)
-{
-  header("Location:http://$host$uri/index.php");
-}
-else
+if(strlen($_SESSION['userid']) != 0 && $_SESSION['usertype']=='Faculty')
 {
   if(isset($_POST['submit']))
   {
@@ -160,4 +156,12 @@ if($_SESSION['email']!="")
 
 </body>
 </html>
-<?php } ?>
+<?php
+}
+else
+{
+    $_SESSION['errmsg']="Please Login";
+    header("Location:http://$host/onlinecourse/index.php");
+    exit();
+}
+?>
