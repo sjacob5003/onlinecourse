@@ -168,7 +168,7 @@ function valid()
 }
 else
 {
-  header('Location: http://$host$uri/index.php');
+  header("Location: http://$host$uri/login.php");
   exit();
 }  
  ?>
