@@ -4,10 +4,8 @@ error_reporting(0);
 include("includes/config.php");
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-if(isset($_POST['submit']))
+if ( $_SESSION['email'] != NULL && $_SESSION['email'] != '')
 {
-   //php code
-}
 ?>
 
 <!DOCTYPE html>
@@ -34,19 +32,28 @@ if(isset($_POST['submit']))
                 </div>
             </div>
              <span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
-            <form name="admin" method="post">
+            <form name="applyprogram" method="post">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                          <div class="form-group">
-                           <label>Program List</label>
-                               <select class="selectpicker" name="programlist" data-style="btn" data-width="100%" data-border="1px" title="Choose Program" required>
-                                         <option value="bba">Bachelors in business administration</option>
-                                         <option value="bca">Bachelors in computer applications</option>
-                              </select>
-                           </div>
-
-                     <br>
-                     <button type="submit" name="submit" class="btn btn-primary" style="width:100%">Apply </button>
+                    <div class="form-group">
+                        <label>Choose A Program</label>
+                        <select class="selectpicker" id="programselector" name="programlist" data-style="btn" data-width="100%" data-border="1px" title="Choose Program" required>
+                        <?php
+                        $sql = mysqli_query($con, "SELECT programtable.ProgramId, programtable.ProgramName, programtable.AbbreviatedProgName, universitytable.UniversityId, universitytable.UniversityName FROM programofferedtable JOIN programtable ON programofferedtable.ProgramId = programtable.ProgramId JOIN universitytable ON universitytable.UniversityId = programofferedtable.UniversityId GROUP BY programtable.ProgramId");
+                        while ($row = mysqli_fetch_array($sql))
+                        {
+                        ?>
+                            <option value=<?php echo $row['ProgramId'] ?> data-uni=<?php echo $row['UniversityId'] ?>><?php echo $row['ProgramName']." (".$row['AbbreviatedProgName'].")  -  ".$row['UniversityName']; ?></option>
+                        <?php
+                        }
+                        ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="message"></label>
+                    </div>
+                    <br>
+                    <button type="submit" name="submit" id="submit" class="btn btn-primary displaynone" style="width:100%">Apply </button>
 
                 </div>
                 </form>
@@ -62,5 +69,51 @@ if(isset($_POST['submit']))
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var reqtype, progid, universityid;
+        $('#programselector').on('change', function (){
+            universityid = $(this).find(':selected').data('uni');           
+            reqtype = 1;
+            if ( ! $('.btn-primary').hasClass('displaynone') )
+                $('.btn-primary').addClass('displaynone')
+            progid = this.value;
+            $.ajax({
+                type: 'post',
+                url: 'applyprogramajax.php',
+                data: 'programid=' + progid + '&universityid=' + universityid + '&reqtype=' + reqtype,
+                success: function (data) {
+                    if (data == 'yes')
+                    {                        
+                        $('.message').html("You are eligible for this program");
+                        $('.btn-primary').removeClass('displaynone')
+                    }
+                    else
+                    {
+                        $('.message').html("You do not meet the requirements for this program");
+                    }
+                }
+            });
+        });
+        $('#submit').on('click', function() {
+            reqtype = 2;
+            $.ajax({
+                type: 'post',
+                url: 'applyprogramajax.php',
+                data: 'programid=' + progid + '&universityid=' + universityid + '&reqtype=' + reqtype,
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>
+<?php
+}
+else
+{
+    header("Location:http://$host$uri/index.php");
+    exit();
+}
