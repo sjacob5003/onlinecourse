@@ -1,6 +1,13 @@
 <?php
 session_start();
 require_once('includes/config.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 $progid = $_POST['programid'];
 $universityid = $_POST['universityid'];
 $reqtype = $_POST['reqtype'];
@@ -22,6 +29,9 @@ if ($reqtype == 1)
 }
 elseif ($reqtype == 2)
 {
+    $sql = mysqli_query($con, "SELECT * FROM studenttable WHERE StudentId = '$studentid'");
+    while ($row = mysqli_fetch_array($sql))
+        $studentname = $row['StudentName'];
     $sql = mysqli_query($con, "SELECT programtable.ProgramId, programtable.ProgramName, programtable.AbbreviatedProgName, universitytable.UniversityId, universitytable.UniversityName, universitytable.UniversityEmail FROM programofferedtable LEFT JOIN programtable ON programofferedtable.ProgramId = programtable.ProgramId JOIN universitytable ON universitytable.UniversityId = programofferedtable.UniversityId WHERE universitytable.UniversityId = '$universityid' AND programtable.ProgramId = '$progid' GROUP BY programtable.ProgramId");
     while ($row = mysqli_fetch_array($sql))
     {
@@ -50,7 +60,7 @@ elseif ($reqtype == 2)
             );
 
             //Recipients
-            $mail->setFrom('no-reply@confirmation.com', 'Do Not Reply');
+            $mail->setFrom('no-reply@confirmation.com', 'The Open School');
             $mail->addAddress($row['UniversityEmail'],'The Open School');     // Add a recipient
             $mail->addReplyTo('no-reply@confirmation.com');
 
@@ -58,11 +68,11 @@ elseif ($reqtype == 2)
             $mail->isHTML(true);                    // Set email format to HTML
             $mail->Subject = 'Application For Degree';
             $mail->Body    = 'To '.$row['UniversityName'].'<br><br>
-                                This student';
+                                Student: '.$studentname.' has applied for '.$row['ProgramName'].'<br>He/She has completed all requirements. Click on the link below to view their reports';
             if($mail->send())
                 echo "Check email for activation";
             else
-                echo "Not sent";
+                echo "Could Not send";
         }
         catch (Exception $e)
         {
